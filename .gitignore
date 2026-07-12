@@ -4,3 +4,6 @@ provisioning/ansible/group_vars/all.yml
 
 # gitignored reference clones for Serena (OPS-2 wires the bootstrap script)
 references/
+
+# serena MCP project state (generated at session start)
+.serena/

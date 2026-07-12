@@ -15,16 +15,11 @@ before **DES-3** is done.
 |---|---|
 | `docs/design/esp32_satellite.md` (DRAFT 2026-06-14; migrated from voice 2026-07-12, §4 wire tables demoted to the contracts pin) | the consolidated satellite design (voice ARCH-22 lineage) — FW-1, DES-4, DES-5 context |
 | `docs/design/ws_esp32_transport.md` (SUPERSEDED by `esp32_satellite.md`; migrated frozen) | historical lineage only |
+| `docs/devices/deck-common.md` + `revox-a77.md` / `revox-b215.md` / `pioneer-cld925.md` / `panasonic-fs90.md` (harmonized 2026-07-12) | per-device hardware ground truth — DES-4 descriptors, future `boards/<slug>/`, deck FW apps |
+| `docs/review/des1-truth-pass.md` (2026-07-12) | DES-1 evidence: conflict resolutions, REQUIREMENTS disposition (VWB-38 feed), code sweep, pin re-audit |
 
 ## DES — design
 
-- [ ] **DES-1** [fleet] — **Harmonize the bridge ESP32 doc corpus claim-by-claim.** The
-      bridge's fresh general ESP32 doc is newer but WEAKER than its bench-confirmed build
-      docs (HK-4 round 1: it downgrades bench-CONFIRMED facts to VERIFY) — merge
-      claim-by-claim, never newest-wins; build docs are leaf truth. Includes the
-      REQUIREMENTS truth pass and the pin-map re-audit (the GPIO14 double-booking lesson).
-      Input corpus LANDED 2026-07-12 at `imports/bridge-esp32/` (DES-6; bridge `a80322f`) —
-      `docs/wb-*.md` build docs + `REQUIREMENTS.md`; ready to start.
 - [ ] **DES-2** [fleet] — **skidl-skills review / rethink / adoption** (focused session,
       HK-4 round 4). Deliberately NOT installed at bootstrap
       (`no-execution-toolchain-at-bootstrap`); this task decides whether/how it enters the
@@ -34,11 +29,14 @@ before **DES-3** is done.
       the background-monitor pattern, and a **mandatory pin/strapping audit step**.
       **MANDATORY before any FW phase starts** (`phase-gates`). The
       PIO-platform-vs-latest-IDF tension is a fact-check, not a blind bet (HK-4 round 4).
-- [ ] **DES-4** [dev:deck] — **Adopt the bridge's device-descriptor format for the deck
-      devices.** Consumes the bridge's device-integration-convention design (PROD-15 bridge
-      delegation item 2; "convention down, descriptors up") — author the conforming
-      per-device descriptors (required timing/availability fields, `confirm_latency_ms`
-      STATIC), mirror the pin under `contracts/`, wire the CI conformance check.
+- [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] —
+      **Adopt the bridge's device-descriptor format for the deck devices.** Consumes the
+      bridge's device-integration-convention design (PROD-15 bridge delegation item 2;
+      "convention down, descriptors up") — author the conforming per-device descriptors
+      (required timing/availability fields, `confirm_latency_ms` STATIC), mirror the pin
+      under `contracts/`, wire the CI conformance check. Command-surface input: the DES-1
+      dossiers (`docs/devices/<slug>.md` §"Command surface"); slugs fixed 2026-07-12
+      (owner): `revox-a77`, `revox-b215`, `pioneer-cld925`, `panasonic-fs90`.
 
 - [ ] **DES-5** [fleet] — **Device certificate lifecycle — revocation and renewal** (imported
       2026-07-12 from voice **ARCH-44**, export-closed there; travels with `provisioning/`).

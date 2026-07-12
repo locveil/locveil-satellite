@@ -5,6 +5,21 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
 
 ## DES — design
 
+- [x] **DES-1** [fleet] — **DONE 2026-07-12** — **Harmonize the bridge ESP32 doc corpus
+      claim-by-claim** (interactive session, owner decisions inline). Output: the new
+      `docs/devices/` layer (owner-decided three-layer taxonomy) — `deck-common.md` +
+      four dossiers, slugs fixed as `revox-a77` / `revox-b215` / `pioneer-cld925` /
+      `panasonic-fs90`; manual scans → `docs/devices/img/`. Evidence:
+      `docs/review/des1-truth-pass.md` — 10 conflict resolutions (build docs won 7/8
+      direct conflicts; the FS90 rail-isolation check went the OTHER way — the newer doc
+      had dropped a safety requirement, reinstated as that dossier's gating bench item),
+      full REQUIREMENTS FR/NFR/C/EI disposition (the VWB-38 wb-mqtt-v1 promotion feed),
+      code sweep (no unique bench truth; GPIO14 triple-booking recorded — the
+      `per-device-apps` lesson), ESP32 pin re-audit vs official Espressif docs (no legacy
+      pin on a strapping pin; GPIO14=MTMS note). `imports/bridge-esp32/` deleted in this
+      close (absorbed; resolvable at `0d950a9`); repo-to-repo note filed to bridge VWB-38
+      re-pointing the promotion source at the truth pass.
+
 - [x] **DES-6** [fleet] — **DONE 2026-07-12** (filed + executed same session; PROD-15 bridge
       delegation item 1b, satellite side). **Import the frozen bridge `ESP32/` tree.** The 34
       git-tracked files copied 1:1 from `../locveil-bridge/ESP32/` @ bridge `a80322f` into

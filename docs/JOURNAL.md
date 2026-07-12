@@ -3,6 +3,25 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+## 2026-07-12 — deck corpus harmonized, docs/devices/ layer born (DES-1)
+
+Interactive session. Owner decisions: three-layer doc taxonomy (architecture/ =
+narratives, design/ = decisions, **devices/ = per-device hardware ground truth** — the
+voice satellite gets its own dossier there at PCB phase); slugs **revox-a77 / revox-b215
+/ pioneer-cld925 / panasonic-fs90** (fix the `[dev:]` tags + future `boards/<slug>/`);
+trim to engineering truth; imports deleted in this close. Landed: `docs/devices/`
+(deck-common + 4 dossiers + img/), `docs/review/des1-truth-pass.md`. Merge headline:
+build docs won 7/8 direct conflicts (B215 "RS-232 vs TTL" dissolved — it's open-collector
+Serie I/O; A77 "switch common" model was wrong — pin PAIRS), but the FS90
+**rail-isolation check went the other way** — the newer build doc had dropped the
+research pass's non-negotiable safety gate; reinstated. Code sweep: zero unique bench
+truth (placeholders throughout); GPIO14 triple-booked across three drivers — the
+concrete `per-device-apps` evidence, now recorded in deck-common §5. Pin re-audit vs
+Espressif docs: no legacy pin sits on a strapping pin; GPIO14=MTMS noted.
+`imports/bridge-esp32/` deleted (absorbed; import commit `0d950a9` keeps it resolvable);
+bridge VWB-38 note filed repo-to-repo (wb-mqtt-v1 promotion source → the truth pass §2).
+Owner verdict on the imported code recorded: reference-only, docs were the value.
+
 ## 2026-07-12 — day-one toolchain wired (OPS-2)
 
 Root `.mcp.json` (the single MCP config, per HK-4 round 4): `pcbparts` + `espressif-docs`
