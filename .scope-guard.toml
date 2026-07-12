@@ -1,0 +1,34 @@
+# locveil-satellite scope-guard config (guard vendored at scope-v3; template: HK-2/PROD-5)
+
+[ledger]
+active = "docs/LEDGER.md"
+done = "docs/LEDGER_DONE.md"
+archive_dir = "docs/archive/ledger"
+prefixes = ["DES", "PCB", "FW", "OPS"]
+open_statuses = [" ", "~"]
+require_sections = true
+sections_required_for_all = true
+high_water = 3000
+low_water = 2000
+hard_ceiling = 4000
+
+[evidence]
+dirs = ["docs/design", "docs/review"]
+link_scan = true
+
+[journal]
+active = "docs/JOURNAL.md"
+archive_dir = "docs/archive/journal"
+high_water = 1500
+low_water = 1000
+hard_ceiling = 2000
+archive_pointer = true
+
+[claude]
+file = "CLAUDE.md"
+[[claude.blocks]]
+name = "shared-invariants"
+sha256 = "8e295e7009a43ece59693cdf7876189c145d29694291ca2c07bbc88e8dddb214"
+[[claude.blocks]]
+name = "cross-repo-board"
+sha256 = "61769abd18b82a60c2024d419f90196a01856c8dd3b0db815c3480b033e9629d"

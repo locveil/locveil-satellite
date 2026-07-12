@@ -1,0 +1,22 @@
+# Copy to .github/workflows/ledger-guard.yml; adjust paths to the chosen file names.
+# Convention: process/ledger-discipline.md §4 — job name `ledger-guard`, --check only.
+name: ledger-guard
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "CLAUDE.md", "scripts/scope_guard.py", ".scope-guard.toml",
+            ".github/workflows/ledger-guard.yml"]
+  pull_request:
+    paths: ["docs/**", "CLAUDE.md", "scripts/scope_guard.py", ".scope-guard.toml",
+            ".github/workflows/ledger-guard.yml"]
+
+jobs:
+  ledger-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/scope_guard.py --config .scope-guard.toml --check
