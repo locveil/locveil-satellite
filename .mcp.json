@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "pcbparts": {
+      "type": "http",
+      "url": "https://pcbparts.dev/mcp"
+    },
+    "espressif-docs": {
+      "type": "http",
+      "url": "https://mcp.espressif.com/docs"
+    },
+    "esp-component-registry": {
+      "type": "http",
+      "url": "https://components.espressif.com/mcp"
+    },
+    "serena": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "claude-code",
+        "--project-from-cwd"
+      ]
+    }
+  }
+}

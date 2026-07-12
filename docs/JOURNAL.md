@@ -3,6 +3,19 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+## 2026-07-12 — day-one toolchain wired (OPS-2)
+
+Root `.mcp.json` (the single MCP config, per HK-4 round 4): `pcbparts` + `espressif-docs`
++ `esp-component-registry` (all HTTP; docs server needs a one-time GitHub OAuth via `/mcp`
+— a 401 before that is expected, and it's rate-limited 40/h · 200/day per user) + `serena`
+(stdio via `uvx`, project-from-cwd). `scripts/bootstrap_references.sh` clones SKiDL into
+gitignored `references/` for Serena — run today, clone verified, gitignore holds; pcbparts
+and the registry answered 200 to an MCP initialize probe. Per-phase nested CLAUDE.md
+landed: `docs/design/` (DES), `boards/` (PCB), `components/` (FW) — each states its
+`phase-gates` gate + MCP set. Deliberately absent (`no-execution-toolchain-at-bootstrap`):
+PlatformIO (DES-3), skidl-skills (DES-2), and the ESP-IDF *Tools* MCP (build/flash —
+execution-side, rides DES-3; noted in `components/CLAUDE.md` so nobody wires it early).
+
 ## 2026-07-12 — bridge ESP32/ tree imported (DES-6; PROD-15 bridge delegation item 1b)
 
 Board-intake reconciliation found the one delegated action without a local ID: the bridge's

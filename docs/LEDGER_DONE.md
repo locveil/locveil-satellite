@@ -21,3 +21,18 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
 ## FW — firmware
 
 ## OPS — operations / toolchain
+
+- [x] **OPS-2** — **DONE 2026-07-12** — **Wire the day-one toolchain** (HK-4 round 4;
+      knowledge-side only per `no-execution-toolchain-at-bootstrap`). Root `.mcp.json` with
+      the four servers: `pcbparts` (HTTP `https://pcbparts.dev/mcp`, keyless — JLCPCB/
+      Mouser/DigiKey parametric search + KiCad footprints), `espressif-docs` (HTTP
+      `https://mcp.espressif.com/docs` — OAuth via GitHub on first `/mcp` use; 401 until
+      then is expected; 40 req/h / 200 req/day per user), `esp-component-registry` (HTTP
+      `https://components.espressif.com/mcp`, keyless), `serena` (stdio, `uvx` from
+      `oraios/serena`, `--project-from-cwd`). `scripts/bootstrap_references.sh` clones SKiDL
+      into gitignored `references/` for Serena (run + verified: clone lands, gitignore
+      holds; pcbparts + registry probed 200 on MCP initialize). Per-phase nested CLAUDE.md
+      wired: `docs/design/` (DES — docs+registry MCPs, corpus ground rules), `boards/` (PCB
+      — pcbparts+serena, bootstrap prereq, strapping-audit rule), `components/` (FW —
+      DES-3 gate, docs+registry, Tools-MCP explicitly deferred to DES-3). No PlatformIO, no
+      skidl-skills, no ESP-IDF Tools MCP — DES-3/DES-2 own those decisions.

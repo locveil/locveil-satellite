@@ -87,8 +87,3 @@ _(gated on DES-3 — `phase-gates`)_
       The Plane-B nginx serves `/esp32/firmware/` + `/esp32/models/` from
       `/srv/esp32/{firmware,models}/` (operator-managed static); this repo owns how
       artifacts get published there (versioning, hashes, the wake-pack pin flow).
-- [ ] **OPS-2** — **Wire the day-one toolchain** (HK-4 round 4): pcbparts MCP + Espressif
-      docs MCP + component-registry MCPs; Serena over gitignored `references/` clones
-      (SKiDL) + a bootstrap script; a single root `.mcp.json`. Also wires the per-phase
-      nested CLAUDE.md + MCP sets (`phase-gates`). Knowledge-side only — no PlatformIO, no
-      skidl-skills (those are DES-3 / DES-2 decisions).
