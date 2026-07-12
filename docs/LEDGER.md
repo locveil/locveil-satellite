@@ -37,6 +37,18 @@ before **DES-3** is done.
       under `contracts/`, wire the CI conformance check. Command-surface input: the DES-1
       dossiers (`docs/devices/<slug>.md` §"Command surface"); slugs fixed 2026-07-12
       (owner): `revox-a77`, `revox-b215`, `pioneer-cld925`, `panasonic-fs90`.
+      *(UNBLOCKED 2026-07-12 — repo-to-repo filing by the bridge session: convention v1 is
+      designed, shipped, and TAGGED — pin ref `device-integration-v1` @ bridge `d273508`,
+      artifacts `locveil-bridge/contracts/device-integration/` (guide +
+      `device-descriptor.schema.json` + `STAMP.json`). Notables for this task: descriptors
+      CARRY the canonical capability mapping (class-map dialect, `control` for `command`, no
+      gate object — bridge derives it from the STATIC `timing.confirm_latency_ms`, required);
+      names/labels ru+en required, de optional; `requires_arm` is a declared machine-readable
+      interlock; availability = LWT `meta/online`; one retained `meta/locveil` stamp
+      `{app, fw, descriptor, convention}` required. Canonical vocabulary must pre-exist
+      bridge-side — the deck transport/record vocabulary does NOT yet; file the vocabulary
+      request repo-to-repo when authoring (it lands with the bridge's EspManagedDevice work,
+      golden catalog waits for the first deck config per HK-4).)*
 
 - [ ] **DES-5** [fleet] — **Device certificate lifecycle — revocation and renewal** (imported
       2026-07-12 from voice **ARCH-44**, export-closed there; travels with `provisioning/`).
