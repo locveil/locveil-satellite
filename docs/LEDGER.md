@@ -49,6 +49,18 @@ before **DES-3** is done.
       bridge-side — the deck transport/record vocabulary does NOT yet; file the vocabulary
       request repo-to-repo when authoring (it lands with the bridge's EspManagedDevice work,
       golden catalog waits for the first deck config per HK-4).)*
+      *(PROD-16 amendment 2026-07-12, filed with OPS-3: the convention pin lands as
+      `contracts/pins/device-integration/` per `process/contracts.md` §2 — a COMPLETE
+      artifact copy at the tag (guide + `device-descriptor.schema.json` + owner
+      `STAMP.json` verbatim) + satellite `PIN.json` (files sha256s + conformance pointer
+      to the descriptor CI check); the descriptors themselves are per-instance config
+      validated AGAINST the pin, never pins. Intake wrinkle (recorded at OPS-3
+      reconciliation): tag `device-integration-v1` (bridge `d273508`) carries the
+      PRE-convention STAMP shape; the STAMP-core fix landed one commit later (bridge
+      `eb08146`, VWB-41) with NO tag bump — since a pin is tag bytes, file the
+      repo-to-repo request for a `device-integration-v1.1` minor tag when authoring
+      (preferred), or pin at v1 and carry contract-guard's legacy warning until the next
+      bump.)*
 
 - [ ] **DES-5** [fleet] — **Device certificate lifecycle — revocation and renewal** (imported
       2026-07-12 from voice **ARCH-44**, export-closed there; travels with `provisioning/`).
@@ -97,3 +109,9 @@ _(gated on DES-3 — `phase-gates`)_
       The Plane-B nginx serves `/esp32/firmware/` + `/esp32/models/` from
       `/srv/esp32/{firmware,models}/` (operator-managed static); this repo owns how
       artifacts get published there (versioning, hashes, the wake-pack pin flow).
+      **PROD-16 amendment (2026-07-12, filed with OPS-3):** the publish flow gains the
+      wake-pack **hash-at-publish** requirement — before a model pack is published into
+      `/srv/esp32/models/`, its file sha256s MUST verify against the pinned sidecar
+      stamp `contracts/pins/wake-pack/STAMP.json` (`wake-pack-v1`); these are the same
+      hashes the firmware verifies at flash time (`process/contracts.md` §4,
+      binary-pack class — hash manifest at publish, hash verification at load).

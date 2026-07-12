@@ -3,6 +3,31 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+## 2026-07-12 — PROD-16 delegation pulled: the contracts pins-shape cut (OPS-3 filed + executed; DES-4/OPS-1 amended)
+
+Unattended session (owner approved the analysis, stepped away). Pulled the PROD-16
+satellite delegation from the board; `task-start-reconciliation` produced four deltas
+that reshaped execution: **(1)** `ws-protocol-v1` + `wake-pack-v1` were ALREADY tagged
+(voice ARCH-47 executed the same afternoon, voice `9f371b9`) — the delegation's interim
+"unstamped PIN.json now, stamp later" step collapsed; both pins landed stamped and
+strict, and the WS doc had moved +17/−3 since our interim commit-ref pin (`98e8fd0`), so
+the re-pin at the tag was substantive, not cosmetic. **(2)** `contracts/README.md` was
+stale in all three rows, not just the one line the delegation named — replaced wholesale
+by the §2 registry. **(3)** A reconciliation DISCOVERY: this repo OWNS a contract nobody
+delegated — voice's registry pins our Plane-B nginx template (`esp32-site`, pre-tag
+@ `37dcac5`, "version/tag fill in when the satellite stamps this surface") — stood the
+owned surface up: STAMP + pointer README + tag `esp32-site-v1` (byte-identical to
+voice's copy, verified) + day-one owner guard `scripts/check_esp32_site.py`; the
+template's stale comment path (`nginx/` vs `provisioning/`) stays as recorded debt —
+fixing a comment is a byte change is a version bump. **(4)** The bridge's
+`device-integration-v1` tag carries the PRE-convention STAMP (core fix landed post-tag,
+`eb08146`/VWB-41, no bump) — recorded as a DES-4 intake wrinkle with the preferred
+`v1.1` repo-to-repo request; deliberately NOT filed into the bridge tonight (their
+ledger, their session). Enforcement: `contract_guard.py` vendored @ `contract-guard-v1`,
+CI job + three-stage pre-commit; both guards green, **0 warnings**. Ledger: OPS-3
+straight to DONE (the DES-6 filed+executed pattern); DES-4 + OPS-1 amended in place;
+IDs written back into the board's PROD-16 entry (commons commit).
+
 ## 2026-07-12 — cross-repo-board block re-pinned @ scope-v4 (PROD-15 close follow-through)
 
 The shared block now names this repo (`../locveil-satellite`) as the fourth sibling; block

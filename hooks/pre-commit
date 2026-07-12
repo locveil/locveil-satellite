@@ -1,4 +1,7 @@
 #!/bin/sh
-# Locveil pre-commit hook (process/ledger-discipline.md §4): scope-guard --check only —
-# hooks never mutate the tree. Install once:  git config core.hooksPath hooks
-exec python3 scripts/scope_guard.py --config .scope-guard.toml --check
+# Locveil pre-commit hook: scope-guard (ledger-discipline.md §4) + contract-guard +
+# the esp32-site owner guard (contracts.md §4) — all --check only, hooks never mutate
+# the tree. Install once:  git config core.hooksPath hooks
+python3 scripts/scope_guard.py --config .scope-guard.toml --check || exit 1
+python3 scripts/contract_guard.py --check || exit 1
+exec python3 scripts/check_esp32_site.py

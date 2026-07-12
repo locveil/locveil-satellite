@@ -1,0 +1,14 @@
+{
+  "contract": "ws-protocol",
+  "version": "1",
+  "tag": "ws-protocol-v1",
+  "owner_repo": "locveil-voice",
+  "owner_commit": "9f371b9a9e93e7cab5644086fc7ee35ac5a55b1d",
+  "pinned_by": "locveil-satellite OPS-3 (PROD-16 delegation; upgrades the interim commit-ref pin @ voice 98e8fd0 — the doc gained the version header + register version fields between)",
+  "pin_date": "2026-07-12",
+  "files": {
+    "websocket-api.md": "1a262b23a8c84075b69cf38c88d4e11133ef633b99f98998c28e2c16fbce185e",
+    "STAMP.json": "a16e7eaeb045cab318768fe9dffb8f2c545454406b0b3c9dc12adc7a3e25a05b"
+  },
+  "conformance": "FW-1 (the firmware WS conformance test lands with the first firmware build; phase-gates: FW opens after DES-3 — until then the pinned doc IS the build contract and no consuming code exists)"
+}

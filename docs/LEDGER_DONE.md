@@ -51,3 +51,29 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       — pcbparts+serena, bootstrap prereq, strapping-audit rule), `components/` (FW —
       DES-3 gate, docs+registry, Tools-MCP explicitly deferred to DES-3). No PlatformIO, no
       skidl-skills, no ESP-IDF Tools MCP — DES-3/DES-2 own those decisions.
+
+- [x] **OPS-3** [fleet] — **DONE 2026-07-12** (filed + executed same session; PROD-16
+      satellite delegation item 1; convention: `../locveil-commons/process/contracts.md`).
+      **Contracts pins-shape restructure + contract-guard adoption.** Landed: `contracts/`
+      in the uniform org shape with the registry README (replacing the bootstrap table —
+      reconciliation found ALL THREE rows stale the same day, not the one line the
+      delegation named). Pins, strict-conformant from day one (full `files` sha256 maps):
+      `pins/ws-protocol/` upgraded from the interim commit-ref pin (voice `98e8fd0`) to a
+      COMPLETE stamped artifact-copy pin @ **`ws-protocol-v1`** — the delegation's
+      "PIN.json now, stamped pin when the tag lands" collapsed to one step because voice
+      ARCH-47 had ALREADY tagged (voice `9f371b9`; the doc moved +17/−3 in between, so
+      re-pinned at the tag); `pins/wake-pack/` first stamped pin @ **`wake-pack-v1`**
+      (sidecar STAMP with HF sha256s; pack binaries never enter the tree). NEW owned
+      surface found at reconciliation: voice already consumes this repo's Plane-B nginx
+      template as a pre-tag pin "waiting for the owner stamp" — stood up
+      `contracts/esp32-site/` (STAMP + pointer README), tagged **`esp32-site-v1`**
+      (byte-identical to voice's pinned copy @ `37dcac5`), day-one owner guard
+      `scripts/check_esp32_site.py` (9 guaranteed-surface markers; template comment-path
+      nit recorded, deferred to the next real bump — any byte change is a version bump).
+      Enforcement wired: vendored `scripts/contract_guard.py` @ **`contract-guard-v1`**,
+      `contract-guard` CI job (path-gated, `--check` only), pre-commit chain
+      (scope-guard → contract-guard → esp32-site guard). Both guards green, 0 warnings.
+      Conformance pointers are honest forwards (no test infra pre-FW): ws-protocol → FW-1,
+      wake-pack → OPS-1 hash-at-publish + FW-1 hash-at-flash. Same change: DES-4 amended
+      (pins-shape mirror + the bridge tag/STAMP wrinkle at intake), OPS-1 amended
+      (hash-at-publish), board write-back into PROD-16.

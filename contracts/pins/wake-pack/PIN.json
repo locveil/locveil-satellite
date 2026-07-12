@@ -1,0 +1,13 @@
+{
+  "contract": "wake-pack",
+  "version": "1",
+  "tag": "wake-pack-v1",
+  "owner_repo": "locveil-voice",
+  "owner_commit": "9f371b9a9e93e7cab5644086fc7ee35ac5a55b1d",
+  "pinned_by": "locveil-satellite OPS-3 (PROD-16 delegation; first stamped pin — activates the wake-pack row that was 'pending firmware' since bootstrap)",
+  "pin_date": "2026-07-12",
+  "files": {
+    "STAMP.json": "8ede1df57970ca7630b0d7b91f7965dd28d94ca43a3cdb03579a8d5cb85109e7"
+  },
+  "conformance": "flash-time hash verification (FW-1) + publish-time hash check (OPS-1) — the pack binaries never enter this tree (third-party HF artifact, sidecar-stamped); sha256s in the pinned STAMP.json are what both checks verify against"
+}

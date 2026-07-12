@@ -1,17 +1,32 @@
-# contracts/ — pinned sibling-owned artifacts
+# locveil-satellite — contract registry
 
-This repo is a **consumer** of three versioned artifacts owned by sibling repos
-(`consumer-pins` invariant in `CLAUDE.md`). Each is pinned here by a **one-way inward,
-version-stamped sync** from the owner's committed artifact — never hand-edit a pin, never
-treat a pin as source, never write into the owning repo. Re-pin on a vN bump and record
-the new version here.
+The direction-labeled index required by `../locveil-commons/process/contracts.md` §2.
+Every contract this repo OWNS and every pin it CONSUMES, one line each; details live in
+the per-contract READMEs. Layout is the uniform org shape: `contracts/<name>/` owned,
+`contracts/pins/<name>/` consumed. Pins are one-way-inward, version-stamped copies per
+the `consumer-pins` invariant — owned elsewhere, **never hand-edited**; re-pin on a vN
+bump.
 
-| Pin | Owner / source of truth | Status |
+## Owned
+
+| Contract | Where | Version authority |
 |---|---|---|
-| **WS wire protocol** | `../locveil-voice/docs/guides/websocket-api.md` (voice `ws-protocol-doc-canonical`) | **Interim** — voice has no version stamp yet (voice ARCH-47 adds it, plus `register` version-reporting). Until then the pin is the doc at the voice commit recorded below; firmware is built against the doc, and the doc wins. |
-| **Wake-word pack** | voice's released pack artifact (v2 manifest + `.tflite`, `../locveil-voice/docs/design/wakeword_models.md`) | **Pending firmware** — flash-time pin of the UNMODIFIED artifact, hash-verifiable; pack version reported in `register` (voice ARCH-47). Activates with the first FW task. |
-| **Device-integration convention** | the bridge's versioned convention (`device-descriptor.schema.json` + guide; PROD-15 bridge delegation item 2) | **Pending bridge design** — once tagged, the schema is mirrored here and the per-device descriptors under `boards/` must conform (CI check; DES-4). |
+| [`esp32-site`](esp32-site/README.md) | artifact stays `provisioning/ansible/templates/esp32-site.conf.j2` (Plane-B nginx site); `esp32-site/` holds the STAMP + pointer README | `esp32-site/STAMP.json` + tag `esp32-site-v1` (owner guard: `scripts/check_esp32_site.py`; consumer: voice `contracts/pins/esp32-site/`) |
 
-Current interim pins:
+## Consumed (pins)
 
-- `voice-ws-protocol`: `websocket-api.md` @ locveil-voice `98e8fd0` (2026-07-12).
+| Pin | Owner | Notes |
+|---|---|---|
+| [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1`) | the WS wire protocol — **the doc wins, firmware adapts**; conformance: FW-1 (opens after DES-3, `phase-gates`); staleness: `register` reports `protocol_version` |
+| [`wake-pack`](pins/wake-pack/README.md) | locveil-voice (tag `wake-pack-v1`) | sidecar stamp over the UNMODIFIED third-party HF pack — binaries never enter this tree; conformance: hash-at-publish (OPS-1) + hash-at-flash (FW-1) |
+
+_Pending pin (not yet a folder): **device-integration** — the bridge's convention (tag
+`device-integration-v1`) is pinned by **DES-4** together with the per-device descriptors
+it governs; the descriptors themselves are per-instance config validated against that
+pin, not contracts (`process/contracts.md` §1)._
+
+Guards: layer 1 is the vendored `scripts/contract_guard.py` (commons
+`packages/contract-guard/`, pinned at tag **`contract-guard-v1`** — never edit the
+vendored file, re-pin to move; runs in `hooks/pre-commit` and the path-gated
+`contract-guard` CI job, `--check` only); layer 2 is the per-contract guards and
+conformance tests listed above.
