@@ -3,6 +3,13 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+## 2026-07-12 — cross-repo-board block re-pinned @ scope-v4 (PROD-15 close follow-through)
+
+The shared block now names this repo (`../locveil-satellite`) as the fourth sibling; block
+text between the markers + the `.scope-guard.toml` hash updated from the commons source per
+the `process/claude-md.md` §3 flow (mechanical re-pin, no other content change —
+journal-line only, no ledger task). PROD-15 closed on the board the same day.
+
 ## 2026-07-12 — deck corpus harmonized, docs/devices/ layer born (DES-1)
 
 Interactive session. Owner decisions: three-layer doc taxonomy (architecture/ =
