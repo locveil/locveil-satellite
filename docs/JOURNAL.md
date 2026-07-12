@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+## 2026-07-12 — bridge ESP32/ tree imported (DES-6; PROD-15 bridge delegation item 1b)
+
+Board-intake reconciliation found the one delegated action without a local ID: the bridge's
+frozen `ESP32/` deck-bridge scaffold awaited a satellite-side pull (bridge DRV-35 BLOCKED on
+our confirmation). Filed **DES-6**, executed same session: 34 git-tracked files @ bridge
+`a80322f` → `imports/bridge-esp32/`, verbatim (rules + provenance: `imports/README.md`).
+Value is the *facts*, not the architecture — the bench-confirmed `docs/wb-*.md` build docs
+are DES-1's leaf truth, `REQUIREMENTS.md` feeds its truth pass (and bridge VWB-38's
+wb-mqtt-v1 promotion), `src/` is FW-phase component material; the single-image FR-1 shape
+stays retired (`per-device-apps`). Confirmation written into bridge DRV-35 (repo-to-repo
+filing) so its delete + DRV-7 retirement can proceed.
+
 ## 2026-07-12 — design corpus + provisioning plane imported from locveil-voice (BUILD-22)
 
 Plain moves, frozen history stays in voice (`git -C ../locveil-voice log --follow` for

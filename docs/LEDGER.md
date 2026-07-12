@@ -23,7 +23,8 @@ before **DES-3** is done.
       docs (HK-4 round 1: it downgrades bench-CONFIRMED facts to VERIFY) — merge
       claim-by-claim, never newest-wins; build docs are leaf truth. Includes the
       REQUIREMENTS truth pass and the pin-map re-audit (the GPIO14 double-booking lesson).
-      Input corpus arrives with the bridge's export task (PROD-15 bridge delegation item 1).
+      Input corpus LANDED 2026-07-12 at `imports/bridge-esp32/` (DES-6; bridge `a80322f`) —
+      `docs/wb-*.md` build docs + `REQUIREMENTS.md`; ready to start.
 - [ ] **DES-2** [fleet] — **skidl-skills review / rethink / adoption** (focused session,
       HK-4 round 4). Deliberately NOT installed at bootstrap
       (`no-execution-toolchain-at-bootstrap`); this task decides whether/how it enters the
