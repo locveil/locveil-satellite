@@ -77,3 +77,36 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       wake-pack → OPS-1 hash-at-publish + FW-1 hash-at-flash. Same change: DES-4 amended
       (pins-shape mirror + the bridge tag/STAMP wrinkle at intake), OPS-1 amended
       (hash-at-publish), board write-back into PROD-16.
+
+- [x] **OPS-4** [fleet] — **DONE 2026-07-12** (filed + executed same session; PROD-17
+      satellite delegation, all three items under one ID; convention:
+      `../locveil-commons/process/user-docs.md` + `process/user-docs/manifest.schema.json`).
+      **User-docs convention adoption: manifest + CONTRIBUTING + provisioning pass +
+      scope-v5.** Landed: (1) `docs/manifest.json` (7 nodes; surfaces provisioning/
+      contracts/devices/boards/firmware) + `contracts/docs-manifest/` STAMP
+      `docs-manifest-v1` (INTERNAL registry row; no git tag — bumps only on schema
+      reshape) + coherence guard `scripts/check_docs_manifest.py` (schema-vocabulary,
+      node↔tree, roots sweep, floor, derives_from, canonical targets; wired into
+      pre-commit as the 4th stage + the `contract-guard` CI job). Floor staffed 5/5
+      where capability exists: front-door (README, banner-honest), operator
+      (provisioning runbook), contributor (NEW `CONTRIBUTING.md` — phase process, pin
+      discipline, leaf-truth corpus rule, per-phase toolchain map),
+      canonical-reference (the `esp32-site` owned surface — stamp + guard from OPS-3),
+      quickstart as a declared pending-gate; FW-gated docs are pending-gate nodes
+      naming gates (`FW-1 first light`; deck build docs gate on first bench-verified
+      board, `derives_from` the four `docs/devices/` dossiers); no end-user class
+      (no report pipeline here — capability carve-out). (2) Provisioning-README
+      user-grade pass: reader-first opener; tracking refs stripped (ARCH/D/PROD IDs,
+      design-doc paths); the `.pio` publish line replaced with an
+      execution-layer-neutral note (toolchain finalizes with DES-3 — recorded in the
+      manifest node, not the doc); DISCOVERED-and-fixed in the same section: the stale
+      `jarvis.*` pack example → `irina.*`, and the publish flow now tells the operator
+      to verify pack sha256s against the pinned wake-pack stamp (the OPS-1 amendment's
+      doc face). (3) scope-guard re-pinned `scope-v3`→`scope-v5` (1.2.0):
+      shared-invariants block re-pinned (gains `user-facing-docs-are-done`), toml hash
+      updated, `docs_verdict_since = 2026-07-13` (day AFTER the re-pin: the four
+      2026-07-12 completions predate the rule; DONE is frozen history). Also: root
+      README ledger-pointer stripped + doc index added. All four guards green.
+      Reconciliation nit filed upstream in the write-back: the commons skeleton
+      manifest's `$comment` key violates the schema's own `additionalProperties: false`.
+      docs: readme, contributing, provisioning-runbook

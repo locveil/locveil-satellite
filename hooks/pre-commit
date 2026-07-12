@@ -4,4 +4,5 @@
 # the tree. Install once:  git config core.hooksPath hooks
 python3 scripts/scope_guard.py --config .scope-guard.toml --check || exit 1
 python3 scripts/contract_guard.py --check || exit 1
-exec python3 scripts/check_esp32_site.py
+python3 scripts/check_esp32_site.py || exit 1
+exec python3 scripts/check_docs_manifest.py

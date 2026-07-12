@@ -1,8 +1,10 @@
-# ESP32 fleet-provisioning plane (Plane B)
+# ESP32 fleet-provisioning plane
 
-The device-fleet / provisioning plane for the ESP32 voice satellites (ARCH-22, design
-`docs/design/esp32_satellite.md`; moved here from locveil-voice `nginx/` 2026-07-12 —
-D-6-as-amended / PROD-15). It is **deliberately separate from Irene** — it runs as
+**For the operator** of the Wirenboard controller that admits new satellite devices and
+serves their firmware and wake-word models.
+
+The device-fleet / provisioning plane for the ESP32 voice satellites. It is
+**deliberately separate from Irene** (the voice backend) — it runs as
 **nginx + openssl + a few scripts** directly on the Wirenboard controller (WB7), **not** in the Irene
 or locveil-bridge container. Rationale: it's security-critical PKI + static serving, it must not depend
 on Irene being up, and the WB7 is tiny (~1 GB RAM / 2 GB disk, armv7) — another service is the wrong
@@ -21,14 +23,14 @@ weight.
 **Two zones, by design:**
 - **`:8081` provisioning bootstrap** — a dedicated port, NOT `:80`: the WB admin UI is served
   by this same nginx on `:80`, and a server block claiming the bare IP there would steal it
-  (ARCH-41; both ports are ansible variables). Everything here is *public* (a CA cert, a CSR, a signed cert; no
+  (both ports are ansible variables). Everything here is *public* (a CA cert, a CSR, a signed cert; no
   secrets, the device key never leaves the device). The security gate is the **human approval**, not the
   transport. Solves the cert chicken-and-egg without a bootstrap secret.
 - **`:443` mTLS operations** — `ssl_verify_client on` against the home CA, so only a **provisioned device
   with a CA-signed cert** can pull firmware/models. This is also where Irene's `/ws/audio*` is reverse-
   proxied **if Irene runs on this host** (enabled by setting `esp32_irene_upstream` — since the release deploys Irene ON the controller, set it to `127.0.0.1:8080`).
 
-## Approval model (CSR-approval, D-17) — the operator CLI
+## Approval model — CSR approval via the operator CLI
 
 A device's CSR is **never auto-signed**. Approval is a deliberate human step, done **over SSH** with the
 `esp32-provision` CLI. The CLI runs as **root**, which is *why it's a CLI and not a web page*: signing needs
@@ -115,18 +117,27 @@ EC (`prime256v1`) throughout — far lighter than RSA-4096 for the ESP32's mTLS 
 
 ## Publishing firmware / models
 
-Plain file copies into the mTLS web roots (no app):
+Plain file copies into the mTLS web roots (no app). The serving side only cares about
+the path layout — where the artifacts come from is your build's business (this repo's
+firmware build toolchain is not finalized yet; publish whichever image your build
+produces):
 
 ```sh
-# firmware (PlatformIO build output), versioned:
-install -D -m644 .pio/build/<env>/firmware.bin  /srv/esp32/firmware/<version>/firmware.bin
+# firmware image (your build's output), versioned:
+install -D -m644 firmware.bin  /srv/esp32/firmware/<version>/firmware.bin
 # per-node model pack (microWakeWord manifest + tflite):
-install -D -m644 jarvis.json   /srv/esp32/models/kitchen_node/jarvis.json
-install -D -m644 jarvis.tflite /srv/esp32/models/kitchen_node/jarvis.tflite
+install -D -m644 irina.json    /srv/esp32/models/kitchen_node/irina.json
+install -D -m644 irina.tflite  /srv/esp32/models/kitchen_node/irina.tflite
 ```
 
-The device reports `firmware_version` / `model_version` in its `register` frame (Irene side); on a
-mismatch it fetches the new artifact from `:443` over mTLS (esp32_satellite.md D-13/D-18).
+**Verify model packs before publishing.** The wake-word pack is a pinned, hash-stamped
+artifact — check each file's `sha256sum` against the pinned stamp
+(`contracts/pins/wake-pack/STAMP.json` in this repo) before it goes into
+`/srv/esp32/models/`; a pack that doesn't match the stamp will fail the device's own
+hash verification at flash time.
+
+The device reports `firmware_version` / `model_version` in its `register` frame; on a
+mismatch it fetches the new artifact from `:443` over mTLS.
 
 ## Deploy
 
@@ -163,6 +174,6 @@ admin UI on the same nginx, which is exactly why the bootstrap zone doesn't use 
 ## What this plane does NOT do
 
 - It is **not** Irene and not the bridge. Irene's ESP32 backend (reply channel, register handshake, ASR)
-  lives in the Irene repo (ARCH-22 Plane A) and is unaffected.
+  lives in the voice repo and is unaffected.
 - It does not run the wake/ASR/TTS — that's Irene (wherever it's deployed).
 - Model *authoring* (microwakeword.com training) is upstream; this plane only *serves* the artifact.

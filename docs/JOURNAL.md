@@ -3,6 +3,25 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+## 2026-07-12 — PROD-17 delegation pulled: user-docs convention adopted (OPS-4 filed + executed)
+
+Unattended session, same pattern as OPS-3. All three delegation items under one ID:
+the docs manifest born (`docs/manifest.json`, 7 nodes, `docs-manifest-v1` INTERNAL
+stamp, coherence guard as pre-commit stage 4 + CI step), `CONTRIBUTING.md` created,
+the provisioning-README user-grade pass done, scope-guard re-pinned `scope-v5`
+(1.2.0, docs-verdict rule + the new shared-invariants block). Reconciliation notes:
+the FW/PCB-gated doc classes went in as **pending-gate nodes** naming their gates
+(`FW-1 first light`; deck builds gate on the first bench-verified board and
+`derives_from` the `docs/devices/` dossiers) — declared, not written; the
+canonical-reference floor slot is staffed by OPS-3's `esp32-site` surface (stamp +
+guard already existed — the two delegations composed cleanly). Discovered-and-fixed
+in the pass: the publish example still said `jarvis.*` (the pack is `irina`), and the
+root README pointed users at the ledger. `docs_verdict_since` set to **2026-07-13**,
+not today: the four completions dated 2026-07-12 predate the rule and DONE is frozen
+history — the OPS-4 entry carries a voluntary verdict line anyway as the format
+exemplar. Upstream nit reported in the board write-back: the commons skeleton
+manifest's `$comment` key fails its own schema (`additionalProperties: false`).
+
 ## 2026-07-12 — PROD-16 delegation pulled: the contracts pins-shape cut (OPS-3 filed + executed; DES-4/OPS-1 amended)
 
 Unattended session (owner approved the analysis, stepped away). Pulled the PROD-16

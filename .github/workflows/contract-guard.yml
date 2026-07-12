@@ -1,16 +1,21 @@
 # Convention: process/contracts.md §4 — job name `contract-guard`, --check only.
 # Layer 1 (coherence): vendored contract_guard.py @ contract-guard-v1.
-# Layer 2 (owned-surface guard): check_esp32_site.py — the esp32-site marker check.
+# Layer 2 (owned-surface guards): check_esp32_site.py (esp32-site markers) +
+# check_docs_manifest.py (docs-manifest coherence, process/user-docs.md §4).
 name: contract-guard
 
 on:
   push:
     branches: [main]
     paths: ["contracts/**", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
+            "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
+            "README.md", "CONTRIBUTING.md", "provisioning/README.md",
             "provisioning/ansible/templates/esp32-site.conf.j2",
             ".github/workflows/contract-guard.yml"]
   pull_request:
     paths: ["contracts/**", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
+            "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
+            "README.md", "CONTRIBUTING.md", "provisioning/README.md",
             "provisioning/ansible/templates/esp32-site.conf.j2",
             ".github/workflows/contract-guard.yml"]
 
@@ -24,3 +29,4 @@ jobs:
           python-version: "3.12"
       - run: python3 scripts/contract_guard.py --check
       - run: python3 scripts/check_esp32_site.py
+      - run: python3 scripts/check_docs_manifest.py

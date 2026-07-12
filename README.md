@@ -19,5 +19,14 @@ This repo owns everything device-side:
   device-integration convention).
 - **`docs/`** — the satellite design corpus and this repo's ledger/journal.
 
-Status: bootstrap. The design corpus is in place; PCB and firmware work opens behind the
-repo's design gates (see `docs/LEDGER.md`).
+Status: bootstrap. The design corpus is in place; PCB and firmware work opens behind
+the repo's design gates — no boards ordered and no firmware built yet.
+
+Where to go next:
+
+- **Operating the provisioning plane** — [`provisioning/README.md`](provisioning/README.md):
+  approving devices, serving firmware/models over mTLS.
+- **Contributing** — [`CONTRIBUTING.md`](CONTRIBUTING.md): the phase process, toolchain
+  map, and doc/contract discipline.
+- **Contract surfaces** — [`contracts/README.md`](contracts/README.md): what this repo
+  owns and what it pins.

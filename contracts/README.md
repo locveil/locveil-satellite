@@ -20,6 +20,12 @@ bump.
 | [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1`) | the WS wire protocol — **the doc wins, firmware adapts**; conformance: FW-1 (opens after DES-3, `phase-gates`); staleness: `register` reports `protocol_version` |
 | [`wake-pack`](pins/wake-pack/README.md) | locveil-voice (tag `wake-pack-v1`) | sidecar stamp over the UNMODIFIED third-party HF pack — binaries never enter this tree; conformance: hash-at-publish (OPS-1) + hash-at-flash (FW-1) |
 
+## Internal
+
+| Contract | Where | Version authority |
+|---|---|---|
+| [`docs-manifest`](docs-manifest/README.md) | artifact stays `docs/manifest.json` (the user-facing docs inventory, `process/user-docs.md` §4); `docs-manifest/` holds the STAMP + pointer README | `docs-manifest/STAMP.json` (`docs-manifest-v1`, INTERNAL — no git tag; bumped only on a schema reshape; guard: `scripts/check_docs_manifest.py`) |
+
 _Pending pin (not yet a folder): **device-integration** — the bridge's convention (tag
 `device-integration-v1`) is pinned by **DES-4** together with the per-device descriptors
 it governs; the descriptors themselves are per-instance config validated against that

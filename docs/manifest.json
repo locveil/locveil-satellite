@@ -1,0 +1,96 @@
+{
+  "repo": "locveil-satellite",
+  "roots": ["README.md", "CONTRIBUTING.md", "provisioning/README.md", "docs/guides"],
+  "surfaces": {
+    "provisioning": ["provisioning/**"],
+    "contracts": ["contracts/**"],
+    "devices": ["docs/devices/**"],
+    "boards": ["boards/**"],
+    "firmware": ["components/**"]
+  },
+  "nodes": [
+    {
+      "id": "readme",
+      "path": "README.md",
+      "class": "front-door",
+      "audience": ["operator", "tester", "contributor"],
+      "status": "banner",
+      "note": "status banner states honestly what is built vs pending — bootstrap: design corpus in place, PCB/FW behind their phase gates"
+    },
+    {
+      "id": "contributing",
+      "path": "CONTRIBUTING.md",
+      "class": "contributor",
+      "audience": ["contributor"],
+      "covers": ["contracts", "devices"],
+      "status": "ok"
+    },
+    {
+      "id": "provisioning-runbook",
+      "path": "provisioning/README.md",
+      "class": "operator",
+      "audience": ["operator"],
+      "covers": ["provisioning"],
+      "status": "ok",
+      "phase": "OPS",
+      "note": "the fleet-provisioning plane: CSR approval, mTLS serving, publish flow; the firmware-side publish command finalizes with the execution-layer decision (DES-3)"
+    },
+    {
+      "id": "esp32-site-reference",
+      "path": "contracts/esp32-site/README.md",
+      "class": "canonical-reference",
+      "audience": ["integrator", "contributor"],
+      "covers": ["contracts", "provisioning"],
+      "status": "ok",
+      "phase": "OPS",
+      "canonical": {
+        "invariant": "esp32-site v1 guaranteed surface (the 'What v1 guarantees' list)",
+        "stamp": "contracts/esp32-site/STAMP.json",
+        "guard": "scripts/check_esp32_site.py"
+      }
+    },
+    {
+      "id": "quickstart",
+      "path": "docs/guides/quickstart.md",
+      "class": "quickstart",
+      "audience": ["tester"],
+      "covers": ["firmware"],
+      "status": "pending-gate",
+      "phase": "FW",
+      "hw_gated": true,
+      "gate": "FW-1 first light",
+      "note": "first safe look at a flashed satellite; truth needs running firmware — declared, not written"
+    },
+    {
+      "id": "flash-and-provision",
+      "path": "docs/guides/flash-and-provision.md",
+      "class": "howto",
+      "audience": ["operator", "tester"],
+      "covers": ["firmware", "provisioning"],
+      "status": "pending-gate",
+      "phase": "FW",
+      "hw_gated": true,
+      "gate": "FW-1 first light",
+      "note": "device-side flash + Stage-1 + CSR walk-through; the operator-side half already lives in the provisioning runbook"
+    },
+    {
+      "id": "deck-build-docs",
+      "path": "docs/guides/builds/",
+      "class": "howto",
+      "audience": ["contributor", "tester"],
+      "covers": ["boards", "devices"],
+      "status": "pending-gate",
+      "phase": "PCB",
+      "hw_gated": true,
+      "gate": "first boards/<device>/ project reaches bench-verified (PCB phase)",
+      "derives_from": [
+        "docs/devices/deck-common.md",
+        "docs/devices/revox-a77.md",
+        "docs/devices/revox-b215.md",
+        "docs/devices/pioneer-cld925.md",
+        "docs/devices/panasonic-fs90.md"
+      ],
+      "note": "splits into one build doc per [dev:<slug>] board; derives from the docs/devices/ leaf-truth dossiers, never duplicates them"
+    }
+  ]
+}

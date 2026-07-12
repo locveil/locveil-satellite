@@ -1,0 +1,10 @@
+{
+  "contract": "docs-manifest",
+  "version": "1",
+  "tag": "docs-manifest-v1",
+  "date": "2026-07-12",
+  "owner_repo": "locveil-satellite",
+  "artifact": "docs/manifest.json",
+  "schema": "../locveil-commons/process/user-docs/manifest.schema.json",
+  "note": "Repo-INTERNAL contract (process/contracts.md §1, repo-internal class — no git tag; the tag string is the version authority, bumped only when the commons manifest SCHEMA reshapes, never for node edits). Node additions/removals ride their causing tasks under the coherence guard."
+}
