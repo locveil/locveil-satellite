@@ -1,0 +1,6 @@
+# provisioning/ansible — operator-local deployment config (the .example.* files are the tracked ones)
+provisioning/ansible/inventory.ini
+provisioning/ansible/group_vars/all.yml
+
+# gitignored reference clones for Serena (OPS-2 wires the bootstrap script)
+references/

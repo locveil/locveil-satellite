@@ -13,7 +13,8 @@ before **DES-3** is done.
 
 | Document | Backs |
 |---|---|
-| _(populated as the migrated corpus lands and DES docs are written)_ | |
+| `docs/design/esp32_satellite.md` (DRAFT 2026-06-14; migrated from voice 2026-07-12, §4 wire tables demoted to the contracts pin) | the consolidated satellite design (voice ARCH-22 lineage) — FW-1, DES-4, DES-5 context |
+| `docs/design/ws_esp32_transport.md` (SUPERSEDED by `esp32_satellite.md`; migrated frozen) | historical lineage only |
 
 ## DES — design
 
@@ -38,6 +39,20 @@ before **DES-3** is done.
       per-device descriptors (required timing/availability fields, `confirm_latency_ms`
       STATIC), mirror the pin under `contracts/`, wire the CI conformance check.
 
+- [ ] **DES-5** [fleet] — **Device certificate lifecycle — revocation and renewal** (imported
+      2026-07-12 from voice **ARCH-44**, export-closed there; travels with `provisioning/`).
+      Plane B can *issue* device certs but never *withdraw* them: `esp32-provision revoke`
+      only drops a **pending CSR**; once signed, a cert is trusted for its full **825 days**
+      (`ssl_verify_client on`, no `ssl_crl`) — a lost/stolen/decommissioned satellite keeps
+      firmware/model/`/ws/` access until expiry, and the only lever is re-issuing the whole
+      CA. Symmetrically there is no renewal story (a batch provisioned together expires
+      together). Design (before a real fleet exists): a CRL (`ssl_crl` + a `revoke-cert`
+      verb regenerating it, nginx reload on change) or short-lived certs with auto-renew
+      over mTLS; the operator verbs must distinguish *drop a pending CSR* from *revoke an
+      issued cert*. Surfaced 2026-07-09 by voice's ARCH-25 provisioning round-trip.
+      Deliverable: design doc + implementation follow-up(s). Refs: `provisioning/README.md`
+      (Safety properties), `docs/design/esp32_satellite.md` D-17.
+
 ## PCB — board projects
 
 _(none yet — opens after the governing DES designs; one `boards/<device>/` project per
@@ -46,6 +61,24 @@ device, tasks tagged `[dev:<board-slug>]`)_
 ## FW — firmware
 
 _(gated on DES-3 — `phase-gates`)_
+
+- [ ] **FW-1** [fleet] `HW-GATED` — **ESP32 satellite firmware build** (imported 2026-07-12
+      from voice **ARCH-23**, export-closed there; reconcile at task start — the imported
+      text predates HK-4). Build the headless voice-satellite firmware to the
+      `docs/design/esp32_satellite.md` contract (D-1..D-18): board + digital I2S mic +
+      MAX98357A speaker, half-duplex (D-2/D-7); the pinned voice wire protocol
+      (`contracts/README.md` — register → PCM → end; reply channel
+      `speak_begin`/PCM/`speak_end`); ported microWakeWord on `esp-tflite-micro` with the
+      **TFLite-Micro micro-features frontend** + µVAD (D-9); models in a flash data
+      partition, runtime-loaded (D-12) — the wake pack is voice's UNMODIFIED artifact,
+      flash-time pinned, hash-verified (`consumer-pins`); two-stage SoftAP→STA provisioning
+      + device admin UI + CSR submission against `provisioning/` (D-16/D-17);
+      config-preserving OTA (D-18). **HK-4 amendments over the imported text:** per-device
+      apps from shared `components/` (`per-device-apps` — no single image); the execution
+      layer (PlatformIO vs alternatives, D-3) is **DES-3's decision, which gates this task**
+      (`phase-gates`); rooms provisioning-time NVS. Also gated on hardware selection
+      (PCB phase) — hence `HW-GATED`. Splits into per-device FW tasks (`[dev:<slug>]`) once
+      the first board exists.
 
 ## OPS — operations / toolchain
 
