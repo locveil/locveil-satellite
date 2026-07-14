@@ -110,3 +110,11 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       Reconciliation nit filed upstream in the write-back: the commons skeleton
       manifest's `$comment` key violates the schema's own `additionalProperties: false`.
       docs: readme, contributing, provisioning-runbook
+- [x] **OPS-5** [fleet] — **DONE 2026-07-14** (board delegation **PROD-22**, executed by the
+      commons session on owner instruction; note: PROD-22's original delegation list named
+      bridge+voice only — satellite added at execution for completeness, it vendors the same
+      guard). **Re-vendor contract-guard @ `contract-guard-v2`** (1.1.0, the `TAG-MISSING`
+      rule). The rule fired here too — third instance of the false-green class:
+      `contracts/docs-manifest/STAMP.json` named `docs-manifest-v1` with no tag behind it;
+      tag created at the STAMP's landing commit, check green 0 warnings. docs: none —
+      vendored tool only.
