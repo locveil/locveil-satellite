@@ -122,16 +122,31 @@ _(gated on DES-3 — `phase-gates`)_
 
 ## OPS — operations / toolchain
 
-- [ ] **OPS-1** — **Own the firmware/model publish pipeline into the WB7 `/srv/esp32/`.**
-      The Plane-B nginx serves `/esp32/firmware/` + `/esp32/models/` from
-      `/srv/esp32/{firmware,models}/` (operator-managed static); this repo owns how
-      artifacts get published there (versioning, hashes, the wake-pack pin flow).
-      **PROD-16 amendment (2026-07-12, filed with OPS-3):** the publish flow gains the
-      wake-pack **hash-at-publish** requirement — before a model pack is published into
-      `/srv/esp32/models/`, its file sha256s MUST verify against the pinned sidecar
-      stamp `contracts/pins/wake-pack/STAMP.json` (`wake-pack-v1`); these are the same
-      hashes the firmware verifies at flash time (`process/contracts.md` §4,
-      binary-pack class — hash manifest at publish, hash verification at load).
+- [ ] **OPS-1** — **Own the firmware publish pipeline into the WB7 `/srv/esp32/firmware/`.**
+      The Plane-B nginx serves `/esp32/firmware/` from `/srv/esp32/firmware/`
+      (operator-managed static); this repo owns how OTA images get published there
+      (versioning, hashes). *(SPLIT 2026-07-14 at sprint-01 intake per `process/sprints.md`
+      §4 — partial dependencies split the task: the model-pack half had zero dependencies
+      and became **OPS-1a** (the sprint-selected row, carrying the PROD-16 hash-at-publish
+      amendment wholesale — it was always about the wake pack); this remainder is the
+      firmware half, gated on the FW phase existing at all — no toolchain (DES-3), no
+      images, nothing to publish. Reopens for real once FW-1 produces its first image.)*
+- [ ] **OPS-1a** [fleet] — **Model-pack publish flow — hash-at-publish vs the wake-pack
+      STAMP** (sprint-01 selected row, M/0.3; split from OPS-1 at intake 2026-07-14; the
+      zero-dependency half — pin `wake-pack-v1` exists (OPS-3), the pack artifacts exist
+      upstream (HF `droman42/microwakeword-irina-ru`, URLs + sha256s in the STAMP), the
+      `/srv/esp32/models/` layout is deployed by the ansible plane). Build the publish
+      flow that turns `provisioning/README.md`'s prose advisory ("verify model packs
+      before publishing") into machinery: before a pack lands in
+      `/srv/esp32/models/<client_id>/`, its file sha256s MUST verify against
+      `contracts/pins/wake-pack/STAMP.json` — the same hashes the firmware verifies at
+      flash time (PROD-16 amendment, `process/contracts.md` §4 binary-pack class: hash
+      manifest at publish, hash verification at load). To settle at execution: where the
+      tool runs (workstation-push over SSH vs controller-side; NOT privileged — no CA
+      key involved, stays OUTSIDE the DES-5 broker by design); the per-node
+      `models/<client_id>/` layout vs the fleet-wide STAMP; behavior on a future
+      `wake-pack-v2` re-pin. Docs: the README "Publishing firmware / models" section is
+      caused-staleness the moment the tool exists — same-change fix + manifest check.
 - [ ] **OPS-6** [fleet] `EARMARK` — **Ansible-deploy rework for the DES-5 broker** (PROD-24
       delegation 2026-07-14; owner ruling: **not this sprint** — filed as an earmark, picked
       up only after DES-5 lands). `provisioning/ansible/deploy.yml` (Plane B) grows the

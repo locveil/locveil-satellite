@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-14 — sprint-01 intake: OPS-1 split, OPS-1a filed (model-pack publish flow).**
+  The sprint-01 satellite row pulled (`../locveil-commons/board/sprints/sprint-01.md`,
+  §4 partial-dependency split, ID pre-named by the coordinator — no board write-back
+  slot). Reconciled clean: the zero-dependency claim holds (pin `wake-pack-v1` + upstream
+  HF artifacts + deployed `/srv/esp32/models/` layout; no FW/bench/hardware needed).
+  OPS-1a takes the PROD-16 hash-at-publish amendment wholesale; OPS-1 narrows to the
+  firmware half, dormant until FW-1 produces an image. Sprint side-finds disposition:
+  the D-17/workbench-panel reconciliation was already discharged by the PROD-24 DES-5
+  expansion (same day, `44d7646`); the DES-4 `device-integration-v1.1` wrinkle was
+  already recorded at OPS-3 intake; the `process/sprints.md` §6 vacuous-line finding is
+  a commons doc finding — becomes scope only if DES-3 is selected in a future sprint.
+
 - **2026-07-14 — PROD-24 delegation pulled: DES-5 expanded (broker + verbs + operator
   credential), OPS-6 ansible earmark filed.** The Workbench shell council's satellite
   delegation: DES-5 (cert lifecycle) absorbs the privileged broker — one privileged code
