@@ -117,24 +117,34 @@ EC (`prime256v1`) throughout — far lighter than RSA-4096 for the ESP32's mTLS 
 
 ## Publishing firmware / models
 
-Plain file copies into the mTLS web roots (no app). The serving side only cares about
-the path layout — where the artifacts come from is your build's business (this repo's
-firmware build toolchain is not finalized yet; publish whichever image your build
-produces):
+Plain files in the mTLS web roots (no app) — the serving side only cares about the
+path layout.
+
+**Model packs** go through `scripts/publish_model_pack.py` (run from a checkout of
+this repo — that's where the pinned stamp lives). It fetches the pack from the pinned
+upstream (or takes local files via `--from`), verifies every file's sha256 against
+`contracts/pins/wake-pack/STAMP.json`, and only then installs into
+`/srv/esp32/models/<client_id>/` — a pack that doesn't match the stamp would fail the
+device's own hash verification at flash time, so nothing unverified ever lands there:
 
 ```sh
-# firmware image (your build's output), versioned:
-install -D -m644 firmware.bin  /srv/esp32/firmware/<version>/firmware.bin
-# per-node model pack (microWakeWord manifest + tflite):
-install -D -m644 irina.json    /srv/esp32/models/kitchen_node/irina.json
-install -D -m644 irina.tflite  /srv/esp32/models/kitchen_node/irina.tflite
+# check the pack against the stamp without publishing anything:
+scripts/publish_model_pack.py verify
+# publish to one or more nodes on the controller (plain ssh/scp underneath):
+scripts/publish_model_pack.py publish --node kitchen_node --node hall_node --host root@<controller>
 ```
 
-**Verify model packs before publishing.** The wake-word pack is a pinned, hash-stamped
-artifact — check each file's `sha256sum` against the pinned stamp
-(`contracts/pins/wake-pack/STAMP.json` in this repo) before it goes into
-`/srv/esp32/models/`; a pack that doesn't match the stamp will fail the device's own
-hash verification at flash time.
+Re-runs are idempotent (identical files are skipped). If a published file differs
+from the stamp, the tool **refuses to replace it**: devices flashed against the old
+hashes would stop verifying — that's a deliberate breaking change, done by bumping
+the wake-pack pin first and then re-publishing with `--allow-replace`.
+
+**Firmware images** are still plain copies (this repo's firmware build toolchain is
+not finalized yet; publish whichever image your build produces):
+
+```sh
+install -D -m644 firmware.bin  /srv/esp32/firmware/<version>/firmware.bin
+```
 
 The device reports `firmware_version` / `model_version` in its `register` frame; on a
 mismatch it fetches the new artifact from `:443` over mTLS.

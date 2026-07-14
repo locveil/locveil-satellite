@@ -118,3 +118,26 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       `contracts/docs-manifest/STAMP.json` named `docs-manifest-v1` with no tag behind it;
       tag created at the STAMP's landing commit, check green 0 warnings. docs: none —
       vendored tool only.
+- [x] **OPS-7** [fleet] — **DONE 2026-07-14** (sprint-01 selected row — named "OPS-1a"
+      there, renumbered at intake: scope-guard IDs are numeric-only; split from OPS-1
+      at intake the same day). **Model-pack publish flow — hash-at-publish vs the
+      wake-pack STAMP.** Landed `scripts/publish_model_pack.py` (stdlib-only,
+      workstation-side — the STAMP is repo truth and lives here; transport is plain
+      ssh/scp; NOT privileged — no CA key, stays outside the DES-5 broker by design):
+      `verify` and `publish --node <client_id>... (--dest DIR | --host)` — sources
+      fetched from the STAMP's own URLs or taken via `--from`; every file's sha256
+      MUST match `contracts/pins/wake-pack/STAMP.json` before anything lands in
+      `/srv/esp32/models/<client_id>/` (PROD-16 amendment, `process/contracts.md` §4
+      binary-pack class), remote copies re-hashed post-copy. Execution-time decisions:
+      per-node dirs get identical fleet-pack copies (per-node divergence is a future
+      pin concern); a published file differing from the STAMP is REFUSED (per the
+      STAMP's own note, replacing a published model is a breaking change — flashed
+      hashes stop verifying), override is explicit `--allow-replace` after a pin bump;
+      re-runs idempotent; client_id validated `^[A-Za-z0-9_-]+$` (the CSR scripts'
+      untrusted-input rule). Verified end-to-end against the live upstream (HF fetch,
+      both hashes green) + the full local matrix (publish, idempotent skip, drift
+      refusal, allow-replace, tampered-source abort with nothing published,
+      path-traversal id rejected); the ssh branch mirrors the local one and awaits a
+      controller session — flagged, not asserted. README publish section rewritten
+      around the tool (firmware half stays plain copies — OPS-1, dormant).
+      docs: provisioning-runbook

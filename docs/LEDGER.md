@@ -140,20 +140,3 @@ _(gated on DES-3 — `phase-gates`)_
       the DES-5 verb surface needs on the controller (e.g. CRL regeneration + nginx reload
       if DES-5 chooses `ssl_crl`). Blocked on DES-5 by definition — the design decides what
       gets deployed. Ref: `../locveil-commons/docs/design/workbench.md` §6.
-- [ ] **OPS-7** [fleet] — **Model-pack publish flow — hash-at-publish vs the wake-pack
-      STAMP** (sprint-01 selected row — named "OPS-1a" there, renumbered at intake:
-      scope-guard IDs are numeric-only; M/0.3; split from OPS-1 at intake 2026-07-14; the
-      zero-dependency half — pin `wake-pack-v1` exists (OPS-3), the pack artifacts exist
-      upstream (HF `droman42/microwakeword-irina-ru`, URLs + sha256s in the STAMP), the
-      `/srv/esp32/models/` layout is deployed by the ansible plane). Build the publish
-      flow that turns `provisioning/README.md`'s prose advisory ("verify model packs
-      before publishing") into machinery: before a pack lands in
-      `/srv/esp32/models/<client_id>/`, its file sha256s MUST verify against
-      `contracts/pins/wake-pack/STAMP.json` — the same hashes the firmware verifies at
-      flash time (PROD-16 amendment, `process/contracts.md` §4 binary-pack class: hash
-      manifest at publish, hash verification at load). To settle at execution: where the
-      tool runs (workstation-push over SSH vs controller-side; NOT privileged — no CA
-      key involved, stays OUTSIDE the DES-5 broker by design); the per-node
-      `models/<client_id>/` layout vs the fleet-wide STAMP; behavior on a future
-      `wake-pack-v2` re-pin. Docs: the README "Publishing firmware / models" section is
-      caused-staleness the moment the tool exists — same-change fix + manifest check.

@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-14 — OPS-7 DONE: model-pack publish flow — hash-at-publish is machinery now.**
+  `scripts/publish_model_pack.py` (stdlib-only, workstation-side — publish from where
+  the pin lives; ssh/scp transport; outside the DES-5 broker, no CA key involved).
+  Nothing lands in `/srv/esp32/models/<client_id>/` unless every file's sha256 matches
+  `contracts/pins/wake-pack/STAMP.json`; drift on already-published files is refused
+  (breaking change per the STAMP — pin bump then `--allow-replace`); re-runs idempotent;
+  remote copies re-hashed post-copy. Verified live against the HF upstream (both hashes
+  green) + the full local failure matrix; the ssh branch mirrors the local one and is
+  untested until a controller session — recorded honestly in the DONE entry. README
+  publish section rewritten around the tool (kept user-grade, no tracking refs — the
+  OPS-4 rule); firmware publishing stays plain copies under dormant OPS-1. Sprint-01's
+  0.3-session satellite row is thereby executed. docs: provisioning-runbook.
 - **2026-07-14 — sprint-01 intake: OPS-1 split, OPS-7 filed (model-pack publish flow;
   the sprint row's "OPS-1a" renumbered).** The sprint-01 satellite row pulled
   (`../locveil-commons/board/sprints/sprint-01.md`, §4 partial-dependency split).
