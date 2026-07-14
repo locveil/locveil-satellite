@@ -127,12 +127,22 @@ _(gated on DES-3 — `phase-gates`)_
       (operator-managed static); this repo owns how OTA images get published there
       (versioning, hashes). *(SPLIT 2026-07-14 at sprint-01 intake per `process/sprints.md`
       §4 — partial dependencies split the task: the model-pack half had zero dependencies
-      and became **OPS-1a** (the sprint-selected row, carrying the PROD-16 hash-at-publish
-      amendment wholesale — it was always about the wake pack); this remainder is the
+      and became **OPS-7** (the sprint-selected row — named "OPS-1a" there; renumbered at
+      intake, scope-guard IDs are numeric-only — carrying the PROD-16 hash-at-publish
+      amendment wholesale, it was always about the wake pack); this remainder is the
       firmware half, gated on the FW phase existing at all — no toolchain (DES-3), no
       images, nothing to publish. Reopens for real once FW-1 produces its first image.)*
-- [ ] **OPS-1a** [fleet] — **Model-pack publish flow — hash-at-publish vs the wake-pack
-      STAMP** (sprint-01 selected row, M/0.3; split from OPS-1 at intake 2026-07-14; the
+- [ ] **OPS-6** [fleet] `EARMARK` — **Ansible-deploy rework for the DES-5 broker** (PROD-24
+      delegation 2026-07-14; owner ruling: **not this sprint** — filed as an earmark, picked
+      up only after DES-5 lands). `provisioning/ansible/deploy.yml` (Plane B) grows the
+      broker deployment: the broker unit/service under its key-owning user, the
+      localhost/unix-socket authenticated zone, operator-credential material, and whatever
+      the DES-5 verb surface needs on the controller (e.g. CRL regeneration + nginx reload
+      if DES-5 chooses `ssl_crl`). Blocked on DES-5 by definition — the design decides what
+      gets deployed. Ref: `../locveil-commons/docs/design/workbench.md` §6.
+- [ ] **OPS-7** [fleet] — **Model-pack publish flow — hash-at-publish vs the wake-pack
+      STAMP** (sprint-01 selected row — named "OPS-1a" there, renumbered at intake:
+      scope-guard IDs are numeric-only; M/0.3; split from OPS-1 at intake 2026-07-14; the
       zero-dependency half — pin `wake-pack-v1` exists (OPS-3), the pack artifacts exist
       upstream (HF `droman42/microwakeword-irina-ru`, URLs + sha256s in the STAMP), the
       `/srv/esp32/models/` layout is deployed by the ansible plane). Build the publish
@@ -147,11 +157,3 @@ _(gated on DES-3 — `phase-gates`)_
       `models/<client_id>/` layout vs the fleet-wide STAMP; behavior on a future
       `wake-pack-v2` re-pin. Docs: the README "Publishing firmware / models" section is
       caused-staleness the moment the tool exists — same-change fix + manifest check.
-- [ ] **OPS-6** [fleet] `EARMARK` — **Ansible-deploy rework for the DES-5 broker** (PROD-24
-      delegation 2026-07-14; owner ruling: **not this sprint** — filed as an earmark, picked
-      up only after DES-5 lands). `provisioning/ansible/deploy.yml` (Plane B) grows the
-      broker deployment: the broker unit/service under its key-owning user, the
-      localhost/unix-socket authenticated zone, operator-credential material, and whatever
-      the DES-5 verb surface needs on the controller (e.g. CRL regeneration + nginx reload
-      if DES-5 chooses `ssl_crl`). Blocked on DES-5 by definition — the design decides what
-      gets deployed. Ref: `../locveil-commons/docs/design/workbench.md` §6.
