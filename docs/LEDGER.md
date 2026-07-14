@@ -75,6 +75,23 @@ before **DES-3** is done.
       issued cert*. Surfaced 2026-07-09 by voice's ARCH-25 provisioning round-trip.
       Deliverable: design doc + implementation follow-up(s). Refs: `provisioning/README.md`
       (Safety properties), `docs/design/esp32_satellite.md` D-17.
+      *(PROD-24 expansion 2026-07-14 — board delegation, Workbench shell council; normative
+      source `../locveil-commons/docs/design/workbench.md` §6. The design ABSORBS:
+      **(a) the privileged broker** — one privileged code path, two peer clients (the
+      `esp32-provision` CLI + the workbench provisioning page): a featherweight
+      controller-side broker (key-owning user, localhost/unix-socket, authenticated zone)
+      that both call. Owner overruled the CLI-only reading of D-17: the CLI's functionality
+      MUST be replicated in the UI; the CA-key privilege boundary survives, the SSH-only
+      gate does not — the **D-17 second amendment lands via this design**.
+      **(b) the full verb vocabulary** — `list`/`status` (read surface; implies an
+      `esp32-site` version bump), `approve`/`reject-pending` (broker v1; today's CLI
+      `revoke` = drop-pending, reconciled at intake), `revoke-issued`/`renew` (this task's
+      original core). **(c) the workstation operator-credential design** — client cert
+      from the home CA vs a separate secret; the broker's authentication is this design's
+      to define. Binding conditions on record: no write API ships before PROD-4's auth
+      decision; the workbench page stays registry-declared dormant, gated on this task +
+      first light; voice's desktop satellite is the page's first test target and needs the
+      broker/read surface first. Deploy follow-through earmarked as **OPS-6**.)*
 
 ## PCB — board projects
 
@@ -115,3 +132,11 @@ _(gated on DES-3 — `phase-gates`)_
       stamp `contracts/pins/wake-pack/STAMP.json` (`wake-pack-v1`); these are the same
       hashes the firmware verifies at flash time (`process/contracts.md` §4,
       binary-pack class — hash manifest at publish, hash verification at load).
+- [ ] **OPS-6** [fleet] `EARMARK` — **Ansible-deploy rework for the DES-5 broker** (PROD-24
+      delegation 2026-07-14; owner ruling: **not this sprint** — filed as an earmark, picked
+      up only after DES-5 lands). `provisioning/ansible/deploy.yml` (Plane B) grows the
+      broker deployment: the broker unit/service under its key-owning user, the
+      localhost/unix-socket authenticated zone, operator-credential material, and whatever
+      the DES-5 verb surface needs on the controller (e.g. CRL regeneration + nginx reload
+      if DES-5 chooses `ssl_crl`). Blocked on DES-5 by definition — the design decides what
+      gets deployed. Ref: `../locveil-commons/docs/design/workbench.md` §6.

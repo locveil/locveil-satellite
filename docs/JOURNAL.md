@@ -3,6 +3,22 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-14 — PROD-24 delegation pulled: DES-5 expanded (broker + verbs + operator
+  credential), OPS-6 ansible earmark filed.** The Workbench shell council's satellite
+  delegation: DES-5 (cert lifecycle) absorbs the privileged broker — one privileged code
+  path, two peer clients (`esp32-provision` CLI + the workbench provisioning page); the
+  owner overruled D-17's CLI-only reading (CA-key boundary survives, the SSH-only gate
+  does not — D-17's second amendment lands via the expanded design), plus the full verb
+  vocabulary (`list/status/approve/reject-pending` now, `revoke-issued/renew` from DES-5's
+  original core) and the workstation operator-credential question (home-CA client cert vs
+  separate secret). Reconciled clean: `provisioning/README.md` verbs match (today's
+  `revoke` = the board's `reject-pending` — drop-pending only, exactly the gap DES-5 was
+  filed on), D-17 already carried the "config-ui may call the same scripts later" hook,
+  `provisioning/ansible/deploy.yml` exists as the OPS-6 target. OPS-6 filed as an EARMARK
+  (owner: not this sprint; blocked on DES-5 by definition). Binding conditions recorded in
+  the ledger: no write API before PROD-4's auth decision; the workbench page stays dormant
+  until DES-5 + first light. IDs written back into the board's PROD-24 entry (commons
+  commit). Normative source: `../locveil-commons/docs/design/workbench.md` §6.
 - **2026-07-14 — OPS-5: contract-guard re-vendored @ v2 (PROD-22) — TAG-MISSING fired here too.** Third instance org-wide of the STAMP-names-a-nonexistent-tag false green; docs-manifest-v1 created at the STAMP's landing commit. Executed by the commons session on owner instruction; satellite added to the PROD-22 delegation list at execution (the original named bridge+voice only).
 ## 2026-07-12 — PROD-17 delegation pulled: user-docs convention adopted (OPS-4 filed + executed)
 
