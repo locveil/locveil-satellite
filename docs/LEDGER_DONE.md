@@ -156,3 +156,21 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       fixed in the same touched file: the workflow header comment still said
       "@ contract-guard-v1" (staleness caused by OPS-5's re-vendor). docs: none — CI
       workflow internals, no user-facing surface.
+- [x] **OPS-9** [fleet] — **DONE 2026-07-15** (post-completion defect in OPS-8, caught
+      by watching the pushed run — CI run 29414821199 FAILED with the same 2×
+      TAG-MISSING). **The convention's `fetch-tags: true` one-liner does not work**:
+      actions/checkout#1467 — on the default shallow single-commit fetch the flag only
+      drops `--no-tags`, and git tag auto-following can't see tags on unfetched commits,
+      so tags pointing at older commits never arrive (the checkout log shows the fetch
+      command carries no tag refspec). OPS-8's local repro passed because
+      `clone --no-tags` + `fetch --tags` is not checkout's actual fetch shape — repro
+      fidelity lesson recorded. Fix: explicit `git fetch --tags --depth=1 origin` step
+      after checkout (replaces the dead flag); re-verified from checkout's EXACT clone
+      state (init + single-sha depth-1 fetch → guard fails; explicit tag fetch → green,
+      0 warnings); this commit's own pushed run is the live confirmation, monitored to
+      completion with the verdict recorded in the board write-back (not pre-asserted
+      here — the OPS-8 lesson). Cross-repo blast radius written back to
+      PROD-25: commons' own post-fix run dd7c270 FAILED the same way (its "EXECUTED"
+      deliverable (2) is defective, convention §4 amendment (1) prescribes the dead
+      one-liner); voice BUILD-38 verified "by simulation" — likely same latent state.
+      docs: none — CI workflow internals, no user-facing surface.

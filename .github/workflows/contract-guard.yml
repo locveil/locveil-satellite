@@ -24,10 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          # PROD-25: TAG-MISSING resolves owned STAMP tags via `git tag -l`; the default
-          # checkout is tag-less and the rule can never pass without this. Shallow is fine.
-          fetch-tags: true
+      # PROD-25: TAG-MISSING resolves owned STAMP tags via `git tag -l`. The convention's
+      # `fetch-tags: true` one-liner is a no-op here (actions/checkout#1467: on the default
+      # shallow single-commit fetch it only drops --no-tags, and tag auto-following can't
+      # see tags on unfetched commits — run 29414821199 was the live proof). Fetch the tag
+      # refs explicitly; shallow stays fine, the rule only needs the refs.
+      - run: git fetch --tags --depth=1 origin
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

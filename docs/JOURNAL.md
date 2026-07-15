@@ -3,6 +3,19 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-15 — OPS-9 DONE: the PROD-25 one-liner was a dud — explicit tag fetch.**
+  Watched OPS-8's pushed run instead of trusting it: FAILED, same 2× TAG-MISSING.
+  `fetch-tags: true` is a no-op on checkout's default shallow single-commit fetch
+  (actions/checkout#1467 — the flag only drops `--no-tags`; auto-following can't see
+  tags on unfetched commits). The OPS-8 repro had passed because `clone --no-tags`
+  isn't checkout's real fetch shape — this time reproduced from the EXACT state
+  (init + single-sha depth-1 fetch) before trusting the fix. Fix: explicit
+  `git fetch --tags --depth=1 origin` step; green locally from the exact state; the
+  pushed run is monitored and its verdict lands in the board write-back.
+  Blast radius filed back to PROD-25: commons' own post-fix run dd7c270
+  failed identically (convention §4 prescribes the dead one-liner; commons workflow
+  still broken), voice BUILD-38 was verified by simulation only.
+
 - **2026-07-15 — OPS-8 DONE: contract-guard CI checkout fetches tags (PROD-25).**
   The v2 `TAG-MISSING` rule reads `git tag -l`, but `actions/checkout` defaults to a
   tag-less shallow clone — since OPS-5 re-vendored v2, this repo's guard job was
