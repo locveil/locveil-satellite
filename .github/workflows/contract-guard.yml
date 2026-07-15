@@ -1,5 +1,5 @@
 # Convention: process/contracts.md §4 — job name `contract-guard`, --check only.
-# Layer 1 (coherence): vendored contract_guard.py @ contract-guard-v1.
+# Layer 1 (coherence): vendored contract_guard.py @ contract-guard-v2.
 # Layer 2 (owned-surface guards): check_esp32_site.py (esp32-site markers) +
 # check_docs_manifest.py (docs-manifest coherence, process/user-docs.md §4).
 name: contract-guard
@@ -24,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # PROD-25: TAG-MISSING resolves owned STAMP tags via `git tag -l`; the default
+          # checkout is tag-less and the rule can never pass without this. Shallow is fine.
+          fetch-tags: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

@@ -141,3 +141,18 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       controller session — flagged, not asserted. README publish section rewritten
       around the tool (firmware half stays plain copies — OPS-1, dormant).
       docs: provisioning-runbook
+- [x] **OPS-8** [fleet] — **DONE 2026-07-15** (board delegation **PROD-25**, filed off
+      bridge OPS-30's finding). **CI checkout fetches tags for contract-guard.**
+      contract-guard-v2's `TAG-MISSING` rule resolves owned STAMP tags via `git tag -l`,
+      but the default `actions/checkout` clone is shallow AND tag-less — the guard job
+      could never pass once v2 landed. Fix per `process/contracts.md` §4 (PROD-25
+      amendment): `fetch-tags: true` on the guard job's checkout (shallow stays fine —
+      the rule only needs the tag ref). Reconciliation vs the board text: PROD-25's sweep
+      recorded satellite "vendored at v1, fix rides the v2 re-pin" — stale; OPS-5 had
+      already re-vendored v2 on 2026-07-14, so this repo's job was latently broken NOW
+      (both owned STAMPs name tags: `esp32-site-v1`, `docs-manifest-v1`) and the fix
+      lands standalone. Verified by reproduction: tag-less shallow clone → 2× false
+      TAG-MISSING, exit 1; after `git fetch --tags --depth 1` → green, 0 warnings. Also
+      fixed in the same touched file: the workflow header comment still said
+      "@ contract-guard-v1" (staleness caused by OPS-5's re-vendor). docs: none — CI
+      workflow internals, no user-facing surface.

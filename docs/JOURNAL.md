@@ -3,6 +3,17 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-15 — OPS-8 DONE: contract-guard CI checkout fetches tags (PROD-25).**
+  The v2 `TAG-MISSING` rule reads `git tag -l`, but `actions/checkout` defaults to a
+  tag-less shallow clone — since OPS-5 re-vendored v2, this repo's guard job was
+  latently broken: the next `contracts/**` push would have fired 2× false TAG-MISSING
+  (`esp32-site-v1`, `docs-manifest-v1`), nothing wrong in the contracts. One-line fix
+  per `process/contracts.md` §4: `fetch-tags: true` on the checkout (shallow stays
+  fine). Both sides reproduced locally: tag-less clone fails exactly as CI would, tags
+  make it green. Board text reconciled at intake — its "rides the v2 re-pin" framing
+  was stale for satellite (re-pin already done); fix landed standalone. Stale v1 header
+  comment in the workflow fixed in the same change. OPS-8 written back to PROD-25.
+
 - **2026-07-14 — OPS-7 DONE: model-pack publish flow — hash-at-publish is machinery now.**
   `scripts/publish_model_pack.py` (stdlib-only, workstation-side — publish from where
   the pin lives; ssh/scp transport; outside the DES-5 broker, no CA key involved).
