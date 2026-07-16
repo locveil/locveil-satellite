@@ -113,7 +113,18 @@ before **DES-3** is done.
       minimal "listening" animation while capture is active (owner 2026-07-16: the
       Siri-like *idea*, explicitly not Siri's UI); D-7/D-8 notes (PCM5101A-for-MAX98357A;
       the board has NO AEC path — half-duplex v1 unchanged, and §14's v2 ES8311/AEC/2-mic
-      upgrade is CLOSED on this hardware: v2 means new hardware); **(c)** phase
+      upgrade is CLOSED on this hardware: v2 means new hardware); **D-9/D-12 clarifying
+      amendment (owner 2026-07-16): the µVAD model is COMPILED INTO the app image** — the
+      ESP32 analog of pymicro-vad's packaging (verified: the 2.0.1 wheel ships only the
+      compiled extension, no `.tflite`); the models partition holds EXACTLY the wake pack
+      (the unmodified HF artifact) — no fourth pin, no `publish_model_pack.py` extension;
+      the VAD model is vendored third-party source with provenance recorded in the
+      component README (upstream + version + sha256; candidates: `rhasspy/pymicro-vad`'s
+      embedded model or `esphome/micro-wake-word-models` `vad.tflite` @ v2, ~16 KB tensor
+      arena), and D-10's byte-identical device+server contract stays WAKE-model-only
+      (server never runs VAD on the satellite path, D-11); one-time byte-diff vs the
+      desktop wheel's model at FW build (end-hint parity check — same Ahrendt lineage,
+      byte-identity unverified); **(c)** phase
       consequences recorded: no `boards/<slug>/` PCB project for the voice satellite, and
       FW-1's hardware-selection gate (the `HW-GATED` reason) lifts once this lands — FW
       still waits on DES-3 (`phase-gates`).

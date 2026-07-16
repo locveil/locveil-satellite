@@ -3,6 +3,19 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-16 — DES-7 scope expanded: µVAD provenance decided (compiled into the app
+  image).** Owner question "wake models come from my HF account — what about microVAD on
+  ESP32?" surfaced a real hole: D-9 names `pymicro-vad` but neither D-12 nor any
+  contracts pin covers the VAD model's on-device provenance/storage. Verified facts:
+  the desktop wheel (voice `.venv`, pymicro-vad 2.0.1) embeds the model in the compiled
+  extension — no `.tflite` ships; the ESPHome reference distributes the same
+  Ahrendt-lineage model as `vad.json`+`vad.tflite` (micro-wake-word-models v2, ~16 KB
+  tensor arena). Owner decision folded into DES-7 (b): bake the VAD model into the
+  firmware image (vendored third-party source, provenance in the component README) —
+  the models partition stays exactly the wake pack, no fourth pin, no publish-flow
+  extension; D-10 byte-identity stays wake-model-only; one-time byte-diff vs the wheel's
+  model at FW build.
+
 - **2026-07-16 — OPS-10 DONE: scope-guard re-pinned scope-v5 → scope-v6.** Found while
   sweeping the board for delegations and pin drift (result: no pending satellite
   delegations; both contract pins current at their owners' newest tags — `ws-protocol-v1`,
