@@ -3,6 +3,23 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-16 — DES-7: hardware findings doc committed (enclosure data + vendor
+  software survey).** `docs/design/assets/des7-hardware-findings.md`, referenced from
+  DES-7 (input evidence) and DES-3 (decision input). Casing verdict: everything CAD
+  needs exists — the wiki's structural-diagram RAR holds a dimensioned 2D print
+  (39.36×41.53 board, 3× M2.0-H3.5 bosses fully dimensioned, 9.0 mm stack) AND a full
+  3D STEP assembly (219 components incl. the mic body and the 12×10×2.8 speaker);
+  vendor URLs + sha256s pinned in the doc, files not committed (15 MB). Mic confirmed
+  TOP-ported (Waveshare-hosted datasheet + SnapEDA/DFRobot) → the D-7 acoustic channel
+  is a gasket-sealed hole over the mic body, no through-PCB port. `waveshareteam`
+  survey: the board repo carries a complete NATIVE ESP-IDF 5.3.2 project (SPD2010 +
+  PCM5101 + mic capture with the 32-bit/RIGHT-slot wiring truth + TCA9554 reset
+  gating + esp-sr wake demo proving the audio pipeline on this exact hardware, factory
+  .bin for bench restore) — validates DES-3's native-idf.py option; espressif-maintained
+  SPD2010 display+touch registry components exist, so the consumption model is registry
+  drivers + own glue, no vendoring of the demo's UNLICENSED code (repo has no license
+  file); no 1.46 BSP in Waveshare's components repo yet — watch item.
+
 - **2026-07-16 — DES-7: listening animation decided — variant B "waveform".** Three
   candidates mocked as an interactive page simulating the round 412×412 screen
   (idle/listening states, synthetic speech-amplitude drive; LottieFiles' free tier

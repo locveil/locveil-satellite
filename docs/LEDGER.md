@@ -29,6 +29,11 @@ before **DES-3** is done.
       the background-monitor pattern, and a **mandatory pin/strapping audit step**.
       **MANDATORY before any FW phase starts** (`phase-gates`). The
       PIO-platform-vs-latest-IDF tension is a fact-check, not a blind bet (HK-4 round 4).
+      *(Decision input 2026-07-16, from the DES-7 hardware findings —
+      `docs/design/assets/des7-hardware-findings.md` §3.1: the vendor's own reference for
+      the adopted voice-satellite board is a plain-`idf.py` native project on IDF 5.3.2,
+      validating the native option and anchoring a known-good IDF version; demo pins
+      LVGL ~8.3.)*
 - [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] —
       **Adopt the bridge's device-descriptor format for the deck devices.** Consumes the
       bridge's device-integration-convention design (PROD-15 bridge delegation item 2;
@@ -104,7 +109,13 @@ before **DES-3** is done.
       1.46" round 412×412 LCD + touch (SPD2010, QSPI); TCA9554 expander, QMI8658 IMU,
       PCF85063 RTC, microSD, ETA6098 Li-ion charge, USB-C; ~7 free GPIOs (none needed —
       all voice-satellite peripherals are onboard). Electronics identical across the
-      1.46/1.46B/1.46C variants (B = no cover glass). Deliverables: **(a)** the
+      1.46/1.46B/1.46C variants (B = no cover glass). **Findings doc (input evidence,
+      2026-07-16): `docs/design/assets/des7-hardware-findings.md`** — enclosure data
+      inventory (dimensioned 2D print + full 3D STEP assembly incl. mic/speaker bodies,
+      vendor URLs + sha256s; mic confirmed TOP-ported → gasket-sealed case channel) +
+      the `github.com/waveshareteam` survey (native ESP-IDF 5.3.2 reference project for
+      this exact board; espressif-maintained SPD2010 registry drivers; no-license caveat
+      on vendor demo code; no 1.46 BSP yet — watch). Deliverables: **(a)** the
       voice-satellite device dossier `docs/devices/<slug>.md` (slug fixed at execution —
       DES-1 precedent) with the full pin/strapping map, feeding DES-3's mandatory audit;
       **(b)** `esp32_satellite.md` decision-log amendments — **D-2 amendment: display
