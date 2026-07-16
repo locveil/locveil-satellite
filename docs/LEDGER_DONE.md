@@ -31,6 +31,44 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       architecture itself stays retired). Import confirmation filed repo-to-repo into the
       bridge's DRV-35 entry — unblocks its delete + DRV-7 retirement.
 
+- [x] **DES-7** — **DONE 2026-07-17** — **Voice-satellite hardware adoption: Waveshare
+      ESP32-S3-Touch-LCD-1.46B** (owner decision 2026-07-16 — off-the-shelf, 3 units on
+      hand, no custom PCB; executed as an interactive owner session). Slug fixed at
+      execution (owner): **`waveshare-lcd146`**. Landed:
+      **(a)** dossier **`docs/devices/waveshare-lcd146.md`** — full pin/strapping map
+      (official schematic p.1 GPIO matrix + vendor demo @ `fda89ff` + wiki, cross-checked
+      claim-by-claim, per-file/line cites), strapping audit vs the ESP32-S3 datasheet/TRM
+      (notable: straps **GPIO45/46 double as LCD QSPI DATA1/DATA0** — vendor-designed-in,
+      safe at reset via the chip's weak pull-downs, download-mode caution recorded as a
+      bench item; the GPIO14-lesson pass is otherwise clean), audio wiring truths
+      (32-bit/RIGHT-slot mic capture; NO amp-enable GPIO — NS8002 hardwired on, trimmer
+      volume; disjoint mic/DAC pin sets → the S3's two I2S peripherals carry D-8's two
+      rates), TCA9554-gated LCD/touch resets (bring-up landmine), the vendor's stale
+      `SD D3=21` define flagged, present-but-unused inventory, `HW-GATED` bench items.
+      **(b)** `esp32_satellite.md` decision-log amendments: **D-2** (board adopted;
+      display support an OPTIONAL compile-time feature, headless baseline; variant-B
+      waveform listening-animation spec folded in; touch present-but-unused — scope
+      decided at FW-1 intake, not DES-3); **D-7/D-8** (PCM5101A+NS8002 as the MAX98357A
+      functional substitute; NO AEC path — §14's v2 audio-hardware upgrades CLOSED, v2 =
+      new hardware); **D-9/D-12** (µVAD compiled into the app image, vendored source with
+      provenance; models partition = EXACTLY the wake pack; **owner 2026-07-17: the pack
+      is MULTI-model** — one wake model per unit, ≥3 near-term; whole pack in the
+      partition for hash-verifiability, per-unit model + room identity provisioned
+      post-flash via a **workbench-hosted management page over a firmware REST API** —
+      filed onto DES-3's agenda; D-10 byte-identity stays whole-pack/wake-only). Owner
+      rulings recorded: power **USB-C only** (Li-ion path unused, no cell), enclosure
+      posture **wall-mounted**.
+      **(c)** phase consequences: no `boards/waveshare-lcd146/` PCB project; **FW-1's
+      `HW-GATED` marker dropped** (hardware adopted AND on the desk; sole remaining gate
+      DES-3); DES-3 agenda expanded (REST API surface + management page + admin-UI
+      shrink). Findings doc grew **§2.6** (owner-requested pre-designed-enclosure survey:
+      Waveshare sells no 1.46 case; the whole community field is 3 mesh-only finds, none
+      wall-mounted → the case is designed from the vendor STEP; snap-fit bezel + M2-boss
+      mounting proven practical by the finds). docs: none — design-phase corpus (dossier
+      + amendments are ledger-indexed ground truth, not manifest nodes; `quickstart` /
+      `flash-and-provision` stay pending-gate on FW-1 first light; CONTRIBUTING's
+      `devices` coverage description unchanged).
+
 ## PCB — board projects
 
 ## FW — firmware

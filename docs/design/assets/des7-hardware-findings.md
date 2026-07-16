@@ -78,6 +78,34 @@ geometry instead of calipers. Confirmed present by product name in the STEP:
    device posture (desk puck vs wall — decides mic-channel and speaker-outlet
    direction), bezel-lip protection for the glass-less panel.
 
+### 2.6 Pre-designed enclosure survey (added 2026-07-17, owner request) — verdict: design from the vendor STEP
+
+Swept Waveshare official + Printables, Thingiverse, MakerWorld, Cults3D, GrabCAD + project
+repos (every candidate verified against the actual 1.46 board, not its 1.28/1.47/1.75/1.85
+siblings):
+
+- **Waveshare sells/publishes NO case for the 1.46** (CNC aluminum cases exist for the
+  1.75C/1.85B siblings only; no "with case" SKU for any 1.46 variant).
+- The complete community field is **three finds, none wall-mounted, none with CAD source**:
+  1. **Pendant Case** — `thingiverse.com/thing:7324253`, moononournation, **CC BY-NC 4.0**,
+     STL-only (case/cover/button/belt), wearable posture; mic/speaker handling unverified.
+  2. **PowerDot Victron monitor** — `makerworld.com/en/models/2959214`, Scoolt96,
+     MakerWorld standard license (poor remix base), 3MF, desk puck; snap-fit two-part
+     (ignores the M2 bosses), USB-C side cutout confirmed, no mic/speaker apertures.
+  3. **TheMakersSpace Flight Radar** — `github.com/commputethis/TheMakersSpace-Flight-Radar`
+     (`3mf/`, AGPL-3.0), 3MF-only, desk/portable, targets the 1.46C; **uses the 3× M2×4 mm
+     bosses** + rear USB-C routing, LiPo compartment; no mic/speaker apertures documented.
+- Explicit negatives: Printables/Cults3D/GrabCAD have nothing for this board; **no
+  wall-mount design exists anywhere** for the 1.46; voice-assistant builds on this exact
+  board (xiaozhi et al.) publish firmware, not enclosures.
+
+Assessment: **unusable as starting points** for the wall-mounted satellite case (mesh-only,
+wrong postures, two of three restrictively licensed) — the §2.1 STEP is the design base.
+Still useful as fit references: PowerDot proves a screw-less snap-fit bezel capture works on
+this stack-up; Flight Radar confirms the M2-boss mounting + rear USB-C routing are
+practical. **Mic-port and speaker-grille acoustics are unprecedented — solved in-house**
+(§2.4).
+
 ## 3. Vendor software survey — `github.com/waveshareteam` (100+ repos)
 
 ### 3.1 `ESP32-S3-Touch-LCD-1.46` — the board's own repo (the important one)

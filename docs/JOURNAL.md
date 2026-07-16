@@ -3,6 +3,24 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — DES-7 DONE: voice-satellite hardware adopted — dossier + design
+  amendments landed.** Interactive owner session. Slug fixed `waveshare-lcd146`; dossier
+  written with the full pin/strapping map (schematic GPIO matrix + vendor demo @
+  `fda89ff` + wiki, all three agreeing on every pin; strap audit vs the S3 datasheet/TRM
+  found GPIO45/46 double as LCD QSPI DATA1/0 — vendor-designed-in, safe at reset,
+  download-mode caution recorded; no amp-enable GPIO; the demo's stale `SD D3=21` define
+  flagged). `esp32_satellite.md` amended: D-2 display-optional (+ the variant-B waveform
+  animation spec; touch scope → FW-1 intake), D-7/D-8 (PCM5101A/NS8002; §14 v2 audio
+  CLOSED on this hardware), D-9/D-12 (µVAD compiles into the app image; models
+  partition = the wake pack only). Mid-session owner rulings: power USB-C only; posture
+  wall-mounted; the wake pack is MULTI-model (one wake model per unit, ≥3 near-term) →
+  whole pack in the partition, per-unit model + room identity provisioned post-flash via
+  a WORKBENCH-hosted management page driving a firmware REST API — filed onto DES-3's
+  agenda (API surface, on-device framework, D-16 admin-UI shrink). FW-1's `HW-GATED`
+  marker dropped (hardware on hand; sole gate DES-3). Findings doc grew §2.6
+  (owner-requested pre-designed-enclosure survey: no vendor case, 3 mesh-only community
+  finds, none wall-mount → design from the vendor STEP).
+
 - **2026-07-16 — DES-3 input sharpened: docs-MCP is latest-only; latest = IDF v6.0.2.**
   Owner question ("does the docs MCP only serve the latest IDF? which version is
   that?") answered with verification, folded into the findings doc as §3.5 + the DES-3

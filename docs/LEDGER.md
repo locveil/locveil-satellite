@@ -16,6 +16,8 @@ before **DES-3** is done.
 | `docs/design/esp32_satellite.md` (DRAFT 2026-06-14; migrated from voice 2026-07-12, §4 wire tables demoted to the contracts pin) | the consolidated satellite design (voice ARCH-22 lineage) — FW-1, DES-4, DES-5 context |
 | `docs/design/ws_esp32_transport.md` (SUPERSEDED by `esp32_satellite.md`; migrated frozen) | historical lineage only |
 | `docs/devices/deck-common.md` + `revox-a77.md` / `revox-b215.md` / `pioneer-cld925.md` / `panasonic-fs90.md` (harmonized 2026-07-12) | per-device hardware ground truth — DES-4 descriptors, future `boards/<slug>/`, deck FW apps |
+| `docs/devices/waveshare-lcd146.md` (2026-07-17) | voice-satellite hardware ground truth (DES-7) — DES-3's mandatory pin/strapping audit, FW-1, enclosure CAD |
+| `docs/design/assets/des7-hardware-findings.md` (2026-07-16, enclosure survey added 2026-07-17) | DES-7 input evidence — enclosure data + `waveshareteam` survey; DES-3 decision input (§3.5); FW-1 consumption model |
 | `docs/review/des1-truth-pass.md` (2026-07-12) | DES-1 evidence: conflict resolutions, REQUIREMENTS disposition (VWB-38 feed), code sweep, pin re-audit |
 
 ## DES — design
@@ -40,6 +42,15 @@ before **DES-3** is done.
       `esp-tflite-micro` + the SPD2010 registry components against it; fallback v5.5.x;
       the i2s_std API family spans both, so the demo stays readable as a wiring
       reference either way.)*
+      *(Owner agenda expansion 2026-07-17, DES-7 session: the wake pack is MULTI-model —
+      one wake model per unit, ≥3 near-term — so per-unit model selection AND room
+      identity are provisioned POST-flash through a **WORKBENCH-HOSTED device-management
+      page** that drives the device over a **firmware REST API** (owner rulings
+      2026-07-17). DES-3 session subjects alongside the execution-layer decision: the
+      REST API surface, its on-device framework, how far the D-16 Stage-2 on-device
+      admin UI shrinks toward being just that API, and the page's relation to the DES-5
+      broker/workbench surfaces. See the D-12 amendment in
+      `docs/design/esp32_satellite.md`.)*
 - [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] —
       **Adopt the bridge's device-descriptor format for the deck devices.** Consumes the
       bridge's device-integration-convention design (PROD-15 bridge delegation item 2;
@@ -104,56 +115,6 @@ before **DES-3** is done.
       first light; voice's desktop satellite is the page's first test target and needs the
       broker/read surface first. Deploy follow-through earmarked as **OPS-6**.)*
 
-- [ ] **DES-7** — **Voice-satellite hardware adoption: Waveshare ESP32-S3-Touch-LCD-1.46B**
-      (owner decision 2026-07-16 — hardware selection is MADE: 3 units on hand, purchased
-      2025; off-the-shelf board, no custom PCB for the voice satellite). Board ground truth
-      (verified 2026-07-16 against the Waveshare wiki + official schematic + demo code):
-      ESP32-S3R8, 8 MB octal PSRAM (D-2's floor exactly) + 16 MB W25Q128 flash; ONE I2S
-      MEMS mic MSM261S4030H0R (ICS-43434-class — D-5 holds); PCM5101A I2S DAC + NS8002
-      2.4 W amp + onboard speaker (functional substitute for D-7's MAX98357A; mic and DAC
-      on separate I2S buses, so D-8's capture-16k / playback-22k05 coexistence holds);
-      1.46" round 412×412 LCD + touch (SPD2010, QSPI); TCA9554 expander, QMI8658 IMU,
-      PCF85063 RTC, microSD, ETA6098 Li-ion charge, USB-C; ~7 free GPIOs (none needed —
-      all voice-satellite peripherals are onboard). Electronics identical across the
-      1.46/1.46B/1.46C variants (B = no cover glass). **Findings doc (input evidence,
-      2026-07-16): `docs/design/assets/des7-hardware-findings.md`** — enclosure data
-      inventory (dimensioned 2D print + full 3D STEP assembly incl. mic/speaker bodies,
-      vendor URLs + sha256s; mic confirmed TOP-ported → gasket-sealed case channel) +
-      the `github.com/waveshareteam` survey (native ESP-IDF 5.3.2 reference project for
-      this exact board; espressif-maintained SPD2010 registry drivers; no-license caveat
-      on vendor demo code; no 1.46 BSP yet — watch). Deliverables: **(a)** the
-      voice-satellite device dossier `docs/devices/<slug>.md` (slug fixed at execution —
-      DES-1 precedent) with the full pin/strapping map, feeding DES-3's mandatory audit;
-      **(b)** `esp32_satellite.md` decision-log amendments — **D-2 amendment: display
-      support becomes an OPTIONAL firmware feature** (compile-time flag per
-      `per-device-apps`; the headless build stays the baseline); nice-to-have on top: a
-      minimal "listening" animation while capture is active (owner 2026-07-16: the
-      Siri-like *idea*, explicitly not Siri's UI) — **animation DECIDED 2026-07-16, owner
-      picked variant B "waveform" of three mocked candidates**
-      (`docs/design/assets/des7-listening-mockup.html` — open in a browser; A rings /
-      B waveform / C rim-arc): five rounded vertical bars, center-weighted
-      (0.55/0.82/1/0.82/0.55), heights driven by the speech envelope from the 16 kHz
-      capture frames (per-bar phase wobble; the mockup's envelope is synthetic),
-      cyan→violet vertical gradient #4FD8EB→#8B7BF7 on black; idle = the same bars as
-      dim near-static dots (~35 % alpha); ~30 fps, five rounded rects — LVGL-cheap, no
-      effects; D-7/D-8 notes (PCM5101A-for-MAX98357A;
-      the board has NO AEC path — half-duplex v1 unchanged, and §14's v2 ES8311/AEC/2-mic
-      upgrade is CLOSED on this hardware: v2 means new hardware); **D-9/D-12 clarifying
-      amendment (owner 2026-07-16): the µVAD model is COMPILED INTO the app image** — the
-      ESP32 analog of pymicro-vad's packaging (verified: the 2.0.1 wheel ships only the
-      compiled extension, no `.tflite`); the models partition holds EXACTLY the wake pack
-      (the unmodified HF artifact) — no fourth pin, no `publish_model_pack.py` extension;
-      the VAD model is vendored third-party source with provenance recorded in the
-      component README (upstream + version + sha256; candidates: `rhasspy/pymicro-vad`'s
-      embedded model or `esphome/micro-wake-word-models` `vad.tflite` @ v2, ~16 KB tensor
-      arena), and D-10's byte-identical device+server contract stays WAKE-model-only
-      (server never runs VAD on the satellite path, D-11); one-time byte-diff vs the
-      desktop wheel's model at FW build (end-hint parity check — same Ahrendt lineage,
-      byte-identity unverified); **(c)** phase
-      consequences recorded: no `boards/<slug>/` PCB project for the voice satellite, and
-      FW-1's hardware-selection gate (the `HW-GATED` reason) lifts once this lands — FW
-      still waits on DES-3 (`phase-gates`).
-
 ## PCB — board projects
 
 _(none yet — opens after the governing DES designs; one `boards/<device>/` project per
@@ -163,7 +124,7 @@ device, tasks tagged `[dev:<board-slug>]`)_
 
 _(gated on DES-3 — `phase-gates`)_
 
-- [ ] **FW-1** [fleet] `HW-GATED` — **ESP32 satellite firmware build** (imported 2026-07-12
+- [ ] **FW-1** [fleet] — **ESP32 satellite firmware build** (imported 2026-07-12
       from voice **ARCH-23**, export-closed there; reconcile at task start — the imported
       text predates HK-4). Build the headless voice-satellite firmware to the
       `docs/design/esp32_satellite.md` contract (D-1..D-18): board + digital I2S mic +
@@ -180,6 +141,16 @@ _(gated on DES-3 — `phase-gates`)_
       (`phase-gates`); rooms provisioning-time NVS. Also gated on hardware selection
       (PCB phase) — hence `HW-GATED`. Splits into per-device FW tasks (`[dev:<slug>]`) once
       the first board exists.
+      *(DES-7 amendment 2026-07-17 — hardware ADOPTED: the voice satellite is the Waveshare
+      ESP32-S3-Touch-LCD-1.46B `[dev:waveshare-lcd146]`, dossier
+      `docs/devices/waveshare-lcd146.md` (full pin/strapping map for DES-3's audit), 3 units
+      on hand — the hardware-selection gate lifts and the `HW-GATED` marker DROPS (bench
+      hardware is on the desk; no PCB phase for this device). Read the imported text through
+      the DES-7 amendments: "MAX98357A" = PCM5101A+NS8002 onboard (D-7 as amended); display
+      support optional per the D-2 amendment (headless baseline; waveform listening animation
+      nice-to-have; touch scope decided at THIS task's intake); µVAD compiles into the app
+      image, models partition = wake pack only (D-9/D-12 as amended); power = USB-C only.
+      Sole remaining gate: **DES-3**.)*
 
 ## OPS — operations / toolchain
 
