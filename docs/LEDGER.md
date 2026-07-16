@@ -111,7 +111,15 @@ before **DES-3** is done.
       support becomes an OPTIONAL firmware feature** (compile-time flag per
       `per-device-apps`; the headless build stays the baseline); nice-to-have on top: a
       minimal "listening" animation while capture is active (owner 2026-07-16: the
-      Siri-like *idea*, explicitly not Siri's UI); D-7/D-8 notes (PCM5101A-for-MAX98357A;
+      Siri-like *idea*, explicitly not Siri's UI) — **animation DECIDED 2026-07-16, owner
+      picked variant B "waveform" of three mocked candidates**
+      (`docs/design/assets/des7-listening-mockup.html` — open in a browser; A rings /
+      B waveform / C rim-arc): five rounded vertical bars, center-weighted
+      (0.55/0.82/1/0.82/0.55), heights driven by the speech envelope from the 16 kHz
+      capture frames (per-bar phase wobble; the mockup's envelope is synthetic),
+      cyan→violet vertical gradient #4FD8EB→#8B7BF7 on black; idle = the same bars as
+      dim near-static dots (~35 % alpha); ~30 fps, five rounded rects — LVGL-cheap, no
+      effects; D-7/D-8 notes (PCM5101A-for-MAX98357A;
       the board has NO AEC path — half-duplex v1 unchanged, and §14's v2 ES8311/AEC/2-mic
       upgrade is CLOSED on this hardware: v2 means new hardware); **D-9/D-12 clarifying
       amendment (owner 2026-07-16): the µVAD model is COMPILED INTO the app image** — the

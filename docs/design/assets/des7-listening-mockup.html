@@ -1,0 +1,367 @@
+<title>Listening UX — 3 candidates</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-raise: #11141c;
+    --bezel: #1a1e27;
+    --ink: #dde3ee;
+    --ink-dim: #8d95a6;
+    --ink-faint: #565e6f;
+    --cyan: #4fd8eb;
+    --violet: #8b7bf7;
+    --line: #232836;
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  /* Committed single-theme: this page simulates a dark hardware screen. */
+  html { background: var(--bg); }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 700px at 50% -10%, #141927 0%, transparent 60%),
+      var(--bg);
+    min-height: 100vh;
+    margin: 0;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+
+  header { margin-bottom: 2.75rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin: 0 0 0.9rem;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin: 0 0 0.7rem;
+    text-wrap: balance;
+  }
+  header > p {
+    max-width: 58ch;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .segmented {
+    display: inline-flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
+    background: var(--bg-raise);
+  }
+  .segmented button {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    background: none;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.5rem 1.15rem;
+    cursor: pointer;
+  }
+  .segmented button:hover { color: var(--ink); }
+  .segmented button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+  }
+  .segmented button[aria-pressed="true"] {
+    color: #06232a;
+    background: var(--cyan);
+  }
+  .controls .hint {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 2.5rem 2rem;
+  }
+  figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+  .device {
+    width: min(100%, 300px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 4.5%;
+    background: linear-gradient(160deg, #232937 0%, var(--bezel) 45%, #0e1118 100%);
+    box-shadow:
+      0 18px 50px -18px rgba(0,0,0,0.85),
+      inset 0 1px 1px rgba(255,255,255,0.07);
+  }
+  .device canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #000;
+  }
+  figcaption { margin-top: 1.35rem; text-align: center; max-width: 34ch; }
+  figcaption .name {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 0.45rem;
+  }
+  figcaption .name .idx { color: var(--violet); margin-right: 0.5em; }
+  figcaption .note {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: var(--ink-dim);
+    margin: 0;
+  }
+
+  footer {
+    margin-top: 3.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 2rem;
+  }
+  footer span { white-space: nowrap; }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Locveil satellite · DES-7 · display nice-to-have</p>
+    <h1>Listening UX — three candidates for the round 412 × 412 screen</h1>
+    <p>Each circle simulates the Waveshare 1.46″ display at scale. Flip the state to
+       compare how the variants wake up; in Listening, all three react to a synthetic
+       speech-amplitude signal, the way firmware could drive them from the mic capture task.</p>
+  </header>
+
+  <div class="controls">
+    <div class="segmented" role="group" aria-label="Satellite state">
+      <button type="button" data-state="idle" aria-pressed="false">Idle</button>
+      <button type="button" data-state="listening" aria-pressed="true">Listening</button>
+    </div>
+    <p class="hint">Amplitude is synthetic — on-device it would come from the 16 kHz capture frames.</p>
+  </div>
+
+  <div class="grid">
+    <figure>
+      <div class="device"><canvas id="cv-rings" width="412" height="412" aria-label="Pulse rings animation"></canvas></div>
+      <figcaption>
+        <p class="name"><span class="idx">A</span>Pulse rings</p>
+        <p class="note">Radar-style ripples spreading from a steady center dot.
+           LVGL cost: three arcs + one dot — trivial at 30 fps.</p>
+      </figcaption>
+    </figure>
+    <figure>
+      <div class="device"><canvas id="cv-bars" width="412" height="412" aria-label="Waveform bars animation"></canvas></div>
+      <figcaption>
+        <p class="name"><span class="idx">B</span>Waveform</p>
+        <p class="note">Five rounded bars breathing with the voice.
+           The most literally mic-reactive of the three; five rects, cheap.</p>
+      </figcaption>
+    </figure>
+    <figure>
+      <div class="device"><canvas id="cv-arc" width="412" height="412" aria-label="Rim arc animation"></canvas></div>
+      <figcaption>
+        <p class="name"><span class="idx">C</span>Rim arc</p>
+        <p class="note">A traveling arc hugging the bezel while the core slowly breathes.
+           One lv_arc sweep — cheapest, most watch-native.</p>
+      </figcaption>
+    </figure>
+  </div>
+
+  <footer>
+    <span>target: SPD2010 · 412×412 · QSPI</span>
+    <span>palette: #4FD8EB → #8B7BF7 on black</span>
+    <span>reduced-motion shows a still frame</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var TAU = Math.PI * 2;
+  var S = 412, C = S / 2;
+  var CYAN = [79, 216, 235], VIOLET = [139, 123, 247];
+  var state = "listening";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function rgba(c, a) { return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")"; }
+  function lerpC(a, b, t) {
+    return [
+      Math.round(a[0] + (b[0] - a[0]) * t),
+      Math.round(a[1] + (b[1] - a[1]) * t),
+      Math.round(a[2] + (b[2] - a[2]) * t)
+    ];
+  }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+  // Synthetic speech envelope: overlapping sines, syllable-ish rhythm.
+  function amplitude(t) {
+    var a = 0.34
+      + 0.30 * Math.sin(t * 2.1)
+      + 0.22 * Math.sin(t * 3.7 + 1.3)
+      + 0.14 * Math.sin(t * 7.3 + 0.5);
+    return clamp(a, 0, 1);
+  }
+
+  function ctx2d(id) {
+    var cv = document.getElementById(id);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = S * dpr;
+    cv.height = S * dpr;
+    var g = cv.getContext("2d");
+    g.scale(dpr, dpr);
+    return g;
+  }
+  var gRings = ctx2d("cv-rings"), gBars = ctx2d("cv-bars"), gArc = ctx2d("cv-arc");
+
+  function clear(g) {
+    g.clearRect(0, 0, S, S);
+  }
+
+  /* A — pulse rings */
+  function drawRings(g, t, amp) {
+    clear(g);
+    var listening = state === "listening";
+    if (listening) {
+      var PERIOD = 2.4, N = 3;
+      for (var i = 0; i < N; i++) {
+        var p = ((t / PERIOD) + i / N) % 1;
+        var r = 24 + p * 165;
+        var col = lerpC(CYAN, VIOLET, p);
+        g.beginPath();
+        g.arc(C, C, r, 0, TAU);
+        g.strokeStyle = rgba(col, (1 - p) * 0.75);
+        g.lineWidth = 3.2 - p * 1.6;
+        g.stroke();
+      }
+    }
+    var dotR = listening ? 11 + amp * 9 : 10 + Math.sin(t * 1.4) * 1.5;
+    var dotA = listening ? 0.95 : 0.35;
+    var grad = g.createRadialGradient(C, C, 0, C, C, dotR * 2.4);
+    grad.addColorStop(0, rgba(CYAN, dotA * 0.35));
+    grad.addColorStop(1, rgba(CYAN, 0));
+    g.beginPath(); g.arc(C, C, dotR * 2.4, 0, TAU); g.fillStyle = grad; g.fill();
+    g.beginPath(); g.arc(C, C, dotR, 0, TAU); g.fillStyle = rgba(CYAN, dotA); g.fill();
+  }
+
+  /* B — waveform bars */
+  function drawBars(g, t, amp) {
+    clear(g);
+    var listening = state === "listening";
+    var N = 5, W = 28, GAP = 20;
+    var total = N * W + (N - 1) * GAP;
+    var x0 = C - total / 2;
+    var weight = [0.55, 0.82, 1, 0.82, 0.55];
+    for (var i = 0; i < N; i++) {
+      var x = x0 + i * (W + GAP);
+      var h, a;
+      if (listening) {
+        var wob = 0.6 + 0.4 * Math.sin(t * 5.1 + i * 1.7);
+        h = 22 + amp * wob * weight[i] * 158;
+        a = 0.95;
+      } else {
+        h = 12 + Math.sin(t * 1.4 + i * 0.9) * 3;
+        a = 0.35;
+      }
+      var grad = g.createLinearGradient(0, C - h / 2, 0, C + h / 2);
+      grad.addColorStop(0, rgba(CYAN, a));
+      grad.addColorStop(1, rgba(VIOLET, a));
+      g.strokeStyle = grad;
+      g.lineWidth = W;
+      g.lineCap = "round";
+      g.beginPath();
+      g.moveTo(x + W / 2, C - h / 2);
+      g.lineTo(x + W / 2, C + h / 2);
+      g.stroke();
+    }
+  }
+
+  /* C — rim arc */
+  function drawArc(g, t, amp) {
+    clear(g);
+    var listening = state === "listening";
+    var R = 184;
+    // faint full rim
+    g.beginPath(); g.arc(C, C, R, 0, TAU);
+    g.strokeStyle = rgba(CYAN, 0.08); g.lineWidth = 6; g.stroke();
+    // breathing core
+    var coreR = listening ? 96 * (1 + 0.05 * Math.sin(t * 2.2) + 0.06 * amp) : 90;
+    var core = g.createRadialGradient(C, C, coreR * 0.2, C, C, coreR);
+    core.addColorStop(0, rgba(VIOLET, listening ? 0.16 : 0.06));
+    core.addColorStop(1, rgba(VIOLET, 0));
+    g.beginPath(); g.arc(C, C, coreR, 0, TAU); g.fillStyle = core; g.fill();
+    // traveling arc
+    var start, len, a;
+    if (listening) {
+      start = -Math.PI / 2 + t * 1.6;
+      len = clamp(1.0 + 0.6 * Math.sin(t * 1.3) + amp * 0.9, 0.5, 2.5);
+      a = 0.95;
+    } else {
+      start = -Math.PI / 2 - 0.35;
+      len = 0.7;
+      a = 0.35;
+    }
+    g.beginPath(); g.arc(C, C, R, start, start + len);
+    g.strokeStyle = rgba(CYAN, a); g.lineWidth = 6; g.lineCap = "round"; g.stroke();
+    // violet trailer on the opposite side, listening only
+    if (listening) {
+      var s2 = start + Math.PI + 0.4 * Math.sin(t * 0.7);
+      g.beginPath(); g.arc(C, C, R, s2, s2 + len * 0.45);
+      g.strokeStyle = rgba(VIOLET, 0.55); g.lineWidth = 6; g.lineCap = "round"; g.stroke();
+    }
+  }
+
+  function drawAll(t) {
+    var amp = state === "listening" ? amplitude(t) : 0;
+    drawRings(gRings, t, amp);
+    drawBars(gBars, t, amp);
+    drawArc(gArc, t, amp);
+  }
+
+  var t0 = null;
+  function loop(ms) {
+    if (t0 === null) t0 = ms;
+    drawAll((ms - t0) / 1000);
+    requestAnimationFrame(loop);
+  }
+
+  if (reduced) {
+    drawAll(1.35); // representative still frame
+  } else {
+    requestAnimationFrame(loop);
+  }
+
+  var buttons = document.querySelectorAll(".segmented button");
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      state = btn.dataset.state;
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
+      if (reduced) drawAll(1.35);
+    });
+  });
+})();
+</script>

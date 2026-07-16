@@ -3,6 +3,16 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-16 — DES-7: listening animation decided — variant B "waveform".** Three
+  candidates mocked as an interactive page simulating the round 412×412 screen
+  (idle/listening states, synthetic speech-amplitude drive; LottieFiles' free tier
+  turned out generation-gated, so the mockups were built directly): A pulse rings /
+  B waveform / C rim arc. Owner picked **B** — five center-weighted rounded bars driven
+  by the capture-frame speech envelope, cyan→violet on black; idle = dim near-static
+  dots. Spec folded into DES-7 (b); mockup committed as
+  `docs/design/assets/des7-listening-mockup.html` (all three variants kept for the
+  record).
+
 - **2026-07-16 — DES-7 scope expanded: µVAD provenance decided (compiled into the app
   image).** Owner question "wake models come from my HF account — what about microVAD on
   ESP32?" surfaced a real hole: D-9 names `pymicro-vad` but neither D-12 nor any
