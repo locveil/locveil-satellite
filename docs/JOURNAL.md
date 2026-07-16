@@ -3,6 +3,15 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-16 — OPS-10 DONE: scope-guard re-pinned scope-v5 → scope-v6.** Found while
+  sweeping the board for delegations and pin drift (result: no pending satellite
+  delegations; both contract pins current at their owners' newest tags — `ws-protocol-v1`,
+  `wake-pack-v1`; the DES-4 `device-integration-v1.1` request still fires at authoring
+  time). scope-v6 = 1.3.0, the UNREFERENCED-evidence check (HK-10/IMPL-2). Vendored from
+  the commons tag, toml header bumped, `unreferenced` left at the consumer default (warn).
+  Green on first run, 0 warnings — every doc in `docs/design/` + `docs/review/` is
+  ledger-referenced.
+
 - **2026-07-16 — DES-7 filed: voice-satellite hardware is the Waveshare
   ESP32-S3-Touch-LCD-1.46B (owner decision).** Owner disclosed 3 units already on the
   desk (bought 2025) — the selection happened outside the repo; the corpus had zero

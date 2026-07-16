@@ -1,4 +1,4 @@
-# locveil-satellite scope-guard config (guard vendored at scope-v5; template: HK-2/PROD-5)
+# locveil-satellite scope-guard config (guard vendored at scope-v6; template: HK-2/PROD-5)
 
 [ledger]
 active = "docs/LEDGER.md"

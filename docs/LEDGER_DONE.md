@@ -174,3 +174,13 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       deliverable (2) is defective, convention §4 amendment (1) prescribes the dead
       one-liner); voice BUILD-38 verified "by simulation" — likely same latent state.
       docs: none — CI workflow internals, no user-facing surface.
+- [x] **OPS-10** [fleet] — **DONE 2026-07-16** (filed + executed same session;
+      adopt-on-re-pin per `ledger-discipline.md` §3/§6 — a consumer choice, not a
+      delegation). **scope-guard re-pinned scope-v5 → scope-v6 (1.2.0 → 1.3.0).** Gains
+      the HK-10/IMPL-2 `UNREFERENCED evidence` check (a doc under `[evidence] dirs` that
+      no active/DONE ledger entry references = forgotten scope; consumer default warn).
+      Vendored byte-identical from commons `scope-v6:packages/scope-guard/scope_guard.py`;
+      toml header comment updated; no new config keys — `unreferenced` left at the
+      consumer default (warn). First check green, 0 warnings: both evidence dirs
+      (`docs/design/`, `docs/review/`) fully ledger-referenced at re-pin time.
+      docs: none — vendored tool only.
