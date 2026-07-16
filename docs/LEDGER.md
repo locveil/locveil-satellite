@@ -93,6 +93,31 @@ before **DES-3** is done.
       first light; voice's desktop satellite is the page's first test target and needs the
       broker/read surface first. Deploy follow-through earmarked as **OPS-6**.)*
 
+- [ ] **DES-7** — **Voice-satellite hardware adoption: Waveshare ESP32-S3-Touch-LCD-1.46B**
+      (owner decision 2026-07-16 — hardware selection is MADE: 3 units on hand, purchased
+      2025; off-the-shelf board, no custom PCB for the voice satellite). Board ground truth
+      (verified 2026-07-16 against the Waveshare wiki + official schematic + demo code):
+      ESP32-S3R8, 8 MB octal PSRAM (D-2's floor exactly) + 16 MB W25Q128 flash; ONE I2S
+      MEMS mic MSM261S4030H0R (ICS-43434-class — D-5 holds); PCM5101A I2S DAC + NS8002
+      2.4 W amp + onboard speaker (functional substitute for D-7's MAX98357A; mic and DAC
+      on separate I2S buses, so D-8's capture-16k / playback-22k05 coexistence holds);
+      1.46" round 412×412 LCD + touch (SPD2010, QSPI); TCA9554 expander, QMI8658 IMU,
+      PCF85063 RTC, microSD, ETA6098 Li-ion charge, USB-C; ~7 free GPIOs (none needed —
+      all voice-satellite peripherals are onboard). Electronics identical across the
+      1.46/1.46B/1.46C variants (B = no cover glass). Deliverables: **(a)** the
+      voice-satellite device dossier `docs/devices/<slug>.md` (slug fixed at execution —
+      DES-1 precedent) with the full pin/strapping map, feeding DES-3's mandatory audit;
+      **(b)** `esp32_satellite.md` decision-log amendments — **D-2 amendment: display
+      support becomes an OPTIONAL firmware feature** (compile-time flag per
+      `per-device-apps`; the headless build stays the baseline); nice-to-have on top: a
+      minimal "listening" animation while capture is active (owner 2026-07-16: the
+      Siri-like *idea*, explicitly not Siri's UI); D-7/D-8 notes (PCM5101A-for-MAX98357A;
+      the board has NO AEC path — half-duplex v1 unchanged, and §14's v2 ES8311/AEC/2-mic
+      upgrade is CLOSED on this hardware: v2 means new hardware); **(c)** phase
+      consequences recorded: no `boards/<slug>/` PCB project for the voice satellite, and
+      FW-1's hardware-selection gate (the `HW-GATED` reason) lifts once this lands — FW
+      still waits on DES-3 (`phase-gates`).
+
 ## PCB — board projects
 
 _(none yet — opens after the governing DES designs; one `boards/<device>/` project per

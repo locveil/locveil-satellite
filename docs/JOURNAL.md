@@ -3,6 +3,21 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-16 — DES-7 filed: voice-satellite hardware is the Waveshare
+  ESP32-S3-Touch-LCD-1.46B (owner decision).** Owner disclosed 3 units already on the
+  desk (bought 2025) — the selection happened outside the repo; the corpus had zero
+  mention of the board (exhaustive grep across satellite/voice/commons). Specs verified
+  against the Waveshare wiki, official schematic, and demo code: S3R8 8 MB octal PSRAM +
+  16 MB flash, single MSM261S4030H0R I2S mic, PCM5101A + NS8002 speaker path, SPD2010
+  412×412 round touch LCD, Li-ion/USB-C. Fit against `esp32_satellite.md`: every v1
+  requirement is met (mic class D-5, separate-I2S topology D-8, wake-pack flash
+  partition D-12, OTA A/B). Two design tensions became DES-7 scope instead of blockers:
+  D-2's "headless" amends to "display support OPTIONAL in firmware" (owner wants a
+  minimal listening animation as a nice-to-have — the Siri-like idea, not Siri's UI),
+  and the §14 v2 ES8311/AEC/2-mic path is CLOSED on this hardware (v2 = new hardware).
+  Voice-satellite PCB phase collapses to none; FW-1's `HW-GATED` hardware-selection
+  reason lifts once DES-7 lands (FW still gated on DES-3).
+
 - **2026-07-15 — OPS-9 DONE: the PROD-25 one-liner was a dud — explicit tag fetch.**
   Watched OPS-8's pushed run instead of trusting it: FAILED, same 2× TAG-MISSING.
   `fetch-tags: true` is a no-op on checkout's default shallow single-commit fetch
