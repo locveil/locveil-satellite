@@ -46,7 +46,10 @@ before **DES-3** is done.
       one wake model per unit, ≥3 near-term — so per-unit model selection AND room
       identity are provisioned POST-flash through a **WORKBENCH-HOSTED device-management
       page** that drives the device over a **firmware REST API** (owner rulings
-      2026-07-17). DES-3 session subjects alongside the execution-layer decision: the
+      2026-07-17). Post-close DES-7 amendment (owner 2026-07-17): the page's config
+      surface also carries the **listening-animation variant** — all three mocked
+      variants (A/B/C) compile into the display-enabled build, per-unit NVS enum,
+      default B (plain config, no artifact machinery; D-2 as re-amended). DES-3 session subjects alongside the execution-layer decision: the
       REST API surface, its on-device framework, how far the D-16 Stage-2 on-device
       admin UI shrinks toward being just that API, and the page's relation to the DES-5
       broker/workbench surfaces. See the D-12 amendment in

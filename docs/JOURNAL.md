@@ -3,6 +3,16 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — post-close DES-7 owner amendment: all three listening animations ship,
+  selected per unit.** Follow-on to the multi-model wake-pack discussion, same session:
+  instead of hard-picking variant B, the display-enabled build compiles in all three
+  mocked variants (A rings / B waveform / C rim arc — procedural renderers, tiny) and
+  the active one is a per-unit NVS config enum set from the workbench management page,
+  default B. Unlike the wake pack this is plain code + config — no artifact/pin/hash
+  machinery. D-2 amendment re-worded in `esp32_satellite.md`; the page-surface note on
+  DES-3 extended. The DONE entry stays frozen as written (single-pick was true at close);
+  this journal line + the design doc carry the delta.
+
 - **2026-07-17 — DES-7 DONE: voice-satellite hardware adopted — dossier + design
   amendments landed.** Interactive owner session. Slug fixed `waveshare-lcd146`; dossier
   written with the full pin/strapping map (schematic GPIO matrix + vendor demo @

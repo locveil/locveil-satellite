@@ -39,12 +39,15 @@ a tracked rewrite**, not built here (§14).
   **Amended (DES-7, 2026-07-17):** the adopted board has an onboard round 412×412 touch LCD (SPD2010, QSPI) —
   **display support becomes an OPTIONAL firmware feature** behind a compile-time flag (per `per-device-apps`);
   the **headless build stays the baseline** and the definition of done. Nice-to-have on top: a minimal
-  **"listening" animation** while capture is active — **variant B "waveform"** (owner pick 2026-07-16, of three
-  mocked candidates, `assets/des7-listening-mockup.html`): five rounded vertical bars, center-weighted
-  (0.55/0.82/1/0.82/0.55), heights driven by the speech envelope from the 16 kHz capture frames (per-bar phase
-  wobble), cyan→violet vertical gradient #4FD8EB→#8B7BF7 on black; idle = the same bars as dim near-static dots
-  (~35 % alpha); ~30 fps, five rounded rects — LVGL-cheap, no effects. The Siri-like *idea*, explicitly not
-  Siri's UI. **Touch input is NOT part of the optional feature** — recorded present-but-unused; whether firmware
+  **"listening" animation** while capture is active — **all three mocked candidates ship** (owner amendment
+  2026-07-17, superseding the single-pick of 2026-07-16): the display-enabled build compiles in variants
+  **A "pulse rings" / B "waveform" / C "rim arc"** (`assets/des7-listening-mockup.html`), and the active one is a
+  per-unit **NVS config enum set from the workbench management page** (same selection pattern as the wake model —
+  but plain firmware code + config, no artifact/pin machinery). **Default = B "waveform"**: five rounded vertical
+  bars, center-weighted (0.55/0.82/1/0.82/0.55), heights driven by the speech envelope from the 16 kHz capture
+  frames (per-bar phase wobble), cyan→violet vertical gradient #4FD8EB→#8B7BF7 on black; idle = the same bars as
+  dim near-static dots (~35 % alpha); ~30 fps — all three are procedural LVGL-cheap renderers, no effects, each
+  with its mocked idle state. The Siri-like *idea*, explicitly not Siri's UI. **Touch input is NOT part of the optional feature** — recorded present-but-unused; whether firmware
   ever uses it is decided at **FW-1 intake** (a feature-scope call, not DES-3's execution-layer decision).
   Onboard IMU/RTC/SD/battery path likewise present-but-unused (power = USB-C only).
 - **D-3 — ESP-IDF + PlatformIO** (`framework = espidf`), **not Arduino**. `common/` as an IDF component;
@@ -229,7 +232,7 @@ Based on the proven **mitsubishi2wb** pattern (SoftAP captive portal + web admin
 | # | Decision |
 |---|---|
 | D-1 | Backend authoritative; firmware draft = inspiration only |
-| D-2 | Headless voice satellite (board + mic + speaker, 3D case); no display/UI; memory bump-able. **Amended (DES-7): board = Waveshare ESP32-S3-Touch-LCD-1.46B; display support OPTIONAL (compile-time flag, headless baseline); waveform listening animation as nice-to-have; touch decided at FW-1 intake** |
+| D-2 | Headless voice satellite (board + mic + speaker, 3D case); no display/UI; memory bump-able. **Amended (DES-7): board = Waveshare ESP32-S3-Touch-LCD-1.46B; display support OPTIONAL (compile-time flag, headless baseline); all three listening animations compiled in, per-unit selection via the management page (default B waveform); touch decided at FW-1 intake** |
 | D-3 | ESP-IDF + PlatformIO; not Arduino |
 | D-4 | Device is a pure MQTT-unaware voice terminal; smart-home stays backend (ARCH-7/8) |
 | D-5 | Single mic v1 (2-mic array = v2) |
