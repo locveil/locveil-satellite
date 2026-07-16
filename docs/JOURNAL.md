@@ -3,6 +3,17 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-16 — DES-3 input sharpened: docs-MCP is latest-only; latest = IDF v6.0.2.**
+  Owner question ("does the docs MCP only serve the latest IDF? which version is
+  that?") answered with verification, folded into the findings doc as §3.5 + the DES-3
+  ledger note: the espressif-docs MCP returns `en/latest` docs + `master` source only
+  (checked via returned source URLs); latest stable is v6.0.2 (2026-06-29), 5.x ended
+  at v5.5.4, Waveshare's 5.3.2 demo is two minors + a major behind but uses the same
+  `i2s_std` API family, so it stays a valid wiring reference. Posture recorded for
+  DES-3: target v6.0.x after an esp-tflite-micro + SPD2010-components compat check,
+  v5.5.x fallback; the vendor demo proves the hardware, never anchors our version —
+  the earlier "known-good IDF version anchor" phrasing corrected in the same change.
+
 - **2026-07-16 — DES-7: hardware findings doc committed (enclosure data + vendor
   software survey).** `docs/design/assets/des7-hardware-findings.md`, referenced from
   DES-7 (input evidence) and DES-3 (decision input). Casing verdict: everything CAD

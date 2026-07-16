@@ -30,10 +30,16 @@ before **DES-3** is done.
       **MANDATORY before any FW phase starts** (`phase-gates`). The
       PIO-platform-vs-latest-IDF tension is a fact-check, not a blind bet (HK-4 round 4).
       *(Decision input 2026-07-16, from the DES-7 hardware findings —
-      `docs/design/assets/des7-hardware-findings.md` §3.1: the vendor's own reference for
-      the adopted voice-satellite board is a plain-`idf.py` native project on IDF 5.3.2,
-      validating the native option and anchoring a known-good IDF version; demo pins
-      LVGL ~8.3.)*
+      `docs/design/assets/des7-hardware-findings.md` §3.1 + §3.5: the vendor's own
+      reference for the adopted voice-satellite board is a plain-`idf.py` native project
+      on IDF 5.3.2, validating the native option — but it proves the HARDWARE, not our
+      version; demo pins LVGL ~8.3. Verified same day: the espressif-docs MCP serves
+      `en/latest` + `master` source ONLY (no version-pinned docs), latest stable =
+      **v6.0.2** (2026-06-29; 5.x ended at v5.5.4). Working posture: target v6.0.x —
+      aligning firmware with what the docs MCP can fact-check — AFTER verifying
+      `esp-tflite-micro` + the SPD2010 registry components against it; fallback v5.5.x;
+      the i2s_std API family spans both, so the demo stays readable as a wiring
+      reference either way.)*
 - [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] —
       **Adopt the bridge's device-descriptor format for the deck devices.** Consumes the
       bridge's device-integration-convention design (PROD-15 bridge delegation item 2;

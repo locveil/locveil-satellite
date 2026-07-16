@@ -95,7 +95,8 @@ geometry instead of calipers. Confirmed present by product name in the STEP:
   (~1.9.4) from the onboard mic. We use microWakeWord instead (D-9), but
   mic → AFE → wake working on this exact board removes the "does audio even work" risk
   class. Also a **DES-3 datapoint**: the vendor's own reference is plain `idf.py` on
-  **IDF 5.3.2** — validates the native-IDF option; known-good IDF version anchor.
+  **IDF 5.3.2** — validates the native-IDF option. The demo proves the *hardware* on
+  5.3.2; it is NOT a version anchor for our firmware — see §3.5.
 - Factory demo image `Firmware/ESP32-S3-Touch-LCD-1.46.bin` — bench sanity-restore.
 - Demo deps pin **LVGL ~8.3** (not 9). The decided variant-B listening animation is
   procedural (five rounded rects) and renders on either; only the (unused) Lottie route
@@ -128,12 +129,35 @@ Waveshare publishes ESP-IDF BSPs to the component registry (~23 boards, CI-check
   but xiaozhi is a mature S3 voice-assistant firmware for UX comparison if ever wanted.
 - `1.46inch-Touch-LCD-Module` — bare panel module repo, redundant given §3.1.
 
+### 3.5 ESP-IDF version landscape (verified 2026-07-16) — DES-3 decision input
+
+- **The espressif-docs MCP serves `en/latest` documentation + `master`-branch source
+  ONLY** — verified from the source URLs of returned chunks
+  (`docs.espressif.com/projects/esp-idf/en/latest/...`,
+  `github.com/espressif/esp-idf/blob/master/...`). There is no way to query it for
+  version-pinned (e.g., v5.3) docs.
+- **Latest stable ESP-IDF: v6.0.2** (2026-06-29). The 5.x line ended at v5.5
+  (v5.5.4, 2026-04-17); v5.3.5 (the Waveshare demo's generation) still receives
+  maintenance releases; v6.1-beta1 is out. Source: `espressif/esp-idf` GitHub releases.
+- **API continuity**: the Waveshare demo already uses the modern `i2s_std` driver
+  (introduced in v5.0) — the same API family the latest docs describe — so the demo
+  stays readable as a wiring reference against v6 docs, even though IDF 6.0 is a major
+  that removed long-deprecated APIs.
+- **Working posture for DES-3**: target **v6.0.x** (aligns the firmware with what the
+  docs MCP can fact-check), but first verify the load-bearing dependency stack against
+  it — `esp-tflite-micro` (the microWakeWord port, D-9), `esp_lcd_spd2010` +
+  `esp_lcd_touch_spd2010`, and whatever else FW-1 pins; component ecosystems lag majors.
+  Fallback: **v5.5.x** (in support until ~Jan 2028 per the 30-month policy). The
+  Waveshare 5.3.2 project is a reading reference only, never the version anchor.
+
 ## 4. Consequences by ledger task
 
 - **DES-7** — this doc is dossier input: §2 feeds the enclosure part of the dossier,
   §3.1's pin/slot truths feed the pin/strapping map, §2.4 discharges the "which side is
   the mic ported" question for the D-7 acoustic amendment.
 - **DES-3** — §3.1: vendor reference on native IDF 5.3.2 validates the `idf.py` option;
-  demo's esp-sr proof + LVGL 8.3 pin are version-alignment datapoints.
+  demo's esp-sr proof + LVGL 8.3 pin are version-alignment datapoints. §3.5: the docs
+  MCP is latest-only (latest = v6.0.2 as of 2026-07-16) → target v6.0.x after the
+  dependency compat check, v5.5.x fallback; the demo is never the version anchor.
 - **FW-1** — §3.2's consumption model (registry drivers + own glue, no unlicensed
   vendoring); the 32-bit/RIGHT-slot mic config; the factory `.bin` as bench restore.
