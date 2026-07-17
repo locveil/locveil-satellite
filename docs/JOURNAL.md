@@ -16,7 +16,11 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   unsafe), 1 stale referent (F-6: dossiers carry no legacy pins), and 2 B215 gaps
   (F-3 no fuse on its 150 mA rail; F-4 no per-unit ground-vs-earth check in its bench
   list). Remediation filed as DOC-2 per review-then-remediate. `DOC` prefix added to
-  CLAUDE.md's ledger section (owner, documentation-corpus audits/maintenance).
+  CLAUDE.md's ledger section (owner, documentation-corpus audits/maintenance) — and,
+  caught right after the DOC-1 commit, registered in `.scope-guard.toml`'s `prefixes`
+  too: the guard's prefix table proved DOC-blind (18 tasks counted, DOC-1/DOC-2
+  invisible = unenforced), the toml is the repo-owned half of the vendored-guard
+  contract, so the fix is config, not a guard edit.
 
 - **2026-07-17 — post-close DES-7 owner amendment: all three listening animations ship,
   selected per unit.** Follow-on to the multi-model wake-pack discussion, same session:
