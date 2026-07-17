@@ -48,12 +48,12 @@ firmware with the latest-only docs MCP (findings §3.5).
     (owner-sanctioned outcome, not a fallback trigger) — coordinating with #125 to
     avoid duplicating Espressif's in-flight work.
   - Bail-out (only if the port runs deep): **v5.5.4** — everything below is green on
-    5.5.x, supported to ~Jan 2028; the machine's existing pristine-but-incomplete
-    v5.5.0 tree (`~/esp/v5.5/esp-idf`) is the starting point, upgraded to 5.5.4.
+    5.5.x, supported to ~Jan 2028; fresh clone into `~/esp/v5.5.4/` *(the machine's
+    old incomplete v5.5.0 tree, initially earmarked as the starting point, was
+    deleted 2026-07-17 on owner instruction)*.
 - **Toolchain install = INFRA-1** (owner: separate task, new `INFRA` category):
   git clone at tag `v6.0.2` → `~/esp/v6.0.2/esp-idf` + `install.sh esp32s3`
-  (matches the machine's `~/esp/<version>/` layout; pinnable checkout). The v5.5.0
-  install stays untouched.
+  (matches the machine's `~/esp/<version>/` layout; pinnable checkout).
 
 ## E-3 — Dependency matrix vs IDF v6.0.2 (verified 2026-07-17)
 

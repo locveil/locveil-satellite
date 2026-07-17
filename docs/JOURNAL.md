@@ -3,6 +3,13 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — old ESP-IDF v5.5.0 install deleted (owner instruction, pre-INFRA-1).**
+  `~/esp/v5.5/` (1.7 GB tree + the source zip) and `~/.espressif` (1.1 GB of v5.5-era
+  toolchain/dist, no python_env) removed — ~4.1 GB reclaimed; `~/esp/` kept as the
+  layout root for INFRA-1's v6.0.2 install. The E-2 bail-out re-anchored: fresh v5.5.4
+  clone if ever triggered (INFRA-1 + FW-2 texts and `fw_execution_layer.md` E-2
+  amended in this change).
+
 - **2026-07-17 — FW-2 filed: the esp-tflite-micro compat spike as its own gating task.**
   Owner question "file the spike separately? what category?" → recommendation accepted:
   **FW** (it builds firmware code — the first in the repo; the harness is a keeper that

@@ -148,8 +148,8 @@ native `idf.py`, IDF v6.0.2 spike-gated (E-2). Order: INFRA-1 (toolchain) → **
       with #125 to avoid duplicating Espressif's in-flight work) — if the port runs
       DEEP, this task closes with the verdict and files the port as its own follow-up
       rather than ballooning; **bail-out** (deep port only) → FW-1 proceeds on v5.5.4
-      (upgrade the existing `~/esp/v5.5` tree). **Gated on INFRA-1** (the v6.0.2
-      toolchain); **gates FW-1**.
+      (fresh clone — the old v5.5 tree was deleted 2026-07-17). **Gated on INFRA-1**
+      (the v6.0.2 toolchain); **gates FW-1**.
 
 ## DOC — documentation
 
@@ -172,9 +172,10 @@ native `idf.py`, IDF v6.0.2 spike-gated (E-2). Order: INFRA-1 (toolchain) → **
       `docs/design/fw_execution_layer.md`; owner filed it as its own task, new `INFRA`
       category, 2026-07-17). git clone at tag `v6.0.2` → `~/esp/v6.0.2/esp-idf` +
       `./install.sh esp32s3` (creates the missing `python_env`, extracts tools; ~2 GB).
-      Matches the machine's existing `~/esp/<version>/` layout; the incomplete v5.5.0
-      install stays UNTOUCHED (it is the E-2 bail-out's starting point — would upgrade
-      to v5.5.4 only if the compat spike forces the fallback). Verify: `. export.sh` +
+      Matches the machine's `~/esp/<version>/` layout. *(The old incomplete v5.5.0
+      install + `~/.espressif` were DELETED 2026-07-17 on owner instruction — ~4.1 GB
+      reclaimed; the E-2 bail-out, if ever triggered, starts from a fresh v5.5.4
+      clone instead.)* Verify: `. export.sh` +
       `idf.py --version` reports v6.0.2. Gates the FW phase's first act (the
       esp-tflite-micro compat spike).
 
