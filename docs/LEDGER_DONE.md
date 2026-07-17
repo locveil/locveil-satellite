@@ -69,6 +69,28 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       `flash-and-provision` stay pending-gate on FW-1 first light; CONTRIBUTING's
       `devices` coverage description unchanged).
 
+## DOC — documentation
+
+- [x] **DOC-1** — **DONE 2026-07-17** (filed + executed same session; owner-filed —
+      first task of the new `DOC` prefix, prefix added to CLAUDE.md in the same change).
+      **Deck-corpus audit: does `deck-common.md` truly contain the common pieces?**
+      Claim-by-claim pass over deck-common §1–§7 against the four deck dossiers (owner
+      ground rule: on contradiction the dossiers win; waveshare dossier out of scope),
+      chip claims re-verified against official Espressif docs via the docs MCP.
+      Evidence: **`docs/review/doc1-deck-corpus-audit.md`**. Verdict: structurally sound
+      (no device truth leaked into common; §4/§6/§7 conventions genuinely family-wide;
+      §5 chip truths all re-confirmed), but **2 contradictions** (F-1 "deck-derived
+      only" vs FS90's sanctioned isolation-gate fallback; F-2 reservoir topology vs
+      B215's bench-proven feed-series wiring — common's R-in-cap-branch factoring also
+      electrically defeats its own low-ESR argument), **1 wrong chip figure** (F-5:
+      "≈15 mA" light-sleep is the ESP8266 modem-sleep DTIM3 number; official ESP32
+      auto-light-sleep = 2.2–3.3 mA — conservative, so nothing unsafe), **1 stale
+      referent** (F-6: "legacy pin choices in the dossiers" — no dossier carries any),
+      and **2 B215 gaps** vs common rules (F-3 missing 150 mA-rail fuse; F-4 missing
+      per-unit ground-vs-earth meter check). Remediation filed as **DOC-2**
+      (`review-then-remediate`). docs: none — review evidence + ledger only; the corpus
+      fixes themselves land with DOC-2.
+
 ## PCB — board projects
 
 ## FW — firmware

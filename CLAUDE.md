@@ -54,7 +54,8 @@ corpus migrated from `../locveil-voice` (see `docs/JOURNAL.md`).
 
 Active ledger `docs/LEDGER.md` · DONE `docs/LEDGER_DONE.md` · journal `docs/JOURNAL.md`
 (newest on top). Prefixes: `DES` (design), `PCB` (board projects), `FW` (firmware), `OPS`
-(operations/toolchain). Everything else — the triad, rotation, watermarks — is the shared
+(operations/toolchain), `DOC` (documentation-corpus audits/maintenance; added 2026-07-17,
+owner). Everything else — the triad, rotation, watermarks — is the shared
 discipline below; mechanics live in `../locveil-commons/process/ledger-discipline.md`.
 
 ## Shared blocks (pinned — `process/claude-md.md`; edit in commons, then re-pin)

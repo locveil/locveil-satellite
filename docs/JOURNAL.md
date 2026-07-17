@@ -3,6 +3,21 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — DOC-1 DONE: deck-corpus audit (deck-common vs the four dossiers);
+  DOC prefix born.** Owner-filed with the ground rule "dossiers win"; waveshare dossier
+  untouched. Result (`docs/review/doc1-deck-corpus-audit.md`): common is structurally
+  sound — pointers not leaked truth, §5 chip claims all re-verified against
+  datasheet/TRM/IDF docs — but the audit found 2 genuine contradictions (F-1 absolute
+  "deck-derived only" vs FS90's sanctioned external-supply fallback behind the
+  isolation gate; F-2 common's resistor-in-cap-branch reservoir vs B215's bench-proven
+  resistor-in-feed topology, which is also the electrically coherent one), 1 wrong chip
+  figure (F-5: "≈15 mA" light-sleep idle is really the ESP8266 modem-sleep DTIM3
+  number; official ESP32 auto-light-sleep is 2.2–3.3 mA — conservative, nothing
+  unsafe), 1 stale referent (F-6: dossiers carry no legacy pins), and 2 B215 gaps
+  (F-3 no fuse on its 150 mA rail; F-4 no per-unit ground-vs-earth check in its bench
+  list). Remediation filed as DOC-2 per review-then-remediate. `DOC` prefix added to
+  CLAUDE.md's ledger section (owner, documentation-corpus audits/maintenance).
+
 - **2026-07-17 — post-close DES-7 owner amendment: all three listening animations ship,
   selected per unit.** Follow-on to the multi-model wake-pack discussion, same session:
   instead of hard-picking variant B, the display-enabled build compiles in all three

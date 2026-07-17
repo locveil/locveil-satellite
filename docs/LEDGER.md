@@ -19,6 +19,7 @@ before **DES-3** is done.
 | `docs/devices/waveshare-lcd146.md` (2026-07-17) | voice-satellite hardware ground truth (DES-7) — DES-3's mandatory pin/strapping audit, FW-1, enclosure CAD |
 | `docs/design/assets/des7-hardware-findings.md` (2026-07-16, enclosure survey added 2026-07-17) | DES-7 input evidence — enclosure data + `waveshareteam` survey; DES-3 decision input (§3.5); FW-1 consumption model |
 | `docs/review/des1-truth-pass.md` (2026-07-12) | DES-1 evidence: conflict resolutions, REQUIREMENTS disposition (VWB-38 feed), code sweep, pin re-audit |
+| `docs/review/doc1-deck-corpus-audit.md` (2026-07-17) | DOC-1 evidence: deck-common vs dossiers claim-by-claim audit — DOC-2 remediation feed |
 
 ## DES — design
 
@@ -154,6 +155,21 @@ _(gated on DES-3 — `phase-gates`)_
       nice-to-have; touch scope decided at THIS task's intake); µVAD compiles into the app
       image, models partition = wake pack only (D-9/D-12 as amended); power = USB-C only.
       Sole remaining gate: **DES-3**.)*
+
+## DOC — documentation
+
+- [ ] **DOC-2** — **Deck-corpus remediation from the DOC-1 audit**
+      (`docs/review/doc1-deck-corpus-audit.md`; filed per `review-then-remediate`,
+      owner ground rule: dossiers win). Fixes: **deck-common** — §1 power-rule exception
+      pointer (F-1, FS90 §5.1 isolation-gate fallback), §2 reservoir topology reworded
+      to the B215 bench-proven feed-series form (F-2), §2 idle-current figure corrected
+      15 mA → the official ~2–4 mA ESP32 auto-light-sleep average, 15 mA kept only as
+      declared sizing margin (F-5; the wrong figure is verbatim ESP8266 modem-sleep
+      DTIM3 — provenance in the audit), §5 stale "legacy pin choices in the dossiers"
+      referent reworded (F-6). **revox-b215** (additive only): 100–200 mA tap fuse into
+      §3 (F-3), the common-§3 ground-vs-earth/chassis meter check into the §7 bench
+      list (F-4). Optional hygiene: F-11 (trim B215's inlined reservoir values; hoist
+      the default PC817 opto stage into common §4). Waveshare dossier untouched.
 
 ## OPS — operations / toolchain
 
