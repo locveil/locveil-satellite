@@ -20,6 +20,33 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       close (absorbed; resolvable at `0d950a9`); repo-to-repo note filed to bridge VWB-38
       re-pointing the promotion source at the truth pass.
 
+- [x] **DES-3** [fleet] — **DONE 2026-07-17** — **Firmware execution-layer decision**
+      (interactive owner session; decision doc **`docs/design/fw_execution_layer.md`**,
+      AGREED — the `phase-gates` FW gate LIFTS). Decisions: **E-1 native `idf.py`, NO
+      PlatformIO** (D-3 amended; evidence: the 2024 split froze Arduino-only — official
+      PIO does espidf at 6.0.1 but has no 6.0.2, structurally trails, and is outside
+      Espressif's supported v6 tooling; pioarduino espidf = 5.5.4/Arduino-centric;
+      per-device-apps maps 1:1 onto plain IDF projects + shared `components/`).
+      **E-2 IDF v6.0.2, spike-gated**: module research found exactly ONE v6-blocked
+      dependency — `esp-tflite-micro` 1.3.7 (CI ≤5.5; maintainer-confirmed issue #125
+      "use v5.5 for now", v6 promised) — so the FW phase's first act is a compat spike
+      building its core on 6.0.2; pass → pin + report upstream, fail → port and
+      CONTRIBUTE (owner-sanctioned), bail-out v5.5.4 (existing v5.5.0 tree the base).
+      **E-3 dependency matrix** (registry, verified): esp_lcd_spd2010 2.0.0 explicitly
+      v6-compatible; esp_websocket_client 1.7.0 (IDF6 CI, mTLS), mdns 1.11.3,
+      esp_io_expander_tca9554 2.0.3 (new i2c_master API), esp_lvgl_port 2.8.0 (IDF6
+      fixes; LVGL pinned ^9), cJSON now a registry dep; v6 notes: warnings-as-errors
+      (vendored µVAD source), mbedTLS-4/PSA (~+40 KB; D-17 CSR-gen = FW-1 check item).
+      **E-4 REST API on core `esp_http_server`** + D-16 amendment: Stage 2 REST-only
+      (workbench page is the UI), Stage-1 SoftAP portal stays (mitsubishi2wb pattern;
+      its form may slip past v1 — build-time NVS seed covers the on-desk units).
+      **E-5** background-monitor pattern defined (idf.py steps as background Bash
+      tasks). **E-6** mandatory pin/strapping audit step defined (dossier + datasheet
+      tables before first flash; already discharged for `waveshare-lcd146`).
+      Toolchain install split out as **INFRA-1** (owner: new `INFRA` category; prefix
+      registered in CLAUDE.md + `.scope-guard.toml` this change). docs: none — design
+      artifact + ledger; user-facing guides remain pending-gate on FW-1 first light.
+
 - [x] **DES-6** [fleet] — **DONE 2026-07-12** (filed + executed same session; PROD-15 bridge
       delegation item 1b, satellite side). **Import the frozen bridge `ESP32/` tree.** The 34
       git-tracked files copied 1:1 from `../locveil-bridge/ESP32/` @ bridge `a80322f` into
@@ -94,6 +121,8 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
 ## PCB — board projects
 
 ## FW — firmware
+
+## INFRA — dev-machine / environment infrastructure
 
 ## OPS — operations / toolchain
 

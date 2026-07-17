@@ -48,14 +48,18 @@ corpus migrated from `../locveil-voice` (see `docs/JOURNAL.md`).
 - **`no-execution-toolchain-at-bootstrap`** — no PlatformIO install and no skidl-skills
   install until DES-3 / DES-2 decide them (HK-4 round 4, owner amendment). Day-one toolchain
   is knowledge-side only: pcbparts MCP + Serena-over-cloned-SKiDL (PCB), Espressif docs +
-  component-registry MCPs (FW) — wired by OPS-2.
+  component-registry MCPs (FW) — wired by OPS-2. *(DES-3 decided 2026-07-17: execution
+  layer = native `idf.py`, **PlatformIO is permanently out**; the FW toolchain install
+  (ESP-IDF v6.0.2) is INFRA-1 — `docs/design/fw_execution_layer.md`. skidl-skills remains
+  DES-2's open decision.)*
 
 ## Ledger & journal
 
 Active ledger `docs/LEDGER.md` · DONE `docs/LEDGER_DONE.md` · journal `docs/JOURNAL.md`
 (newest on top). Prefixes: `DES` (design), `PCB` (board projects), `FW` (firmware), `OPS`
 (operations/toolchain), `DOC` (documentation-corpus audits/maintenance; added 2026-07-17,
-owner). Everything else — the triad, rotation, watermarks — is the shared
+owner), `INFRA` (dev-machine/environment infrastructure — installs living outside the
+repo; added 2026-07-17, owner, DES-3 session). Everything else — the triad, rotation, watermarks — is the shared
 discipline below; mechanics live in `../locveil-commons/process/ledger-discipline.md`.
 
 ## Shared blocks (pinned — `process/claude-md.md`; edit in commons, then re-pin)

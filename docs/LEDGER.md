@@ -14,6 +14,7 @@ before **DES-3** is done.
 | Document | Backs |
 |---|---|
 | `docs/design/esp32_satellite.md` (DRAFT 2026-06-14; migrated from voice 2026-07-12, §4 wire tables demoted to the contracts pin) | the consolidated satellite design (voice ARCH-22 lineage) — FW-1, DES-4, DES-5 context |
+| `docs/design/fw_execution_layer.md` (AGREED 2026-07-17) | the DES-3 execution-layer decision (native `idf.py`, IDF v6.0.2 spike-gated, dependency matrix, REST-only Stage 2, monitor pattern, audit-step definition) — FW-1, INFRA-1 |
 | `docs/design/ws_esp32_transport.md` (SUPERSEDED by `esp32_satellite.md`; migrated frozen) | historical lineage only |
 | `docs/devices/deck-common.md` + `revox-a77.md` / `revox-b215.md` / `pioneer-cld925.md` / `panasonic-fs90.md` (harmonized 2026-07-12) | per-device hardware ground truth — DES-4 descriptors, future `boards/<slug>/`, deck FW apps |
 | `docs/devices/waveshare-lcd146.md` (2026-07-17) | voice-satellite hardware ground truth (DES-7) — DES-3's mandatory pin/strapping audit, FW-1, enclosure CAD |
@@ -27,49 +28,6 @@ before **DES-3** is done.
       HK-4 round 4). Deliberately NOT installed at bootstrap
       (`no-execution-toolchain-at-bootstrap`); this task decides whether/how it enters the
       PCB toolchain alongside Serena-over-cloned-SKiDL.
-- [ ] **DES-3** [fleet] — **Firmware execution-layer decision** — PlatformIO vs
-      pioarduino-lineage vs native `idf.py`, including docs-MCP ↔ IDF-version alignment,
-      the background-monitor pattern, and a **mandatory pin/strapping audit step**.
-      **MANDATORY before any FW phase starts** (`phase-gates`). The
-      PIO-platform-vs-latest-IDF tension is a fact-check, not a blind bet (HK-4 round 4).
-      *(Decision input 2026-07-16, from the DES-7 hardware findings —
-      `docs/design/assets/des7-hardware-findings.md` §3.1 + §3.5: the vendor's own
-      reference for the adopted voice-satellite board is a plain-`idf.py` native project
-      on IDF 5.3.2, validating the native option — but it proves the HARDWARE, not our
-      version; demo pins LVGL ~8.3. Verified same day: the espressif-docs MCP serves
-      `en/latest` + `master` source ONLY (no version-pinned docs), latest stable =
-      **v6.0.2** (2026-06-29; 5.x ended at v5.5.4). Working posture: target v6.0.x —
-      aligning firmware with what the docs MCP can fact-check — AFTER verifying
-      `esp-tflite-micro` + the SPD2010 registry components against it; fallback v5.5.x;
-      the i2s_std API family spans both, so the demo stays readable as a wiring
-      reference either way.)*
-      *(Decision input 2026-07-17, workstation recon + owner ruling: an **ESP-IDF v5.5.0
-      install already exists on the dev machine** — `~/esp/v5.5/esp-idf` (tag v5.5 @
-      `8c750b088`, source pristine — the 17k git "modifications" are zip-extraction
-      permission bits only, submodules complete) with a PARTIAL toolchain in
-      `~/.espressif` (xtensa esp-14.2.0 + gdbs extracted; cmake/ninja/openocd/clang/
-      riscv-gcc downloaded to `dist/` but unextracted; **no `python_env`** — install.sh
-      never completed, so `idf.py` is currently non-functional). It is also 4 patches
-      behind its own line (v5.5.4). Owner ruling: **strong preference for v6.0.2** — the
-      earlier "target v6.0.x" posture hardens; the library/module-availability research
-      (esp-tflite-micro, esp_lcd_spd2010 + touch, and whatever else FW-1 pins, against
-      v6.0.x) is IN-SCOPE for this task, and **where a needed module lags the major, we
-      may port/upgrade it to 6.0.2 ourselves and CONTRIBUTE upstream** — a sanctioned
-      outcome, not just a fallback trigger. The v5.5 install stays untouched until this
-      task decides (finish it only if the compat check forces the v5.5.x fallback; the
-      `~/esp/<version>/` layout accommodates a fresh v6.0.2 alongside).)*
-      *(Owner agenda expansion 2026-07-17, DES-7 session: the wake pack is MULTI-model —
-      one wake model per unit, ≥3 near-term — so per-unit model selection AND room
-      identity are provisioned POST-flash through a **WORKBENCH-HOSTED device-management
-      page** that drives the device over a **firmware REST API** (owner rulings
-      2026-07-17). Post-close DES-7 amendment (owner 2026-07-17): the page's config
-      surface also carries the **listening-animation variant** — all three mocked
-      variants (A/B/C) compile into the display-enabled build, per-unit NVS enum,
-      default B (plain config, no artifact machinery; D-2 as re-amended). DES-3 session subjects alongside the execution-layer decision: the
-      REST API surface, its on-device framework, how far the D-16 Stage-2 on-device
-      admin UI shrinks toward being just that API, and the page's relation to the DES-5
-      broker/workbench surfaces. See the D-12 amendment in
-      `docs/design/esp32_satellite.md`.)*
 - [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] —
       **Adopt the bridge's device-descriptor format for the deck devices.** Consumes the
       bridge's device-integration-convention design (PROD-15 bridge delegation item 2;
@@ -141,7 +99,9 @@ device, tasks tagged `[dev:<board-slug>]`)_
 
 ## FW — firmware
 
-_(gated on DES-3 — `phase-gates`)_
+_(DES-3 gate LIFTED 2026-07-17 — `docs/design/fw_execution_layer.md`. Execution layer:
+native `idf.py`, IDF v6.0.2 spike-gated (E-2). FW work starts with the esp-tflite-micro
+compat spike, after INFRA-1 installs the toolchain.)_
 
 - [ ] **FW-1** [fleet] — **ESP32 satellite firmware build** (imported 2026-07-12
       from voice **ARCH-23**, export-closed there; reconcile at task start — the imported
@@ -185,6 +145,18 @@ _(gated on DES-3 — `phase-gates`)_
       §3 (F-3), the common-§3 ground-vs-earth/chassis meter check into the §7 bench
       list (F-4). Optional hygiene: F-11 (trim B215's inlined reservoir values; hoist
       the default PC817 opto stage into common §4). Waveshare dossier untouched.
+
+## INFRA — dev-machine / environment infrastructure
+
+- [ ] **INFRA-1** [fleet] — **Install ESP-IDF v6.0.2** (DES-3 decision E-2 —
+      `docs/design/fw_execution_layer.md`; owner filed it as its own task, new `INFRA`
+      category, 2026-07-17). git clone at tag `v6.0.2` → `~/esp/v6.0.2/esp-idf` +
+      `./install.sh esp32s3` (creates the missing `python_env`, extracts tools; ~2 GB).
+      Matches the machine's existing `~/esp/<version>/` layout; the incomplete v5.5.0
+      install stays UNTOUCHED (it is the E-2 bail-out's starting point — would upgrade
+      to v5.5.4 only if the compat spike forces the fallback). Verify: `. export.sh` +
+      `idf.py --version` reports v6.0.2. Gates the FW phase's first act (the
+      esp-tflite-micro compat spike).
 
 ## OPS — operations / toolchain
 

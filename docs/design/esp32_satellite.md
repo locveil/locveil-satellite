@@ -52,6 +52,10 @@ a tracked rewrite**, not built here (§14).
   Onboard IMU/RTC/SD/battery path likewise present-but-unused (power = USB-C only).
 - **D-3 — ESP-IDF + PlatformIO** (`framework = espidf`), **not Arduino**. `common/` as an IDF component;
   per-node `[env:…]`; deps via `lib_deps` / IDF components (notably `esp-tflite-micro`).
+  **Re-decided (DES-3, 2026-07-17): ESP-IDF + native `idf.py`, NO PlatformIO** — one plain IDF project per
+  device app sharing `components/` via `EXTRA_COMPONENT_DIRS`, registry deps per-app in `idf_component.yml`.
+  Target **IDF v6.0.2**, gated on the esp-tflite-micro compat spike (port-and-contribute sanctioned; v5.5.4
+  bail-out). Full decision + evidence: **`fw_execution_layer.md`** (E-1/E-2/E-3/E-7).
 - **D-4 — Pure MQTT-unaware voice terminal.** The device sees **audio in / audio out only**. All NLU →
   `DeviceCommand` → bridge → MQTT/native actuation is **backend-side** (ARCH-7/8). The device's reply channel
   carries **SPEECH/TEXT only — never `DEVICE_COMMAND`/`EVENT`**.
@@ -210,6 +214,12 @@ Based on the proven **mitsubishi2wb** pattern (SoftAP captive portal + web admin
     exchange is **never** in AP mode.
   - **Admin UI v1: no password, no button-gating** (trusted home LAN). **v2 (§14):** admin password + config-button
     gating (short = enable ~10 min window; long = factory-reset to AP); optional HTTPS-self-signed portal.
+  - **Amended (DES-3, 2026-07-17): Stage 2 is REST-only — no on-device HTML.** The device serves a **REST API on
+    core `esp_http_server`** (identity/room/wake-model/animation/tunables/CSR triggers/status); ALL Stage-2
+    configuration UI lives in the **workbench-hosted management page** driving that API. Stage 1 (SoftAP captive
+    portal + minimal WiFi form, the mitsubishi2wb first-boot-hotspot pattern) stays device-hosted; the form may
+    slip past v1 — the build-time NVS seed covers first provisioning of the on-desk units. Spec:
+    `fw_execution_layer.md` E-4.
 - **D-17 — Cert provisioning = CSR-approval via config-ui** (no token). Device generates its keypair (private key
   **never leaves the device**), submits its CSR unauthenticated in Stage 2 → **pending queue on WB7** → operator
   approves in **config-ui** (sees `client_id` + CSR fingerprint) → WB7 CA signs → device fetches its cert. Trust
@@ -233,7 +243,7 @@ Based on the proven **mitsubishi2wb** pattern (SoftAP captive portal + web admin
 |---|---|
 | D-1 | Backend authoritative; firmware draft = inspiration only |
 | D-2 | Headless voice satellite (board + mic + speaker, 3D case); no display/UI; memory bump-able. **Amended (DES-7): board = Waveshare ESP32-S3-Touch-LCD-1.46B; display support OPTIONAL (compile-time flag, headless baseline); all three listening animations compiled in, per-unit selection via the management page (default B waveform); touch decided at FW-1 intake** |
-| D-3 | ESP-IDF + PlatformIO; not Arduino |
+| D-3 | ESP-IDF + PlatformIO; not Arduino. **Re-decided (DES-3): native `idf.py`, NO PlatformIO; IDF v6.0.2 spike-gated, v5.5.4 bail-out — `fw_execution_layer.md`** |
 | D-4 | Device is a pure MQTT-unaware voice terminal; smart-home stays backend (ARCH-7/8) |
 | D-5 | Single mic v1 (2-mic array = v2) |
 | D-6 | Server-streaming ASR endpointing is the target & authority; device end-frame is a hint. **Fallback (accumulate-until-end + batch ASR) is the permanent floor & active; the streaming enhancement is deferred to ARCH-10** |
@@ -246,7 +256,7 @@ Based on the proven **mitsubishi2wb** pattern (SoftAP captive portal + web admin
 | D-13 | Model push: prod = HTTPS-from-WB7 (versioned, hashed); dev = admin UI. **Amended: served by Plane-B nginx static from `/srv/esp32/models/` (operator-managed), NOT Irene's AssetManager** |
 | D-14 | Identity = client_id + name + primary_room + covered_rooms[]; resolve_physical_id unchanged for output |
 | D-15 | Multi-room resolution policy (impl → ARCH-7/QUAL-35 + ARCH-8 catalog; data carried now) |
-| D-16 | Two-stage SoftAP→STA provisioning + web admin UI (v1 no-auth/no-button; v2 adds them) |
+| D-16 | Two-stage SoftAP→STA provisioning + web admin UI (v1 no-auth/no-button; v2 adds them). **Amended (DES-3): Stage 2 REST-only (`esp_http_server` API + workbench page, no on-device HTML); Stage-1 portal stays, its form may slip past v1 (NVS seed)** |
 | D-17 | Cert provisioning = CSR-approval (no token); private key stays on device. **Amended: Plane-B home CA on the WB7; approval via the `esp32-provision` CLI over SSH (dedicated/LAN-only > config-ui for a once-per-device op); config-ui may call the same scripts later** |
 | D-18 | OTA A/B + esp_https_ota from WB7; config/models preserved; auto-rollback |
 

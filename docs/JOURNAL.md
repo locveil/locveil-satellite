@@ -3,6 +3,27 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — DES-3 DONE: execution layer decided — native `idf.py`, IDF v6.0.2
+  spike-gated; PlatformIO is out; FW gate lifts.** Interactive session; decision doc
+  `docs/design/fw_execution_layer.md` (AGREED). Research findings: the 2024
+  PIO/Espressif split froze Arduino only — official platform-espressif32 v7.0.1 builds
+  espidf at IDF 6.0.1 but has never packaged 6.0.2 and sits outside Espressif's
+  supported tooling; pioarduino is 5.5.4/Arduino-centric. Registry sweep: every FW-1
+  dependency admits v6.0.x, with explicit v6 evidence for esp_lcd_spd2010 (2.0.0
+  changelog), esp_websocket_client (IDF6 CI), esp_lvgl_port (IDF6 fixes) — EXCEPT
+  `esp-tflite-micro` 1.3.7: CI tops at 5.5 and Espressif's maintainer confirmed v6
+  incompatibility in the still-open issue #125 ("use release/v5.5 for now"). Owner
+  decisions: native idf.py (no PIO, permanently); 6.0.2-first with the tflite-micro
+  compat spike as the FW phase's first act — port-and-contribute if it fails, v5.5.4
+  bail-out only if the port runs deep; toolchain install filed as INFRA-1 under the
+  NEW `INFRA` prefix (registered in CLAUDE.md + scope-guard toml); D-16 Stage 2 goes
+  REST-only on core esp_http_server (workbench page is the UI; Stage-1 portal stays,
+  form may slip past v1 in favor of the NVS seed). Also defined: the background-monitor
+  pattern (E-5) and the mandatory pin/strapping audit step (E-6 — waveshare-lcd146 §3
+  already discharges it). v6.0 migration notes recorded (warnings-as-errors, mbedTLS
+  4/PSA, cJSON to registry). FW section header updated: gate lifted, first act = the
+  spike after INFRA-1.
+
 - **2026-07-17 — DES-3 input: existing ESP-IDF v5.5.0 install verified on the dev
   machine; owner hardens the v6.0.2 preference.** Owner asked "I think I already have
   an older ESP-IDF — verify": found `~/esp/v5.5/esp-idf` (tag v5.5 @ `8c750b088`,
