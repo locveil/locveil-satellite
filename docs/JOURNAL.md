@@ -3,6 +3,17 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — INFRA-1 DONE: ESP-IDF v6.0.2 installed and verified; FW-2 unblocked.**
+  Shallow clone at tag v6.0.2 (691 MB, 21 submodules) into `~/esp/v6.0.2/esp-idf` +
+  `install.sh esp32s3`. First run FAILED on a machine wrinkle worth remembering: the
+  system `python3` is a custom /usr/local 3.11.4 built without lzma → tarfile
+  CompressionError on the `.tar.xz` tool archives; re-run with `PATH="/usr/bin:$PATH"`
+  (distro 3.12.3) succeeded, venv `idf6.0_py3.12_env` — and the SAME prefix is needed
+  on every future `export.sh` source (it probes bare `python3`). Verified: `idf.py
+  --version` = ESP-IDF v6.0.2, xtensa-esp-elf-gcc 15.2.0. Cleanup per owner: dist
+  archives (606 MB) + pip cache (1.2 GB) removed; footprint 692 MB source + 4.1 GB
+  tools/venv.
+
 - **2026-07-17 — old ESP-IDF v5.5.0 install deleted (owner instruction, pre-INFRA-1).**
   `~/esp/v5.5/` (1.7 GB tree + the source zip) and `~/.espressif` (1.1 GB of v5.5-era
   toolchain/dist, no python_env) removed — ~4.1 GB reclaimed; `~/esp/` kept as the

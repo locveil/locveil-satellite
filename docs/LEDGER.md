@@ -168,16 +168,7 @@ native `idf.py`, IDF v6.0.2 spike-gated (E-2). Order: INFRA-1 (toolchain) → **
 
 ## INFRA — dev-machine / environment infrastructure
 
-- [ ] **INFRA-1** [fleet] — **Install ESP-IDF v6.0.2** (DES-3 decision E-2 —
-      `docs/design/fw_execution_layer.md`; owner filed it as its own task, new `INFRA`
-      category, 2026-07-17). git clone at tag `v6.0.2` → `~/esp/v6.0.2/esp-idf` +
-      `./install.sh esp32s3` (creates the missing `python_env`, extracts tools; ~2 GB).
-      Matches the machine's `~/esp/<version>/` layout. *(The old incomplete v5.5.0
-      install + `~/.espressif` were DELETED 2026-07-17 on owner instruction — ~4.1 GB
-      reclaimed; the E-2 bail-out, if ever triggered, starts from a fresh v5.5.4
-      clone instead.)* Verify: `. export.sh` +
-      `idf.py --version` reports v6.0.2. Gates the FW phase's first act (the
-      esp-tflite-micro compat spike).
+_(none open)_
 
 ## OPS — operations / toolchain
 

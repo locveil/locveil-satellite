@@ -124,6 +124,24 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
 
 ## INFRA — dev-machine / environment infrastructure
 
+- [x] **INFRA-1** [fleet] — **DONE 2026-07-17** — **Install ESP-IDF v6.0.2** (DES-3
+      decision E-2; the old v5.5.0 install + `~/.espressif` were deleted first, owner
+      instruction, ~4.1 GB reclaimed). Executed: **shallow clone at tag `v6.0.2`**
+      (`--depth 1 --recursive --shallow-submodules`, 691 MB — ~1 GB under the old full
+      tree; 21 submodules) → `~/esp/v6.0.2/esp-idf`; `./install.sh esp32s3`.
+      **Machine wrinkle found + worked around:** the system `python3` is a custom
+      `/usr/local` 3.11.4 built WITHOUT the lzma module — the first install run died
+      unpacking `.tar.xz` tools (`tarfile.CompressionError`); re-ran with
+      `PATH="/usr/bin:$PATH"` (distro Python 3.12.3, lzma OK) → venv
+      `idf6.0_py3.12_env`. **The same PATH prefix is required every time `export.sh`
+      is sourced on this machine** (it probes bare `python3`) — noted for FW-2/FW-1
+      sessions. Verified per the task's criterion: `idf.py --version` →
+      **ESP-IDF v6.0.2**; `xtensa-esp-elf-gcc` 15.2.0 (crosstool-NG esp-15.2.0_20251204).
+      Post-install cleanup (owner instruction): `~/.espressif/dist` archives (606 MB) +
+      pip cache (1.2 GB) removed. Final footprint: 692 MB source + 4.1 GB tools/venv.
+      **FW-2 (the compat spike) is now unblocked.** docs: none — dev-machine
+      infrastructure, no user-facing surface.
+
 ## OPS — operations / toolchain
 
 - [x] **OPS-2** — **DONE 2026-07-12** — **Wire the day-one toolchain** (HK-4 round 4;
