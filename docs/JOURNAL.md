@@ -3,6 +3,15 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — FW-2 filed: the esp-tflite-micro compat spike as its own gating task.**
+  Owner question "file the spike separately? what category?" → recommendation accepted:
+  **FW** (it builds firmware code — the first in the repo; the harness is a keeper that
+  becomes the wake-stack component's standing build test), not INFRA (installs only) or
+  OPS (repo operations). Chain recorded: INFRA-1 → FW-2 → FW-1; FW-1 gains the gate
+  note; the E-2 outcomes (pass→pin+report on #125 / fail→port+contribute /
+  deep-port→v5.5.4 bail-out) carried into the task text, with the deep-port case
+  closing FW-2 on the verdict and filing the port as its own follow-up.
+
 - **2026-07-17 — DES-3 DONE: execution layer decided — native `idf.py`, IDF v6.0.2
   spike-gated; PlatformIO is out; FW gate lifts.** Interactive session; decision doc
   `docs/design/fw_execution_layer.md` (AGREED). Research findings: the 2024
