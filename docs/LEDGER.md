@@ -43,6 +43,21 @@ before **DES-3** is done.
       `esp-tflite-micro` + the SPD2010 registry components against it; fallback v5.5.x;
       the i2s_std API family spans both, so the demo stays readable as a wiring
       reference either way.)*
+      *(Decision input 2026-07-17, workstation recon + owner ruling: an **ESP-IDF v5.5.0
+      install already exists on the dev machine** — `~/esp/v5.5/esp-idf` (tag v5.5 @
+      `8c750b088`, source pristine — the 17k git "modifications" are zip-extraction
+      permission bits only, submodules complete) with a PARTIAL toolchain in
+      `~/.espressif` (xtensa esp-14.2.0 + gdbs extracted; cmake/ninja/openocd/clang/
+      riscv-gcc downloaded to `dist/` but unextracted; **no `python_env`** — install.sh
+      never completed, so `idf.py` is currently non-functional). It is also 4 patches
+      behind its own line (v5.5.4). Owner ruling: **strong preference for v6.0.2** — the
+      earlier "target v6.0.x" posture hardens; the library/module-availability research
+      (esp-tflite-micro, esp_lcd_spd2010 + touch, and whatever else FW-1 pins, against
+      v6.0.x) is IN-SCOPE for this task, and **where a needed module lags the major, we
+      may port/upgrade it to 6.0.2 ourselves and CONTRIBUTE upstream** — a sanctioned
+      outcome, not just a fallback trigger. The v5.5 install stays untouched until this
+      task decides (finish it only if the compat check forces the v5.5.x fallback; the
+      `~/esp/<version>/` layout accommodates a fresh v6.0.2 alongside).)*
       *(Owner agenda expansion 2026-07-17, DES-7 session: the wake pack is MULTI-model —
       one wake model per unit, ≥3 near-term — so per-unit model selection AND room
       identity are provisioned POST-flash through a **WORKBENCH-HOSTED device-management

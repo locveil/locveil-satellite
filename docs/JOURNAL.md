@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-17 — DES-3 input: existing ESP-IDF v5.5.0 install verified on the dev
+  machine; owner hardens the v6.0.2 preference.** Owner asked "I think I already have
+  an older ESP-IDF — verify": found `~/esp/v5.5/esp-idf` (tag v5.5 @ `8c750b088`,
+  2025-07-18, 1.7 GB) — source pristine (all 17,433 git 'modifications' are
+  zip-extraction permission bits, 0 content changes; submodules complete) but the
+  toolchain install is INCOMPLETE: only xtensa-gcc + gdbs extracted in `~/.espressif`,
+  the rest sits unextracted in `dist/`, and `python_env` is missing → `idf.py`
+  non-functional as-is; also 4 patches behind v5.5.4. Owner ruling folded into DES-3:
+  strong preference for v6.0.2; the dependency-availability research is part of DES-3,
+  and porting lagging modules to 6.0.2 + contributing upstream is a sanctioned outcome.
+  Nothing installed/touched (`no-execution-toolchain-at-bootstrap` — DES-3's call).
+
 - **2026-07-17 — DOC-1 DONE: deck-corpus audit (deck-common vs the four dossiers);
   DOC prefix born.** Owner-filed with the ground rule "dossiers win"; waveshare dossier
   untouched. Result (`docs/review/doc1-deck-corpus-audit.md`): common is structurally
