@@ -21,6 +21,7 @@ before **DES-3** is done.
 | `docs/design/assets/des7-hardware-findings.md` (2026-07-16, enclosure survey added 2026-07-17) | DES-7 input evidence — enclosure data + `waveshareteam` survey; DES-3 decision input (§3.5); FW-1 consumption model |
 | `docs/review/des1-truth-pass.md` (2026-07-12) | DES-1 evidence: conflict resolutions, REQUIREMENTS disposition (VWB-38 feed), code sweep, pin re-audit |
 | `docs/review/doc1-deck-corpus-audit.md` (2026-07-17) | DOC-1 evidence: deck-common vs dossiers claim-by-claim audit — DOC-2 remediation feed |
+| `docs/design/satellite_enclosure.md` (AGREED 2026-07-18) | the DES-8 wall-case design (C-1..C-9, measured STEP inputs, acoustic architecture) — DES-9, `enclosures/waveshare-lcd146/` |
 
 ## DES — design
 
@@ -98,26 +99,15 @@ before **DES-3** is done.
       in the SAME change — never "stamp it later"; the completion's `contracts:` verdict
       asks the question at close (contract-triad block).)*
 
-- [ ] **DES-8** [dev:waveshare-lcd146] — **Voice-satellite enclosure design** (filed
-      2026-07-18, owner; the DES-7 mechanical inputs become scope). Design the
-      **wall-mounted** case for the Waveshare ESP32-S3-Touch-LCD-1.46B from the vendor
-      STEP assembly — no vendor case exists and the community field is 3 mesh-only /
-      wrong-posture finds (`docs/design/assets/des7-hardware-findings.md` §2.6: design
-      from the STEP; snap-fit bezel + M2-boss mounting proven practical by the finds).
-      Recorded constraints: posture wall-mounted, power **USB-C only** → NO battery
-      pocket (dossier §6); round 412×412 display + touch face; the cable-exit direction
-      (straight vs right-angle USB-C plug — owner cable purchase pends on it) is this
-      design's call. **First act: the CAD toolchain decision** (the repo has NO
-      CAD-capable tooling — no FreeCAD/OpenSCAD/CadQuery MCP or skill; per the
-      `no-execution-toolchain-at-bootstrap` pattern the task decides what enters, DES-2/
-      DES-3 precedent; candidates: code-CAD — build123d/CadQuery (STEP import via OCCT
-      for reference dims) or OpenSCAD — chosen for agent-driven workflow). Prerequisite:
-      **re-download the vendor pack and hash-verify** (`ESP32-S3-LCD-1_46.stp`, 14.8 MB,
-      sha256 in findings §2.1 — deliberately not committed). Open mechanical unknown to
-      resolve: the **antenna keep-out** (position in the STEP, no vendor guidance —
-      findings §2 flag). Deliverable: design doc + the CAD model source; print/
-      fabrication + bench fit-check follow-ups are FILED FROM the design (fit-check is
-      the HW-GATED part, never this task).
+- [ ] **DES-9** [dev:waveshare-lcd146] `HW-GATED` — **Enclosure print, fit-check &
+      acoustic bench** (filed 2026-07-18 from the DES-8 design,
+      `docs/design/satellite_enclosure.md` §5). Print v0 (`enclosures/waveshare-lcd146/`,
+      matte white PETG, face-down shell / inner-face-up plate); fit-check on a unit;
+      **speaker radiating-face check before sealing rib heights**; gasket material pick;
+      front-shell retention feature (snap lip vs 2 self-tappers, v0 is friction);
+      acoustic bench — mic SNR through the 90° duct vs open, speaker bottom-slot tuning
+      (count/width are `case.py` parameters); CAD amendments land back in the design doc
+      + `case.py`. HW-GATED: needs the printer and a unit on the bench.
 
 ## PCB — board projects
 

@@ -15,6 +15,26 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-18 — DES-8 DONE: enclosure design agreed — squircle wall case, 15.9 mm off
+  the wall; DES-9 (print/fit/acoustics) filed; INFRA-2 DONE en route.** Interactive
+  session. INFRA-2 executed first (owner: machine-level per INFRA-1 precedent):
+  build123d 0.11.1 at `~/cad/build123d-env` from the distro python, STEP round-trip
+  verified; vendor pack re-downloaded + all three §2.1 hashes matched. The STEP survey
+  then MEASURED the design inputs (16 s import, 219 components): mic soldered at
+  (−14.20, −12.05) back face, speaker pad-soldered at (+11.17, 0.00), SMTSO-M2-3.5
+  standoffs exactly located, USB/switch/antenna zones fixed — resolving findings §2.5's
+  posture question the hard way: BOTH transducers fire at the wall, so the case forms
+  sealed gasket cavities in place with 90° ducts to bottom-edge openings. Concept sheet
+  as a claude.ai artifact (S1 ground truth / S2 section / S3 cable variants / S4 body
+  forms); owner decisions: keyholes, straight-plug open bottom (cable purchase settled:
+  straight A-to-C + 5 V/2 A USB-A ×3), squircle, bottom-only openings, matte white
+  PETG. **Session correction worth remembering: the speaker was briefly mis-read as a
+  wired/relocatable part off the schematic's 2-pin symbol — the OWNER caught it against
+  the wiki; the STEP hierarchy settled it (PCBA child, pad-soldered). Lesson: locate
+  parts from the STEP hierarchy first, schematic symbols second.** Deliverables:
+  `docs/design/satellite_enclosure.md` (AGREED, C-1..C-9) +
+  `enclosures/waveshare-lcd146/case.py` (v0 builds + exports clean).
+
 - **2026-07-18 — FW-2 DONE: the compat spike PASSES — FW-1 builds on IDF v6.0.2; the
   FW phase's first code committed.** The keeper harness (`firmware/tflm-compat/`)
   builds `esp-tflite-micro==1.3.7` clean on v6.0.2/esp32s3 — 0 errors, 370 KB image,

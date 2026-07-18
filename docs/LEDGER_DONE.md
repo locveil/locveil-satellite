@@ -95,6 +95,31 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       + amendments are ledger-indexed ground truth, not manifest nodes; `quickstart` /
       `flash-and-provision` stay pending-gate on FW-1 first light; CONTRIBUTING's
       `devices` coverage description unchanged).
+- [x] **DES-8** [dev:waveshare-lcd146] — **DONE 2026-07-18** — **Voice-satellite
+      enclosure design AGREED** (interactive owner session; design doc
+      `docs/design/satellite_enclosure.md` + parametric CAD
+      `enclosures/waveshare-lcd146/case.py`, both committed; v0 exports build clean —
+      squircle 45.1 × 48.5 face, **15.9 mm off the wall**). Owner decisions C-1..C-9:
+      build123d toolchain (install = **INFRA-2**), keyhole wall mount (metal kept below
+      the antenna band), cable exit **variant B** straight-plug open bottom (cable
+      purchase settled: straight data-capable A-to-C + 5 V/2 A USB-A adapters ×3),
+      squircle body, bottom-only openings, matte white PETG, Ø38.2 bezel lip outside
+      the Ø37.36 viewing circle, two-part shell+plate, switch service pinholes.
+      Prerequisite discharged: vendor pack re-downloaded, RAR/STEP/PDF all matching the
+      findings §2.1 hashes. STEP survey (build123d) measured everything the CAD
+      consumes — incl. the three SMTSO-M2-3.5 standoffs at (12.00, −14.95) /
+      (−11.54, −15.45) / (0.00, +17.75) — and resolved the §2.5 posture consequence:
+      BOTH transducers are soldered to the back face and fire at the wall → the sealed
+      90°-duct-to-bottom-edge acoustic architecture (§3 of the design).
+      **In-session correction (owner catch):** the speaker was first mis-read as
+      wired/relocatable from the schematic 2-pin symbol — the STEP hierarchy proves it
+      pad-soldered at (+11.17, 0.00), a PCBA child like the mic; concept + design
+      corrected before agreement (the dossier's "onboard speaker" was right all
+      along). Antenna keep-out resolved by construction (plastic-only case; keyholes
+      at y −6). Follow-up filed: **DES-9** (HW-GATED print/fit/acoustic bench).
+      docs: none — design-phase corpus, ledger-indexed; no `docs/manifest.json` node.
+      contracts: none — mechanical design, no cross-repo surface (vendor STEP is
+      hash-pinned reference data, not a Locveil contract).
 
 ## DOC — documentation
 
@@ -167,6 +192,20 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       pip cache (1.2 GB) removed. Final footprint: 692 MB source + 4.1 GB tools/venv.
       **FW-2 (the compat spike) is now unblocked.** docs: none — dev-machine
       infrastructure, no user-facing surface.
+- [x] **INFRA-2** — **DONE 2026-07-18** (filed + executed same session, DES-8 first
+      act; owner: build123d over CadQuery/OpenSCAD — OCCT kernel, native STEP import;
+      machine-level install as its own INFRA task per INFRA-1 precedent, over a repo
+      venv). **build123d 0.11.1 installed** in a dedicated venv at
+      `~/cad/build123d-env`, created from the DISTRO python (`/usr/bin/python3`
+      3.12.3 — the lzma-less `/usr/local` wrinkle sidestepped at venv creation; OCP
+      kernel wheel `cadquery_ocp_novtk 7.9.3`). Verified: version import + solid →
+      STEP export → re-import round-trip exact. Use: `~/cad/build123d-env/bin/python`
+      (no activation needed). Vendor mechanical pack re-downloaded to
+      `~/cad/waveshare-lcd146/` and hash-verified against findings §2.1 (RAR
+      `4647210e…`, STEP `0587a096…`, PDF `ff0da267…`) — the DES-8 prerequisite,
+      discharged here since it lives machine-side with the tool. docs: none —
+      machine-side toolchain. contracts: none — dev-machine install, no cross-repo
+      surface.
 
 ## OPS — operations / toolchain
 
