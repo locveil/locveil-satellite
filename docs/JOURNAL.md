@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-18 — DES-8 filed: voice-satellite enclosure design (owner).** The DES-7
+  mechanical inputs (findings §2: vendor STEP verified with hashes, not committed;
+  §2.6: no vendor case, community finds unusable → design from the STEP) get their
+  task. Wall-mounted, USB-C only/no battery pocket, cable-exit direction decided by
+  the design (the owner's cable purchase pends on it). First act is the CAD toolchain
+  decision — the repo has zero CAD tooling wired (no FreeCAD/OpenSCAD/CadQuery MCP or
+  skill; `no-execution-toolchain-at-bootstrap` pattern, DES-2/DES-3 precedent);
+  code-CAD (build123d/CadQuery with OCCT STEP import, or OpenSCAD) is the recorded
+  candidate set for an agent-driven workflow. Antenna keep-out carried as the open
+  mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
+  design; only the fit-check is HW-GATED.
+
 - **2026-07-18 — FW-2 DONE: the compat spike PASSES — FW-1 builds on IDF v6.0.2; the
   FW phase's first code committed.** The keeper harness (`firmware/tflm-compat/`)
   builds `esp-tflite-micro==1.3.7` clean on v6.0.2/esp32s3 — 0 errors, 370 KB image,
