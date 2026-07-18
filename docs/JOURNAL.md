@@ -3,6 +3,21 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-18 — PROD-26 delegation pulled: OPS-11 (lead) + OPS-12 (guard sweep) +
+  OPS-13 (repin adoption) filed.** The HK-12 convention-enforcement-hardening execution
+  entry landed on the board with the satellite delegation: guard sweep (contract-guard-v3
+  + scope-v7.1 + `contracts_verdict_since` + the contract-triad block), repin adoption
+  (vendored tool + `.repin.toml` + hook/CI warn stages + the `publish_model_pack.py`
+  freshness check), the registry-README drift one-liner, born-stamped clauses for DES-5 +
+  the D-16 Stage-2 API, and the two greenlit repo-to-repo filings (voice wake-pack-v1.x
+  bump confirmation; bridge device-integration-v1.1 minor-tag request). Reconciled against
+  repo reality at intake: the drift is live (`contracts/README.md` says contract-guard-v1,
+  the vendored script is 1.1.0/v2, the CI workflow comment already says v2); commons
+  facts verified against the tags (scope family newest is **scope-v7.1** — block-only
+  release over v7, script bytes identical; block pin hash is the guard's stripped-content
+  sha256, not the raw file hash). Sequencing per the commons notes: filings first, then
+  the two sweep commits, clauses + write-back close OPS-11.
+
 - **2026-07-17 — INFRA-1 DONE: ESP-IDF v6.0.2 installed and verified; FW-2 unblocked.**
   Shallow clone at tag v6.0.2 (691 MB, 21 submodules) into `~/esp/v6.0.2/esp-idf` +
   `install.sh esp32s3`. First run FAILED on a machine wrinkle worth remembering: the
