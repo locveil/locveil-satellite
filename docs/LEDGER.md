@@ -106,8 +106,8 @@ device, tasks tagged `[dev:<board-slug>]`)_
 ## FW — firmware
 
 _(DES-3 gate LIFTED 2026-07-17 — `docs/design/fw_execution_layer.md`. Execution layer:
-native `idf.py`, IDF v6.0.2 spike-gated (E-2). Order: INFRA-1 (toolchain) → **FW-2**
-(the compat spike) → FW-1.)_
+native `idf.py`. **FW-2 verdict 2026-07-18: PASS — FW-1 builds on IDF v6.0.2** (E-2
+outcome; the v5.5.4 bail-out is retired unused). Next: FW-1.)_
 
 - [ ] **FW-1** [fleet] — **ESP32 satellite firmware build** (imported 2026-07-12
       from voice **ARCH-23**, export-closed there; reconcile at task start — the imported
@@ -138,24 +138,12 @@ native `idf.py`, IDF v6.0.2 spike-gated (E-2). Order: INFRA-1 (toolchain) → **
       Sole remaining gate: **DES-3**.)*
       *(DES-3 done 2026-07-17 — the gate above is met; this task is now gated on **FW-2**
       (the esp-tflite-micro compat spike decides the IDF version FW-1 builds against).)*
-
-- [ ] **FW-2** [fleet] — **esp-tflite-micro v6.0.2 compat spike** (filed 2026-07-17,
-      owner; per `docs/design/fw_execution_layer.md` E-2 — the FW phase's first act).
-      Build a minimal harness — `esp-tflite-micro` core + the TFLite-Micro
-      micro-features frontend + a tiny model invoke (micro_speech-scale), NO camera
-      examples — against **IDF v6.0.2** for `esp32s3`, as a keeper project (it later
-      becomes the wake-stack component's standing build test). Context: the component
-      declares `idf >=5.0` but has zero v6 CI and a maintainer-confirmed v6
-      incompatibility (upstream issue #125, "use release/v5.5 for now"); whether the
-      CORE (without the examples where the known breakage lives) compiles is unverified.
-      Recorded outcomes (E-2): **pass** → pin the verified commit in the harness +
-      report the datapoint upstream on #125, FW-1 proceeds on v6.0.2; **fail** → port
-      esp-tflite-micro to 6.0.2 and CONTRIBUTE upstream (owner-sanctioned; coordinate
-      with #125 to avoid duplicating Espressif's in-flight work) — if the port runs
-      DEEP, this task closes with the verdict and files the port as its own follow-up
-      rather than ballooning; **bail-out** (deep port only) → FW-1 proceeds on v5.5.4
-      (fresh clone — the old v5.5 tree was deleted 2026-07-17). **Gated on INFRA-1**
-      (the v6.0.2 toolchain); **gates FW-1**.
+      *(FW-2 done 2026-07-18 — **gate met, verdict PASS: build on IDF v6.0.2**, dep pinned
+      `esp-tflite-micro==1.3.7` (`firmware/tflm-compat/dependencies.lock`). Intake item
+      from the spike: the OLD micro-features frontend is NOT in the component distribution
+      (removed upstream) — the microWakeWord port either vendors that C lib or moves
+      features to the shipped signal lib; decide at intake against the wake-pack models'
+      feature semantics (`fw_execution_layer.md` E-2 outcome note). UNGATED — next task.)*
 
 ## DOC — documentation
 

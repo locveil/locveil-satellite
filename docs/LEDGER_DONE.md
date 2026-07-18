@@ -122,6 +122,32 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
 
 ## FW — firmware
 
+- [x] **FW-2** [fleet] — **DONE 2026-07-18** — **esp-tflite-micro v6.0.2 compat spike:
+      verdict PASS — FW-1 proceeds on IDF v6.0.2** (E-2 outcome; the v5.5.4 bail-out
+      retired unused). Keeper harness `firmware/tflm-compat/` (the FW tree's first
+      project; becomes the wake-stack component's standing build test at FW-1): TFLM
+      core (MicroInterpreter + resolver + int8 micro_speech-scale invoke,
+      DepthwiseConv2D/FullyConnected/Softmax/Reshape) + the full signal-lib feature
+      path (18 preprocessor ops — Window/FftAutoScale/Rfft/Energy/FilterBank*/PCAN →
+      kissfft), models vendored from the component's own micro_speech example
+      (Apache-2.0, provenance in-file). Build: 1309/1309 steps, **0 errors**, clean
+      link, 370 KB image; 17 benign `-Wshadow` warnings in TFLM reference kernels.
+      Pin: exact `==1.3.7` in `idf_component.yml` + committed `dependencies.lock`
+      (component_hash `22fc501a…`, esp-nn 1.2.3, idf 6.0.2, esp32s3). Datapoint
+      reported upstream per the pass outcome: espressif/esp-tflite-micro#125 comment
+      (2026-07-18) — the v6 gap is the examples layer, not the core. **Reconciliation
+      find, carried to FW-1 intake:** the task-named "TFLite-Micro micro-features
+      frontend" (`tensorflow/lite/experimental/microfrontend`, the lib ESPHome's
+      microWakeWord uses) is NOT in the 1.3.7 distribution — removed upstream, the
+      component's CMake GLOB of it is vestigial (also reported in the #125 comment);
+      the port either vendors that C lib or moves features to the shipped signal lib
+      (decide against the wake-pack models' feature semantics). Compile+link is the
+      recorded gate; an on-bench invoke run is a bonus check left to FW-1 bring-up.
+      docs: none — firmware spike + design/ledger records, no `docs/manifest.json`
+      node touched. contracts: none — third-party registry dependency pinned
+      (`espressif/esp-tflite-micro`, not a Locveil cross-repo surface; the wake-pack
+      pin is untouched).
+
 ## INFRA — dev-machine / environment infrastructure
 
 - [x] **INFRA-1** [fleet] — **DONE 2026-07-17** — **Install ESP-IDF v6.0.2** (DES-3

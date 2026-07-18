@@ -54,6 +54,19 @@ firmware with the latest-only docs MCP (findings §3.5).
 - **Toolchain install = INFRA-1** (owner: separate task, new `INFRA` category):
   git clone at tag `v6.0.2` → `~/esp/v6.0.2/esp-idf` + `install.sh esp32s3`
   (matches the machine's `~/esp/<version>/` layout; pinnable checkout).
+- **OUTCOME (FW-2, 2026-07-18): the spike PASSES — FW-1 proceeds on v6.0.2.** The
+  harness (`firmware/tflm-compat/`, keeper) builds and links `esp-tflite-micro==1.3.7`
+  clean on v6.0.2/esp32s3: TFLM core + int8 micro_speech-scale invoke + the full
+  signal-lib feature path (18 preprocessor ops → kissfft). 0 errors; 17 benign
+  `-Wshadow` warnings in TFLM reference kernels. Pin = exact `==1.3.7` in
+  `idf_component.yml` + committed `dependencies.lock` (component_hash `22fc501a…`,
+  esp-nn 1.2.3). Datapoint reported upstream (#125 comment 2026-07-18) — the v6 gap is
+  the examples layer, not the core. **Intake item for FW-1:** the OLD micro-features
+  frontend (`tensorflow/lite/experimental/microfrontend`, what ESPHome's microWakeWord
+  uses) is NOT in the 1.3.7 distribution (removed upstream; the component's CMake GLOB
+  of it is vestigial) — the port either vendors that C lib or moves features to the
+  shipped signal lib; decide at FW-1 intake against the wake-pack models' expected
+  feature semantics.
 
 ## E-3 — Dependency matrix vs IDF v6.0.2 (verified 2026-07-17)
 

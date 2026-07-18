@@ -3,6 +3,21 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-18 — FW-2 DONE: the compat spike PASSES — FW-1 builds on IDF v6.0.2; the
+  FW phase's first code committed.** The keeper harness (`firmware/tflm-compat/`)
+  builds `esp-tflite-micro==1.3.7` clean on v6.0.2/esp32s3 — 0 errors, 370 KB image,
+  17 benign `-Wshadow` warnings — exercising the TFLM core (int8 micro_speech-scale
+  invoke) AND the full signal-lib feature path (18 preprocessor ops down to kissfft).
+  The maintainer's "not updated for v6" (#125) turns out to be the EXAMPLES layer;
+  the core is fine — datapoint posted upstream (#125, 2026-07-18), including a second
+  find: the old micro-features frontend (`experimental/microfrontend`) is gone from
+  the distribution entirely, the component CMake GLOB of it is vestigial. That
+  frontend is what ESPHome's microWakeWord uses → FW-1 intake decision: vendor the C
+  lib vs move features to the shipped signal lib (recorded in E-2's outcome note +
+  FW-1's gate rider). Pin = exact `==1.3.7` + committed `dependencies.lock`. The
+  v5.5.4 bail-out retires unused. Machine wrinkle held as recorded: `PATH="/usr/bin:
+  $PATH"` before `export.sh`, then everything just works.
+
 - **2026-07-18 — OPS-11 DONE: the PROD-26 delegation lead closes — filings, clauses,
   write-back all landed.** The two greenlit repo-to-repo filings executed and pushed
   (voice BUILD-44 `92b7178` + drift addendum `c115340`; bridge VWB-42 `4cbf667`);

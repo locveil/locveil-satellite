@@ -1,0 +1,6 @@
+# FW-2 spike defaults — esp32s3 (the waveshare-lcd146 target class). Kept minimal:
+# this project proves COMPILATION of the TFLM core + micro-features frontend on the
+# pinned IDF; board bring-up config belongs to FW-1's per-device app.
+CONFIG_IDF_TARGET="esp32s3"
+# The wake stack will run from the app image (D-9); no PSRAM assumptions in the spike.
+CONFIG_COMPILER_OPTIMIZATION_SIZE=y

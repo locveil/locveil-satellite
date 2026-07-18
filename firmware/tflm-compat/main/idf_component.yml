@@ -1,0 +1,6 @@
+# FW-2 compat spike: the single v6-blocked dependency (fw_execution_layer.md E-3).
+# Pinned EXACT — the spike's verdict names the verified version; dependencies.lock is
+# committed alongside (the "pin the verified commit" of the FW-2 pass outcome).
+dependencies:
+  espressif/esp-tflite-micro: "==1.3.7"
+  idf: ">=6.0.0"
