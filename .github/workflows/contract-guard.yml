@@ -1,5 +1,6 @@
 # Convention: process/contracts.md §4 — job name `contract-guard`, --check only.
-# Layer 1 (coherence): vendored contract_guard.py @ contract-guard-v2.
+# Layer 1 (coherence): vendored contract_guard.py @ contract-guard-v3 (OPS-12; CI runs
+# strict — no --relax-tags — the pushed tag must exist, unlike the mid-bump local hook).
 # Layer 2 (owned-surface guards): check_esp32_site.py (esp32-site markers) +
 # check_docs_manifest.py (docs-manifest coherence, process/user-docs.md §4).
 name: contract-guard
@@ -7,13 +8,13 @@ name: contract-guard
 on:
   push:
     branches: [main]
-    paths: ["contracts/**", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
+    paths: ["contracts/**", ".contract-guard.toml", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
             "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
             "README.md", "CONTRIBUTING.md", "provisioning/README.md",
             "provisioning/ansible/templates/esp32-site.conf.j2",
             ".github/workflows/contract-guard.yml"]
   pull_request:
-    paths: ["contracts/**", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
+    paths: ["contracts/**", ".contract-guard.toml", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
             "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
             "README.md", "CONTRIBUTING.md", "provisioning/README.md",
             "provisioning/ansible/templates/esp32-site.conf.j2",

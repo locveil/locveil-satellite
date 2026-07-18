@@ -1,0 +1,5 @@
+# contract-guard v3 config (HK-12/PROD-26, vendored via OPS-12). Explicit,
+# empty-by-default rules only — the product-repo default: no vendorable package roots
+# (shared tools live in commons `packages/*`; this repo only vendors copies).
+vendorable_roots = []
+non_contract = []

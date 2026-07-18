@@ -291,3 +291,19 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       consumer default (warn). First check green, 0 warnings: both evidence dirs
       (`docs/design/`, `docs/review/`) fully ledger-referenced at re-pin time.
       docs: none — vendored tool only.
+- [x] **OPS-12** [fleet] — **DONE 2026-07-18** (PROD-26/HK-12 delegation, rides OPS-11).
+      **Guard + block sweep, one commit.** `scripts/scope_guard.py` re-vendored
+      byte-identical @ **`scope-v7.1`** (1.3.0 → 1.4.0: CONTRACTS-VERDICT +
+      UNKNOWN-PREFIX; `contracts_verdict_since = 2026-07-18` set — no DONE entry predating
+      today needed a retro line) and `scripts/contract_guard.py` @ **`contract-guard-v3`**
+      (1.1.0 → 3.0.0: ORPHAN-TAG, CONTENT-DRIFT, VENDORABLE-UNREGISTERED, `--relax-tags`);
+      `.contract-guard.toml` added (product default: `vendorable_roots = []`); the
+      **contract-triad** block pinned into CLAUDE.md (block-pin lane, stripped-content
+      sha256 `a3fe8d6b…` matching the commons pin); hook gains `--relax-tags` (CI stays
+      strict); the registry-README drift one-liner folded in (`contracts/README.md` said
+      `contract-guard-v1` while running v2 — the HK-12 round-2 live find — now v3 with
+      real bytes behind it); CI workflow comment + path filter updated. Both guards green
+      on first run, 0 warnings. docs: none — guard tooling + registry/CLAUDE.md process
+      surfaces, no `docs/manifest.json` node touched. contracts: none — re-vendored the
+      commons-owned guard tools at newer tags (consumed copies, not first consumption;
+      the `[[tool]]` staleness watch arrives with OPS-13).

@@ -205,17 +205,6 @@ _(none open)_
       text and the D-16 Stage-2 REST-API design. **(c)** write the satellite lead ID back
       into PROD-26 (`../locveil-commons/board/BOARD.md`). Closes when both filings are
       committed in the sibling ledgers, the clauses landed, and the write-back is pushed.
-- [ ] **OPS-12** [fleet] — **Guard + block sweep (PROD-26 item, rides OPS-11)** — one
-      commit: re-vendor `scripts/scope_guard.py` @ **`scope-v7.1`** (1.4.0 —
-      CONTRACTS-VERDICT + UNKNOWN-PREFIX; `contracts_verdict_since = 2026-07-18`) and
-      `scripts/contract_guard.py` @ **`contract-guard-v3`** (3.0.0 — ORPHAN-TAG,
-      CONTENT-DRIFT, VENDORABLE-UNREGISTERED, `--relax-tags`); add `.contract-guard.toml`
-      (products default: no vendorable roots); pin the third CLAUDE.md block
-      (`contract-triad`, block-pin lane); hook line gains `--relax-tags`; fold in the
-      registry-README drift one-liner (`contracts/README.md` guards line still says
-      `contract-guard-v1` while the vendored script is v2 — the HK-12 round-2 live find;
-      the sweep re-vendors to v3, so the same commit corrects it with real bytes behind
-      it). Ref: `../locveil-commons/process/ledger-discipline.md` §7.
 - [ ] **OPS-13** [fleet] — **repin adoption (PROD-26 item, rides OPS-11)** — vendor
       `scripts/repin.py` @ **`repin-v1`** (commons `packages/repin/`); write `.repin.toml`:
       families **ws-protocol** (owner voice), **wake-pack** (sidecar-STAMP shape — files =

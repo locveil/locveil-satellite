@@ -3,6 +3,23 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-18 — OPS-12 DONE: guard + block sweep — scope-v7.1 + contract-guard-v3
+  vendored, verdict cutover set, contract-triad block pinned, registry drift corrected.**
+  One commit per the delegation shape. scope-guard 1.3.0 → 1.4.0 (CONTRACTS-VERDICT — the
+  `contracts:` line required on completions from today; UNKNOWN-PREFIX — the satellite
+  DOC-prefix scar, now failing loudly); contract-guard 1.1.0 → 3.0.0 (ORPHAN-TAG,
+  CONTENT-DRIFT, VENDORABLE-UNREGISTERED, `--relax-tags` mid-bump tolerance — hook warns,
+  CI strict); both byte-identical to their commons tags. `.contract-guard.toml` product
+  default (`vendorable_roots = []`); third CLAUDE.md block (`contract-triad`) on the
+  block-pin lane, hash verified against the commons pin. The `contracts/README.md` guards
+  line said contract-guard-v1 while running v2 (HK-12 round-2 live find) — corrected to
+  v3 in the same commit as the re-vendor. Both guards green on first run, 0 warnings.
+  Earlier the same day, before the sweep commit: the two greenlit repo-to-repo filings
+  executed — **bridge `4cbf667` (VWB-42**, the `device-integration-v1.1` minor-tag
+  request) and **voice `92b7178` (BUILD-44**, the wake-pack-v1.x bump confirmation,
+  `[deferred]` at filing since it gates no voice release — retag at their intake); both
+  pushed.
+
 - **2026-07-18 — PROD-26 delegation pulled: OPS-11 (lead) + OPS-12 (guard sweep) +
   OPS-13 (repin adoption) filed.** The HK-12 convention-enforcement-hardening execution
   entry landed on the board with the satellite delegation: guard sweep (contract-guard-v3

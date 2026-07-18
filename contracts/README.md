@@ -32,7 +32,9 @@ it governs; the descriptors themselves are per-instance config validated against
 pin, not contracts (`process/contracts.md` §1)._
 
 Guards: layer 1 is the vendored `scripts/contract_guard.py` (commons
-`packages/contract-guard/`, pinned at tag **`contract-guard-v1`** — never edit the
-vendored file, re-pin to move; runs in `hooks/pre-commit` and the path-gated
-`contract-guard` CI job, `--check` only); layer 2 is the per-contract guards and
-conformance tests listed above.
+`packages/contract-guard/`, vendored at tag **`contract-guard-v3`** — never edit the
+vendored file, re-pin to move; runs in `hooks/pre-commit` (`--relax-tags` mid-bump
+tolerance) and the path-gated `contract-guard` CI job, `--check` only); layer 2 is the
+per-contract guards and conformance tests listed above. *(This line said `contract-guard-v1` while the vendored
+script was already v2 — the HK-12 round-2 live drift find, corrected by the OPS-12
+re-vendor to v3.)*

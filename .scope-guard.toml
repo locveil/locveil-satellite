@@ -1,4 +1,4 @@
-# locveil-satellite scope-guard config (guard vendored at scope-v6; template: HK-2/PROD-5)
+# locveil-satellite scope-guard config (guard vendored at scope-v7.1; template: HK-2/PROD-5)
 
 [ledger]
 active = "docs/LEDGER.md"
@@ -15,6 +15,11 @@ hard_ceiling = 4000
 # HK-6 docs-verdict rule active from the day AFTER the scope-v5 re-pin: the four
 # completions dated 2026-07-12 predate the rule and DONE is frozen history.
 docs_verdict_since = "2026-07-13"
+
+# HK-12 contracts-verdict rule (ledger-discipline.md §7), active from the scope-v7.1
+# re-pin day (OPS-12): completions from this date record `contracts: <what moved>` or
+# `contracts: none — <why>`; earlier entries frozen.
+contracts_verdict_since = "2026-07-18"
 
 [evidence]
 dirs = ["docs/design", "docs/review"]
@@ -36,3 +41,6 @@ sha256 = "71d1c3bb3a6de0626a4c9ab8709f2e31166c866cede31c345fc93a58e4345218"
 [[claude.blocks]]
 name = "cross-repo-board"
 sha256 = "0f5e8f63b55c752ddfd542e112f06dd1a6d615c38f1b6f1d57dbeaee7dbdb86a"
+[[claude.blocks]]
+name = "contract-triad"
+sha256 = "a3fe8d6b58d86fd997ef8e17bf8b8216aba09ad4f4978b0bb56fd05ce12d1fc2"
