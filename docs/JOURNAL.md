@@ -15,6 +15,17 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-18 — DES-8 delta (same day, post-close): first renders generated — and they
+  caught two v0 geometry bugs, fixed in `case.py`.** Owner asked for model + renders; a
+  render path was added to the INFRA-2 venv (trimesh + matplotlib — shaded STL views;
+  build123d's no-VTK kernel has no rasterizer) and five views published as a claude.ai
+  render artifact. The pass immediately earned its keep: the speaker rib box overhung
+  the back-plate rim by 1.2 mm on +X (the speaker sits 1.2 mm from the board edge — the
+  shell could not have closed; ribs now asymmetric, right wall flush at the rim) and
+  the top standoff pillar grazed the plate edge (r 3.0 → 2.6). Plate bounds verified
+  ±19.98 after the fix. The DONE entry stays frozen; this line + the committed source
+  carry the delta. DES-9's print starts from this corrected v0.
+
 - **2026-07-18 — DES-8 DONE: enclosure design agreed — squircle wall case, 15.9 mm off
   the wall; DES-9 (print/fit/acoustics) filed; INFRA-2 DONE en route.** Interactive
   session. INFRA-2 executed first (owner: machine-level per INFRA-1 precedent):

@@ -130,11 +130,12 @@ with BuildPart() as back:
                 Cylinder(radius=1.15, height=p.plate_t + 2)
             with Locations(Location((x, y, p.back_z + 0.6))):
                 Cylinder(radius=2.1, height=1.2)
-    # standoff pillars: plate inner face up to the SMTSO boss ends
+    # standoff pillars: plate inner face up to the SMTSO boss ends (r kept small —
+    # the top boss at y 17.75 sits 2.9 from the plate rim)
     with BuildPart():
         for (x, y) in p.bosses:
             with Locations(Location((x, y, (p.back_in_z + p.boss_top_z) / 2))):
-                Cylinder(radius=3.0, height=p.back_in_z * -1 + p.boss_top_z)
+                Cylinder(radius=2.6, height=p.back_in_z * -1 + p.boss_top_z)
     # mic gasket ring rib (seals to board back around the port) + duct rib pair to bottom
     with BuildPart():
         ring_h = -(p.back_in_z - p.board_back_z) - 0.5   # rib stops 0.5 shy: foam gasket crush
@@ -147,17 +148,27 @@ with BuildPart() as back:
     with BuildPart(mode=Mode.SUBTRACT):
         with Locations(Location((p.mic[0], p.mic[1], p.back_in_z + 2))):
             Cylinder(radius=0.9, height=8)  # port bore through the ring
-    # speaker cavity rib box (seals around the soldered speaker) + open side toward duct
+    # speaker cavity rib box (seals around the soldered speaker). The speaker's right
+    # edge is 1.2 from the board edge, so the box is ASYMMETRIC: right rib squeezed to
+    # the plate rim (outer face at 19.85, inside the 19.98 rim), the rest roomy.
     with BuildPart():
         rib_h = -(p.back_in_z - p.board_back_z) - 0.5
         sx, sy, sw, sh = p.spk
-        for (w, h, ox, oy) in ((sw + 4, 1.5, 0, (sh + 4) / 2), (sw + 4, 1.5, 0, -(sh + 4) / 2),
-                               (1.5, sh + 4, (sw + 4) / 2, 0), (1.5, sh + 4, -(sw + 4) / 2, 0)):
-            with Locations(Location((sx + ox, sy + oy, p.back_in_z + rib_h / 2))):
-                Box(w, h, rib_h)
+        rib = 1.2
+        x0, x1 = sx - sw / 2 - 2.0, 19.85          # inner-left bound, outer-right limit
+        y0, y1 = sy - sh / 2 - 2.0, sy + sh / 2 + 2.0
+        zc = p.back_in_z + rib_h / 2
+        with Locations(Location(((x0 - rib + x1) / 2, y1 + rib / 2, zc))):
+            Box(x1 - x0 + rib, rib, rib_h)          # top — flush right at x1
+        with Locations(Location(((x0 - rib + x1) / 2, y0 - rib / 2, zc))):
+            Box(x1 - x0 + rib, rib, rib_h)          # bottom — flush right at x1
+        with Locations(Location((x0 - rib / 2, sy, zc))):
+            Box(rib, y1 - y0 + 2 * rib, rib_h)      # left
+        with Locations(Location((x1 - rib / 2, sy, zc))):
+            Box(rib, y1 - y0 + 2 * rib, rib_h)      # right — flush at the rim limit
     # duct opening: gap in the bottom rib toward the grille slots
     with BuildPart(mode=Mode.SUBTRACT):
-        with Locations(Location((p.spk[0], p.spk[1] - (p.spk[3] + 4) / 2, p.back_in_z + 1.4))):
+        with Locations(Location((p.spk[0], p.spk[1] - p.spk[3] / 2 - 2.0 - 0.6, p.back_in_z + 1.4))):
             Box(6.0, 3.0, 2.4)
     # keyhole slots (screw head Ø7 entry, Ø3.6 slide-up), metal low, clear of antenna
     with BuildPart(mode=Mode.SUBTRACT):
