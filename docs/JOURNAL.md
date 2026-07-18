@@ -3,6 +3,21 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-18 — OPS-13 DONE: repin adopted — vendored @ repin-v1, `.repin.toml` live,
+  publish flow gated; AND the smoke test caught real upstream drift.** The vendored tool
+  + config (families ws-protocol / wake-pack / device-integration + the `[[tool]]`
+  manifest watching scope-v7.1 / contract-guard-v3 / repin-v1), hook warn stage, CI
+  advisory stage (`default_fail_on = "none"` — the §5 satellite carve-out until FW first
+  light), and the `publish_model_pack.py` internal freshness gate (publish = touch-the-
+  family = `--fail-on any`; verify warn-only so offline bench runs stay legal). First
+  live `--check` green: both pins current, tools current, device-integration correctly
+  nagging never-pinned (DES-4 pins at the VWB-42 v1.1 tag). Then the verify smoke test
+  earned its keep immediately: HF `/resolve/main/irina.json` no longer matches the
+  pinned sha256 (`.tflite` fine) — the STAMP's URLs are a MUTABLE ref and upstream
+  moved; publish-from-URLs is now correctly impossible. Reported to voice same-day as
+  the BUILD-44 addendum (`c115340`): re-stamp at the bump + immutable
+  `/resolve/<revision>/` URLs.
+
 - **2026-07-18 — OPS-12 DONE: guard + block sweep — scope-v7.1 + contract-guard-v3
   vendored, verdict cutover set, contract-triad block pinned, registry drift corrected.**
   One commit per the delegation shape. scope-guard 1.3.0 → 1.4.0 (CONTRACTS-VERDICT — the

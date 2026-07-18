@@ -8,13 +8,13 @@ name: contract-guard
 on:
   push:
     branches: [main]
-    paths: ["contracts/**", ".contract-guard.toml", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
+    paths: ["contracts/**", ".contract-guard.toml", ".repin.toml", "scripts/contract_guard.py", "scripts/repin.py", "scripts/check_esp32_site.py",
             "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
             "README.md", "CONTRIBUTING.md", "provisioning/README.md",
             "provisioning/ansible/templates/esp32-site.conf.j2",
             ".github/workflows/contract-guard.yml"]
   pull_request:
-    paths: ["contracts/**", ".contract-guard.toml", "scripts/contract_guard.py", "scripts/check_esp32_site.py",
+    paths: ["contracts/**", ".contract-guard.toml", ".repin.toml", "scripts/contract_guard.py", "scripts/repin.py", "scripts/check_esp32_site.py",
             "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
             "README.md", "CONTRIBUTING.md", "provisioning/README.md",
             "provisioning/ansible/templates/esp32-site.conf.j2",
@@ -35,5 +35,9 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 scripts/contract_guard.py --check
+      # HK-12 §5 staleness stage — ADVISORY (config default_fail_on = "none"): the
+      # recorded satellite carve-out holds until FW first light; the first release gate
+      # raises it (release flows then run --fail-on any).
+      - run: python3 scripts/repin.py --check
       - run: python3 scripts/check_esp32_site.py
       - run: python3 scripts/check_docs_manifest.py

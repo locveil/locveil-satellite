@@ -307,3 +307,25 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       surfaces, no `docs/manifest.json` node touched. contracts: none — re-vendored the
       commons-owned guard tools at newer tags (consumed copies, not first consumption;
       the `[[tool]]` staleness watch arrives with OPS-13).
+- [x] **OPS-13** [fleet] — **DONE 2026-07-18** (PROD-26/HK-12 delegation, rides OPS-11).
+      **repin adoption.** `scripts/repin.py` vendored byte-identical @ **`repin-v1`**
+      (1.0.0, the promoted voice BUILD-24 engine); `.repin.toml` written — families
+      **ws-protocol**, **wake-pack** (sidecar-STAMP shape: files = the pinned STAMP,
+      tag-only freshness, HF revision explicitly out of scope), **device-integration**
+      (declared ahead of the first pin — DES-4 takes it at the VWB-42-requested v1.1 tag;
+      never-pinned nags advisory until then) + the `[[tool]]` manifest (scope-guard @
+      scope-v7.1, contract-guard @ contract-guard-v3, repin @ repin-v1);
+      `default_fail_on = "none"` — the §5 recorded satellite carve-out, advisory until FW
+      first light. Hook warn stage (`--check --fail-on none || true`) + CI advisory stage
+      in `contract-guard.yml`. `publish_model_pack.py` grew the internal freshness gate:
+      `publish` hard-fails on ANY wake-pack staleness (publishing IS touch-the-family —
+      closes the publishes-without-committing gap), `verify` warn-only (offline bench
+      legal). First live `--check`: both pins current, all three tools current, exactly
+      the designed device-integration never-pinned warning. **Live find during the verify
+      smoke test:** the published pack has ALREADY drifted upstream — HF `/resolve/main/`
+      `irina.json` no longer matches the pinned sha256 (`.tflite` still matches; the
+      STAMP's URLs are a mutable ref) — reported to voice as the BUILD-44 addendum
+      (voice `c115340`): re-stamp at the bump + switch to immutable revision URLs.
+      docs: none — consumer tooling/config, no `docs/manifest.json` node touched.
+      contracts: **repin FIRST CONSUMED** (commons surface, vendored @ `repin-v1` with
+      its `[[tool]]` self-watch); no owned surface moved.

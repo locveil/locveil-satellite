@@ -42,6 +42,23 @@ STAMP = REPO_ROOT / "contracts" / "pins" / "wake-pack" / "STAMP.json"
 VALID_ID = re.compile(r"^[A-Za-z0-9_-]+$")  # same untrusted-input rule as the CSR scripts
 
 
+def freshness_gate(fail_on: str) -> None:
+    """Wake-pack pin staleness via the vendored repin tool (HK-12 §5, OPS-13).
+
+    Publishing IS touch-the-family: a publish against a pin the owner has since bumped
+    would push bytes the fleet's flash-time verification no longer agrees with — so
+    `publish` hard-fails on ANY staleness (including an unreachable tag source: publish
+    needs the network anyway). `verify` runs the same check warn-only, keeping offline
+    bench runs legal. Closes the publishes-without-committing gap the re-pin flow left.
+    """
+    r = subprocess.run([sys.executable, str(REPO_ROOT / "scripts" / "repin.py"),
+                        "--check", "--family", "wake-pack", "--fail-on", fail_on],
+                       cwd=REPO_ROOT)
+    if r.returncode != 0:
+        sys.exit("FAIL: wake-pack pin freshness gate — re-pin first "
+                 "(scripts/repin.py wake-pack, its own ledger task), then publish")
+
+
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -190,6 +207,7 @@ def main() -> None:
         if bad:
             sys.exit(f"FAIL: invalid client_id(s): {', '.join(bad)} (need ^[A-Za-z0-9_-]+$)")
 
+    freshness_gate("any" if args.cmd == "publish" else "none")
     files = load_stamp()
     with tempfile.TemporaryDirectory(prefix="wake-pack.") as tmp:
         sources = gather_sources(files, args.from_dir, Path(tmp))

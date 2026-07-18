@@ -205,17 +205,3 @@ _(none open)_
       text and the D-16 Stage-2 REST-API design. **(c)** write the satellite lead ID back
       into PROD-26 (`../locveil-commons/board/BOARD.md`). Closes when both filings are
       committed in the sibling ledgers, the clauses landed, and the write-back is pushed.
-- [ ] **OPS-13** [fleet] — **repin adoption (PROD-26 item, rides OPS-11)** — vendor
-      `scripts/repin.py` @ **`repin-v1`** (commons `packages/repin/`); write `.repin.toml`:
-      families **ws-protocol** (owner voice), **wake-pack** (sidecar-STAMP shape — files =
-      the pinned STAMP, tags only, HF revision explicitly out of scope),
-      **device-integration** (owner bridge; declared now, first pin lands with DES-4 at
-      the v1.1 tag OPS-11 requests — the never-pinned warning is the visible nag) +
-      the `[[tool]]` vendored-tools manifest (scope-guard, contract-guard, repin itself);
-      pre-commit warn stage (`--check --fail-on none || true` — offline fallback is
-      default behavior, bench sessions never need network); CI advisory stage in
-      `contract-guard.yml` (`--fail-on none` — §5's recorded satellite carve-out: major-gap
-      severity stays advisory until FW first light, rises at the first release gate);
-      `publish_model_pack.py verify/publish` invoke the same freshness check internally
-      (closing the publishes-without-committing gap). Ref:
-      `../locveil-commons/process/contracts.md` §5.
