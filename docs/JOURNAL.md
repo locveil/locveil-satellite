@@ -15,6 +15,12 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-18 — DES-8 delta 2: print files + renders committed (owner request).**
+  `enclosures/waveshare-lcd146/print/` — the v0 STL (slicer input) + STEP snapshots of
+  both parts — and `renders/` — the five review PNGs — now live IN the repo, with a
+  folder README fixing the rule: `case.py` is the source of truth, the snapshots are
+  re-exported after any change, never hand-edited. DES-9 slices from `print/`.
+
 - **2026-07-18 — DES-8 delta (same day, post-close): first renders generated — and they
   caught two v0 geometry bugs, fixed in `case.py`.** Owner asked for model + renders; a
   render path was added to the INFRA-2 venv (trimesh + matplotlib — shaded STL views;
