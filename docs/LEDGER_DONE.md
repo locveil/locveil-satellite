@@ -291,7 +291,24 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       consumer default (warn). First check green, 0 warnings: both evidence dirs
       (`docs/design/`, `docs/review/`) fully ledger-referenced at re-pin time.
       docs: none — vendored tool only.
-- [x] **OPS-12** [fleet] — **DONE 2026-07-18** (PROD-26/HK-12 delegation, rides OPS-11).
+- [x] **OPS-11** [fleet] — **DONE 2026-07-18** (PROD-26/HK-12 delegation lead; decision of
+      record: HK-12 in `../locveil-commons/board/BOARD_DONE.md`; sub-tasks OPS-12 +
+      OPS-13, each its own commit). **(a) Both greenlit repo-to-repo filings executed,
+      committed and pushed in the sibling ledgers** — voice **BUILD-44** (`92b7178`, the
+      wake-pack-v1.x bump confirmation: multi-model pack per DES-7 must land as a tagged
+      bump, never out-of-band; `[deferred]` at filing, voice retags at intake; same-day
+      addendum `c115340` — the OPS-13 smoke test found the published pack ALREADY drifted
+      via HF mutable-ref URLs) and bridge **VWB-42** (`4cbf667`, the
+      `device-integration-v1.1` minor-tag request at the VWB-41-normalized STAMP — DES-4
+      needs clean tag bytes). **(b) Born-stamped clauses landed** ("contract surface —
+      STAMP at first ship"): DES-5 task text (the broker verb surface) + the D-16 Stage-2
+      REST API (`esp32_satellite.md` D-16 + `fw_execution_layer.md` E-4) — the scope-v7.1
+      `contracts:` verdict line enforces the answer at their completions. **(c) Write-back:**
+      lead ID + sub-IDs + filing IDs recorded in PROD-26 (`../locveil-commons/board/BOARD.md`).
+      docs: none — ledger/design/board process surfaces, no `docs/manifest.json` node
+      touched. contracts: none — the filings REQUEST owner-side bumps (wake-pack v1.x,
+      device-integration v1.1); the pins move by their own re-pin/first-pin tasks (the
+      wake-pack re-pin at voice's cut; DES-4).
       **Guard + block sweep, one commit.** `scripts/scope_guard.py` re-vendored
       byte-identical @ **`scope-v7.1`** (1.3.0 → 1.4.0: CONTRACTS-VERDICT +
       UNKNOWN-PREFIX; `contracts_verdict_since = 2026-07-18` set — no DONE entry predating

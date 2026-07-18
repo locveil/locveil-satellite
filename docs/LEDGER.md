@@ -91,6 +91,12 @@ before **DES-3** is done.
       decision; the workbench page stays registry-declared dormant, gated on this task +
       first light; voice's desktop satellite is the page's first test target and needs the
       broker/read surface first. Deploy follow-through earmarked as **OPS-6**.)*
+      *(HK-12 born-stamped clause, OPS-11 2026-07-18: **contract surface — STAMP at first
+      ship.** The broker verb surface this design creates is a versioned cross-repo
+      surface from birth (two peer clients, incl. the workbench provisioning page): the
+      change that first ships it cuts its `contracts/<name>/` STAMP + tag + registry row
+      in the SAME change — never "stamp it later"; the completion's `contracts:` verdict
+      asks the question at close (contract-triad block).)*
 
 ## PCB — board projects
 
@@ -190,18 +196,3 @@ _(none open)_
       the DES-5 verb surface needs on the controller (e.g. CRL regeneration + nginx reload
       if DES-5 chooses `ssl_crl`). Blocked on DES-5 by definition — the design decides what
       gets deployed. Ref: `../locveil-commons/docs/design/workbench.md` §6.
-- [ ] **OPS-11** [fleet] — **PROD-26/HK-12 delegation lead — filings + born-stamped clauses
-      + write-back** (board delegation pulled 2026-07-18; decision of record: HK-12 in
-      `../locveil-commons/board/BOARD_DONE.md`; sub-tasks OPS-12 + OPS-13 carry the two
-      sweep commits). Scope: **(a)** execute the two HK-12-greenlit repo-to-repo filings —
-      voice: the **wake-pack-v1.x bump confirmation** (the pack goes multi-model per DES-7,
-      one wake model per unit, ≥3 near-term; ask voice to confirm the multi-model pack
-      lands as a tagged `wake-pack` bump with the sidecar-STAMP shape so D-12
-      whole-pack-unmodified + hash-at-publish/at-flash survive); bridge: the
-      **`device-integration-v1.1` minor-tag request** (the OPS-3 intake wrinkle: tag
-      `device-integration-v1` carries the pre-convention STAMP shape, the STAMP-core fix
-      landed one commit later untagged — DES-4 needs clean tag bytes to pin). **(b)**
-      born-stamped clauses ("contract surface: STAMP at first ship") into the DES-5 task
-      text and the D-16 Stage-2 REST-API design. **(c)** write the satellite lead ID back
-      into PROD-26 (`../locveil-commons/board/BOARD.md`). Closes when both filings are
-      committed in the sibling ledgers, the clauses landed, and the write-back is pushed.

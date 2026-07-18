@@ -220,6 +220,10 @@ Based on the proven **mitsubishi2wb** pattern (SoftAP captive portal + web admin
     portal + minimal WiFi form, the mitsubishi2wb first-boot-hotspot pattern) stays device-hosted; the form may
     slip past v1 — the build-time NVS seed covers first provisioning of the on-desk units. Spec:
     `fw_execution_layer.md` E-4.
+  - **Born-stamped clause (HK-12/OPS-11, 2026-07-18):** the Stage-2 REST API is a versioned cross-repo
+    surface from birth (the workbench page consumes it) — **contract surface: STAMP at first ship**: the
+    change that first ships the API (FW-1) cuts its `contracts/<name>/` STAMP + tag + registry row in the
+    same change (`fw_execution_layer.md` E-4; contract-triad block).
 - **D-17 — Cert provisioning = CSR-approval via config-ui** (no token). Device generates its keypair (private key
   **never leaves the device**), submits its CSR unauthenticated in Stage 2 → **pending queue on WB7** → operator
   approves in **config-ui** (sees `client_id` + CSR fingerprint) → WB7 CA signs → device fetches its cert. Trust

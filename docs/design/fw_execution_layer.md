@@ -94,6 +94,12 @@ CSR-generation path (mbedtls x509write_csr) against PSA-era mbedTLS**.
   network. Owner note: the Stage-1 form itself **may slip past v1** — the sanctioned
   build-time NVS seed (`per-device-apps`) covers first provisioning of the three
   on-desk units; the portal remains the design for any unit beyond arm's reach.
+- **Born-stamped clause (HK-12/OPS-11, 2026-07-18): contract surface — STAMP at first
+  ship.** This REST API is a versioned cross-repo surface from birth (the
+  workbench-hosted page is its external consumer): the change that FIRST ships it
+  (FW-1) cuts its `contracts/<name>/` STAMP + `<family>-vN` tag + registry row in the
+  SAME change — never "stamp it later" (the contract-triad block; the completion's
+  `contracts:` verdict line asks the question at close).
 
 ## E-5 — Agent-session build/flash/monitor pattern (the "background monitor")
 

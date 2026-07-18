@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-07-18 — OPS-11 DONE: the PROD-26 delegation lead closes — filings, clauses,
+  write-back all landed.** The two greenlit repo-to-repo filings executed and pushed
+  (voice BUILD-44 `92b7178` + drift addendum `c115340`; bridge VWB-42 `4cbf667`);
+  born-stamped clauses ("contract surface — STAMP at first ship") into the DES-5 task
+  text (broker verb surface) and the D-16 Stage-2 REST API (`esp32_satellite.md` D-16 +
+  `fw_execution_layer.md` E-4); the satellite write-back recorded in PROD-26 on the
+  board (lead OPS-11, sub-IDs OPS-12/OPS-13, filing IDs). The full satellite delegation
+  from HK-12 is now discharged: guards at scope-v7.1 / contract-guard-v3, verdict
+  cutover live, contract-triad block pinned, repin adopted with the publish gate, drift
+  one-liner fixed, filings out. Nothing here gated FW-2 (per the board's own sequencing
+  note) — the spike remains the next FW step.
+
 - **2026-07-18 — OPS-13 DONE: repin adopted — vendored @ repin-v1, `.repin.toml` live,
   publish flow gated; AND the smoke test caught real upstream drift.** The vendored tool
   + config (families ws-protocol / wake-pack / device-integration + the `[[tool]]`
