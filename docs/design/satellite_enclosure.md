@@ -38,15 +38,25 @@ MEASURED from the STEP (build123d survey), not transcribed.
 Both transducers are soldered to the back face and fire at the wall; the case relocates
 nothing and instead forms two sealed paths that turn 90° to the bottom edge:
 
-- **Mic**: a rib ring on the back plate seals around the port via a compliant foam
-  gasket (rib stops 0.5 mm shy of the board — crush allowance), bore Ø1.8 into a
-  2 mm duct running down between rib walls to a bottom-edge inlet under the mic's X.
+- **Mic**: a rib ring on the back plate (outer Ø4.4 — lands fully on the 4.7 × 5.0
+  can) seals against the MIC CAN'S PORTED FACE (Z −8.60; the can sits 0.9 proud of
+  the board — a board-plane ring would crash into it, the v0 bug caught 2026-07-19)
+  via a compliant washer: adhesive closed-cell foam or punched silicone, ~Ø4.5 ×
+  0.8 mm compressed to the 0.5 mm gap, bore ~Ø1.5 over the port. Ring bore Ø1.8
+  continues into a 2 mm duct running down between rib walls to a bottom-edge inlet
+  under the mic's X.
 - **Speaker**: a rib box seals around the speaker in place (same gasket principle), a
   6 mm opening in its bottom rib feeds a duct to **three 1.6 mm bottom slots**. Small
   sealed back volume; the ~20 mm duct trades some treble — voice-prompt acceptable,
   bench-tuned in DES-9 (slot count/width are parameters).
 - Radiating-face check (which speaker side is the diaphragm) is a DES-9 first-print
   item — read from the STEP part or the physical unit before sealing rib heights.
+- Mic **port-offset check** (DES-9, with the datasheet/unit in hand): top-ported cans
+  often place the sound hole OFF-CENTRE on the lid — v0 centres the ring bore on the
+  can; align the bore (and the gasket washer's bore) to the real hole before print 2.
+- The mic duct is a v0 approximation (open-topped channel between rails) — sealing its
+  case-cavity side (printed cover vs gasket strip vs enclosed-channel bridge print) is
+  a DES-9 print decision.
 
 ## 4. Parts & assembly
 

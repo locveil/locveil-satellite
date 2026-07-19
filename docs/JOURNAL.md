@@ -15,6 +15,17 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-19 — DES-8 delta 3: mic gasket ring bug — owner's question caught it.**
+  "What about the microphone gasket?" → re-walking the numbers showed the v0 ring
+  grown to 0.5 shy of the BOARD plane, but the mic can sits 0.9 PROUD of the board —
+  the printed ring would have crashed into the can. Seal plane corrected to the can's
+  ported face (ring top verified at −9.10 = the 0.5 crush gap; outer trimmed to Ø4.4
+  to land fully on the 4.7 × 5.0 can). Gasket spec recorded in the design §3
+  (adhesive foam/silicone washer ~Ø4.5 × 0.8 → 0.5, bore Ø1.5); two DES-9 items
+  added: mic PORT-OFFSET check (top-ported cans often have the hole off-centre) and
+  sealing the duct's open side (v0 channel is a print-decision approximation).
+  `print/` snapshots + renders re-exported per the folder rule.
+
 - **2026-07-18 — DES-8 delta 2: print files + renders committed (owner request).**
   `enclosures/waveshare-lcd146/print/` — the v0 STL (slicer input) + STEP snapshots of
   both parts — and `renders/` — the five review PNGs — now live IN the repo, with a

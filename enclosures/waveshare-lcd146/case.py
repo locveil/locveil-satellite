@@ -136,11 +136,15 @@ with BuildPart() as back:
         for (x, y) in p.bosses:
             with Locations(Location((x, y, (p.back_in_z + p.boss_top_z) / 2))):
                 Cylinder(radius=2.6, height=p.back_in_z * -1 + p.boss_top_z)
-    # mic gasket ring rib (seals to board back around the port) + duct rib pair to bottom
+    # mic gasket ring: seals against the MIC CAN'S ported face (NOT the board — the can
+    # sits 0.9 proud, Z -8.60; a board-plane ring would crash into it). Ring lands fully
+    # on the 4.7 x 5.0 can (outer Ø4.4), stops 0.5 shy for the gasket washer's crush
+    # (adhesive foam/silicone, ~Ø4.5 x 0.8 -> 0.5 compressed, bore ~Ø1.5 over the port).
     with BuildPart():
-        ring_h = -(p.back_in_z - p.board_back_z) - 0.5   # rib stops 0.5 shy: foam gasket crush
+        mic_face_z = -8.60
+        ring_h = -(p.back_in_z - mic_face_z) - 0.5
         with Locations(Location((p.mic[0], p.mic[1], p.back_in_z + ring_h / 2))):
-            Cylinder(radius=3.2, height=ring_h)
+            Cylinder(radius=2.2, height=ring_h)
         duct_l = abs((p.cav_cy - p.cav_h / 2) - p.mic[1])
         for dx in (-p.mic_duct_w / 2 - 0.6, p.mic_duct_w / 2 + 0.6):
             with Locations(Location((p.mic[0] + dx, p.mic[1] - duct_l / 2, p.back_in_z + 1.0))):
