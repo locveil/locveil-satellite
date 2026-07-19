@@ -15,6 +15,20 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-19 — DES-8 delta 6: BOTH acoustic paths were blocked mid-route — owner
+  traced the mic's dead-end in their viewer; the probe walk then caught the
+  speaker's.** Mic: the v0 ring bore ran vertically from the gasket face DOWN into
+  the plate slab (blind sump) while the duct channel arrived horizontally against
+  the ring's solid side wall — port and duct never connected. Fix: the acoustic L —
+  bore stops at channel height, a side passage cut through the ring wall into the
+  rail channel. Speaker: the end-to-end probe walk (added in response) found the
+  lower-right SMTSO pillar (12.00, −14.95) sitting dead on the chamber-to-slots
+  line; the rib-gap exit moved left to x 7.5, clear of the pillar (DES-9's sealed
+  duct must skirt it likewise — recorded in §3). Verification now walks both paths
+  point-by-point: mic 33/33 + speaker 42/42 open, interference 0+0, ring seat
+  −9.10 intact. Exports re-synced. Owner-review score this session: FIVE real
+  defects caught from renders/STLs before any print.
+
 - **2026-07-19 — DES-8 delta 5: rightmost speaker slot was BLIND — owner caught it in
   their own STL viewer.** The corner-arc band migrates inboard with x: at the outer
   slot (x 14.2) the wall's cavity face sits at y −19.1, and the delta-4 cut box

@@ -42,13 +42,19 @@ nothing and instead forms two sealed paths that turn 90° to the bottom edge:
   can) seals against the MIC CAN'S PORTED FACE (Z −8.60; the can sits 0.9 proud of
   the board — a board-plane ring would crash into it, the v0 bug caught 2026-07-19)
   via a compliant washer: adhesive closed-cell foam or punched silicone, ~Ø4.5 ×
-  0.8 mm compressed to the 0.5 mm gap, bore ~Ø1.5 over the port. Ring bore Ø1.8
-  continues into a 2 mm duct running down between rib walls to a bottom-edge inlet
-  under the mic's X.
-- **Speaker**: a rib box seals around the speaker in place (same gasket principle), a
-  6 mm opening in its bottom rib feeds a duct to **three 1.6 mm bottom slots**. Small
-  sealed back volume; the ~20 mm duct trades some treble — voice-prompt acceptable,
-  bench-tuned in DES-9 (slot count/width are parameters).
+  0.8 mm compressed to the 0.5 mm gap, bore ~Ø1.5 over the port. Inside the ring the
+  path is an **acoustic L** (owner-caught 2026-07-19: a straight vertical bore
+  dead-ends in the plate while the duct hits the ring's solid side): Ø1.8 bore from
+  the gasket face down to channel height, a side passage through the ring wall, then
+  the 2 mm rail channel to the bottom-edge inlet. Both paths are probe-walked
+  end-to-end in verification (33 + 42 points, all open).
+- **Speaker**: a rib box seals around the speaker in place (same gasket principle); a
+  5 mm opening in its bottom rib — **offset left to x 7.5, because the lower-right
+  SMTSO pillar (12.00, −14.95) sits dead on the centred line (probe-caught
+  2026-07-19)** — feeds a duct to **three 1.6 mm bottom slots**. Small sealed back
+  volume; the ~20 mm duct trades some treble — voice-prompt acceptable, bench-tuned
+  in DES-9 (slot count/width are parameters; the sealed-duct design must skirt the
+  pillar likewise).
 - Radiating-face check (which speaker side is the diaphragm) is a DES-9 first-print
   item — read from the STEP part or the physical unit before sealing rib heights.
 - Mic **port-offset check** (DES-9, with the datasheet/unit in hand): top-ported cans

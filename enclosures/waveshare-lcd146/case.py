@@ -154,9 +154,15 @@ with BuildPart() as back:
         for dx in (-p.mic_duct_w / 2 - 0.6, p.mic_duct_w / 2 + 0.6):
             with Locations(Location((p.mic[0] + dx, p.mic[1] - duct_l / 2, p.back_in_z + 1.0))):
                 Box(1.2, duct_l, 2.0)
+    # the acoustic L inside the ring (owner-caught: the v0 bore dead-ended DOWN into
+    # the plate slab while the duct channel hit the ring's solid side — no through
+    # path). Bore now stops at channel height; a side passage exits south through the
+    # ring wall into the rail channel.
     with BuildPart(mode=Mode.SUBTRACT):
-        with Locations(Location((p.mic[0], p.mic[1], p.back_in_z + 2))):
-            Cylinder(radius=0.9, height=8)  # port bore through the ring
+        with Locations(Location((p.mic[0], p.mic[1], -10.8))):
+            Cylinder(radius=0.9, height=4.6)   # bore -8.5..-13.1: gasket face → channel level
+        with Locations(Location((p.mic[0], p.mic[1] - 1.9, -12.55))):
+            Box(1.8, 4.0, 1.7)                 # side passage through the ring wall
     # speaker cavity rib box (seals around the soldered speaker). The speaker's right
     # edge is 1.2 from the board edge, so the box is ASYMMETRIC: right rib squeezed to
     # the plate rim (outer face at 19.85, inside the 19.98 rim), the rest roomy.
@@ -175,10 +181,13 @@ with BuildPart() as back:
             Box(rib, y1 - y0 + 2 * rib, rib_h)      # left
         with Locations(Location((x1 - rib / 2, sy, zc))):
             Box(rib, y1 - y0 + 2 * rib, rib_h)      # right — flush at the rim limit
-    # duct opening: gap in the bottom rib toward the grille slots
+    # duct opening: gap in the bottom rib toward the grille slots — OFFSET LEFT to
+    # x 7.5: the lower-right SMTSO pillar (12.00, -14.95, r 2.3 → x 9.7..14.3) sits
+    # dead on the centred path (probe-caught); the primary sound line now runs clear
+    # of it. DES-9's sealed duct must skirt the pillar likewise.
     with BuildPart(mode=Mode.SUBTRACT):
-        with Locations(Location((p.spk[0], p.spk[1] - p.spk[3] / 2 - 2.0 - 0.6, p.back_in_z + 1.4))):
-            Box(6.0, 3.0, 2.4)
+        with Locations(Location((7.5, p.spk[1] - p.spk[3] / 2 - 2.0 - 0.6, p.back_in_z + 1.4))):
+            Box(5.0, 3.0, 2.4)
     # assembly-fit rule: clip EVERYTHING (ribs, rails, pillars) to the plate outline —
     # the squircle corner arcs narrow the cavity; features placed by rectangle math
     # (spk box corner, mic duct rails) are trimmed here instead of per-feature.
