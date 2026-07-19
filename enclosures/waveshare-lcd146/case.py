@@ -105,15 +105,17 @@ with BuildPart() as front:
         for y in p.sw_y:
             with Locations(Location((p.out_w / 2, y, p.sw_z), (0, 90, 0))):
                 Cylinder(radius=p.pin_hole_d / 2, height=2 * p.wall + 2)
-    # mic inlet: bottom-edge hole feeding the back-plate duct line at the mic X
+    # mic inlet: at the mic's X the bottom wall is the CORNER ARC band (y −22.2…−19.1,
+    # not the rectangular −25.9) — the hole is drilled through that band and exits on
+    # the under-curve.
     with BuildPart(mode=Mode.SUBTRACT):
-        with Locations(Location((p.mic[0], p.cav_cy - p.out_h / 2, p.back_in_z + 1.2), (90, 0, 0))):
-            Cylinder(radius=0.9, height=2 * p.wall + 2)
-    # speaker grille: three bottom slots under the speaker duct line
+        with Locations(Location((p.mic[0], -20.6, p.back_in_z + 1.2), (90, 0, 0))):
+            Cylinder(radius=0.9, height=8)
+    # speaker grille: three slots through the bottom corner-arc band under the duct
     with BuildPart(mode=Mode.SUBTRACT):
         for dx in (-3.0, 0.0, 3.0):
-            with Locations(Location((p.spk[0] + dx, p.cav_cy - p.out_h / 2, p.back_in_z + 1.2))):
-                Box(1.6, 2 * p.wall + 2, 2.6)
+            with Locations(Location((p.spk[0] + dx, -22.6, p.back_in_z + 1.2))):
+                Box(1.6, 6.0, 2.6)
 
 # ---------------------------------------------------------------- back plate
 # Closes the shell; carries keyholes, M2 screw holes into the board standoffs,
@@ -130,12 +132,13 @@ with BuildPart() as back:
                 Cylinder(radius=1.15, height=p.plate_t + 2)
             with Locations(Location((x, y, p.back_z + 0.6))):
                 Cylinder(radius=2.1, height=1.2)
-    # standoff pillars: plate inner face up to the SMTSO boss ends (r kept small —
-    # the top boss at y 17.75 sits 2.9 from the plate rim)
+    # standoff pillars: plate inner face up to the SMTSO boss ends. r 2.3: the top
+    # boss (y 17.75) reaches 20.05 vs the cavity's 20.19 top — still > the SMTSO
+    # flange Ø3.5 it seats.
     with BuildPart():
         for (x, y) in p.bosses:
             with Locations(Location((x, y, (p.back_in_z + p.boss_top_z) / 2))):
-                Cylinder(radius=2.6, height=p.back_in_z * -1 + p.boss_top_z)
+                Cylinder(radius=2.3, height=p.back_in_z * -1 + p.boss_top_z)
     # mic gasket ring: seals against the MIC CAN'S ported face (NOT the board — the can
     # sits 0.9 proud, Z -8.60; a board-plane ring would crash into it). Ring lands fully
     # on the 4.7 x 5.0 can (outer Ø4.4), stops 0.5 shy for the gasket washer's crush
@@ -174,6 +177,13 @@ with BuildPart() as back:
     with BuildPart(mode=Mode.SUBTRACT):
         with Locations(Location((p.spk[0], p.spk[1] - p.spk[3] / 2 - 2.0 - 0.6, p.back_in_z + 1.4))):
             Box(6.0, 3.0, 2.4)
+    # assembly-fit rule: clip EVERYTHING (ribs, rails, pillars) to the plate outline —
+    # the squircle corner arcs narrow the cavity; features placed by rectangle math
+    # (spk box corner, mic duct rails) are trimmed here instead of per-feature.
+    with BuildSketch(Plane.XY.offset(p.back_z)) as sk:
+        with Locations((0, p.cav_cy)):
+            squircle(p.cav_w - 0.3, p.cav_h - 0.3, p.corner_r - p.wall)
+    extrude(amount=10, mode=Mode.INTERSECT)  # generous height — covers every feature top
     # keyhole slots (screw head Ø7 entry, Ø3.6 slide-up), metal low, clear of antenna
     with BuildPart(mode=Mode.SUBTRACT):
         for (x, y) in p.keyhole_xy:

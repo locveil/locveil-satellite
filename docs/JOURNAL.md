@@ -15,6 +15,24 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-19 — DES-8 delta 4: the owner's "they don't fit" was RIGHT — three fit
+  defects found and fixed; fit is now machine-verified.** Suspected mirroring ruled
+  out (features sit on matching sides; the exploded view reads as a clamshell but the
+  plate TRANSLATES — R5 regenerated with straight assembly guides). The real defects,
+  all from placing features by rectangle math against a squircle whose corner arcs
+  pull the walls inboard: (1) top standoff pillar 0.16 into the shell top wall
+  (cavity half-height mis-derived; r 2.6 → 2.3); (2) speaker rib corner at
+  (19.85, 8.2) inside the cavity's corner-arc zone; (3) bottom apertures placed at
+  the rectangular y −25.9 while the wall at those X lives on the corner arc — the
+  MIC INLET CUT NOTHING (hole in air below the case) and the speaker slots never
+  broke through. Fixes: apertures re-drilled through the real arc band (they exit on
+  the under-curve), and a structural rule added — the plate solid is globally
+  INTERSECTED with its outline prism, so no feature can ever overhang the rim again
+  (first prism attempt decapitated the mic ring — caught by the ring-top assertion,
+  −9.10 restored). Verification now part of the loop: 0 interference verts both
+  directions, all five apertures probe OPEN through the wall, ring/rim/pillar
+  assertions green. `print/` + renders re-exported; artifact updated (fit-verified).
+
 - **2026-07-19 — DES-8 delta 3: mic gasket ring bug — owner's question caught it.**
   "What about the microphone gasket?" → re-walking the numbers showed the v0 ring
   grown to 0.5 shy of the BOARD plane, but the mic can sits 0.9 PROUD of the board —
