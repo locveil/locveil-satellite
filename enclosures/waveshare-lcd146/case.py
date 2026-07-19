@@ -111,11 +111,13 @@ with BuildPart() as front:
     with BuildPart(mode=Mode.SUBTRACT):
         with Locations(Location((p.mic[0], -20.6, p.back_in_z + 1.2), (90, 0, 0))):
             Cylinder(radius=0.9, height=8)
-    # speaker grille: three slots through the bottom corner-arc band under the duct
+    # speaker grille: three slots through the bottom corner-arc band under the duct.
+    # Cut boxes run LONG (y 10): the band migrates inboard with x (inner face at
+    # y −19.1 by x 14.2) — a short box leaves the outermost slot blind (owner-caught).
     with BuildPart(mode=Mode.SUBTRACT):
         for dx in (-3.0, 0.0, 3.0):
-            with Locations(Location((p.spk[0] + dx, -22.6, p.back_in_z + 1.2))):
-                Box(1.6, 6.0, 2.6)
+            with Locations(Location((p.spk[0] + dx, -22.5, p.back_in_z + 1.2))):
+                Box(1.6, 10.0, 2.6)
 
 # ---------------------------------------------------------------- back plate
 # Closes the shell; carries keyholes, M2 screw holes into the board standoffs,

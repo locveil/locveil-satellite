@@ -15,6 +15,15 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-19 — DES-8 delta 5: rightmost speaker slot was BLIND — owner caught it in
+  their own STL viewer.** The corner-arc band migrates inboard with x: at the outer
+  slot (x 14.2) the wall's cavity face sits at y −19.1, and the delta-4 cut box
+  started at −19.6 — 0.48 mm left uncut, a pocket instead of a hole. (Their guess
+  "mic soundpath" corrected en route: the three slots are the SPEAKER grille; the mic
+  is the single Ø1.8 hole across the arc.) Cut boxes lengthened to y-10; probe
+  coverage widened to what it should have been in delta 4 — EVERY aperture at three
+  depths: 13/13 open, interference 0+0. `print/` + renders re-exported.
+
 - **2026-07-19 — DES-8 delta 4: the owner's "they don't fit" was RIGHT — three fit
   defects found and fixed; fit is now machine-verified.** Suspected mirroring ruled
   out (features sit on matching sides; the exploded view reads as a clamshell but the
