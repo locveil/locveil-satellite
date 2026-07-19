@@ -60,9 +60,10 @@ nothing and instead forms two sealed paths that turn 90° to the bottom edge:
 - Mic **port-offset check** (DES-9, with the datasheet/unit in hand): top-ported cans
   often place the sound hole OFF-CENTRE on the lid — v0 centres the ring bore on the
   can; align the bore (and the gasket washer's bore) to the real hole before print 2.
-- The mic duct is a v0 approximation (open-topped channel between rails) — sealing its
-  case-cavity side (printed cover vs gasket strip vs enclosed-channel bridge print) is
-  a DES-9 print decision.
+- The mic duct is a **closed tunnel** since 2026-07-19 (owner question — isolation:
+  one defined path instead of coupling the mic to the case cavity; the 2 mm roof
+  bridge is trivial FDM). Remaining DES-9 seam: the rim hand-off pocket where the
+  tunnel meets the shell's inlet (plus the 0.15 rim clearance) — gasket detail.
 
 ## 4. Parts & assembly
 

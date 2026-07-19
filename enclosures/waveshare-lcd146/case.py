@@ -154,6 +154,12 @@ with BuildPart() as back:
         for dx in (-p.mic_duct_w / 2 - 0.6, p.mic_duct_w / 2 + 0.6):
             with Locations(Location((p.mic[0] + dx, p.mic[1] - duct_l / 2, p.back_in_z + 1.0))):
                 Box(1.2, duct_l, 2.0)
+        # roof over the rail channel → a CLOSED tunnel (owner question 2026-07-19:
+        # isolation — one defined path instead of coupling the mic to the case cavity;
+        # the 2 mm bridge span is trivial FDM). Clipped at the rim by the outline
+        # prism; the rim hand-off pocket to the shell inlet stays a DES-9 gasket item.
+        with Locations(Location((p.mic[0], p.mic[1] - duct_l / 2, -11.1))):
+            Box(4.4, duct_l, 0.6)
     # the acoustic L inside the ring (owner-caught: the v0 bore dead-ended DOWN into
     # the plate slab while the duct channel hit the ring's solid side — no through
     # path). Bore now stops at channel height; a side passage exits south through the

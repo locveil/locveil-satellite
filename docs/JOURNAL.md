@@ -15,6 +15,16 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-19 — DES-8 delta 7: mic duct roofed — closed tunnel (owner question:
+  open channel vs roof).** Ruling: roof — not for propagation but for ISOLATION (an
+  open channel couples the mic to the case cavity: room sound arriving through two
+  paths phase-mixes, and internal/speaker-chamber leakage feeds straight in; one
+  defined tunnel with controlled cross-section is what the wake front-end wants).
+  0.6 roof slab over the rails, 2 mm bridge span (trivial FDM), auto-clipped at the
+  rim; roof top −10.8 clears the board back by 3.1. Verified: roof present over the
+  channel, both path walks still fully open, interference 0+0. Remaining DES-9 seam
+  narrowed to the rim hand-off pocket + 0.15 rim clearance (gasket detail, §3).
+
 - **2026-07-19 — DES-8 delta 6: BOTH acoustic paths were blocked mid-route — owner
   traced the mic's dead-end in their viewer; the probe walk then caught the
   speaker's.** Mic: the v0 ring bore ran vertically from the gasket face DOWN into
