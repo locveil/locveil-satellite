@@ -261,7 +261,7 @@ Based on the proven **mitsubishi2wb** pattern (SoftAP captive portal + web admin
 | D-14 | Identity = client_id + name + primary_room + covered_rooms[]; resolve_physical_id unchanged for output |
 | D-15 | Multi-room resolution policy (impl → ARCH-7/QUAL-35 + ARCH-8 catalog; data carried now) |
 | D-16 | Two-stage SoftAP→STA provisioning + web admin UI (v1 no-auth/no-button; v2 adds them). **Amended (DES-3): Stage 2 REST-only (`esp_http_server` API + workbench page, no on-device HTML); Stage-1 portal stays, its form may slip past v1 (NVS seed)** |
-| D-17 | Cert provisioning = CSR-approval (no token); private key stays on device. **Amended: Plane-B home CA on the WB7; approval via the `esp32-provision` CLI over SSH (dedicated/LAN-only > config-ui for a once-per-device op); config-ui may call the same scripts later** |
+| D-17 | Cert provisioning = CSR-approval (no token); private key stays on device. **Amended: Plane-B home CA on the WB7; approval via the `esp32-provision` CLI over SSH (dedicated/LAN-only > config-ui for a once-per-device op); config-ui may call the same scripts later.** **Re-amended (owner 2026-07-20, FW-1 requirements review R-22 — `fw1_requirements.md`): the approval surface is the workbench device-configuration page with a Bluetooth-pairing-style flow (pending device + CSR fingerprint → approve), driving the same Plane-B scripts; the CLI remains the underlying layer/fallback. The page work is a cross-repo filing at FW-1b.** |
 | D-18 | OTA A/B + esp_https_ota from WB7; config/models preserved; auto-rollback |
 
 ## 12. Backend implementation plan (Phase 4 — this session builds backend only)

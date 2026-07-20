@@ -22,6 +22,7 @@ before **DES-3** is done.
 | `docs/review/des1-truth-pass.md` (2026-07-12) | DES-1 evidence: conflict resolutions, REQUIREMENTS disposition (VWB-38 feed), code sweep, pin re-audit |
 | `docs/review/doc1-deck-corpus-audit.md` (2026-07-17) | DOC-1 evidence: deck-common vs dossiers claim-by-claim audit — DOC-2 remediation feed |
 | `docs/design/satellite_enclosure.md` (AGREED 2026-07-18) | the DES-8 wall-case design (C-1..C-9, measured STEP inputs, acoustic architecture) — DES-9, `enclosures/waveshare-lcd146/` |
+| `docs/design/fw1_requirements.md` (AGREED 2026-07-20, owner review ×3 rounds) | the FW-1 intake baseline — R-01..R-33 + O-1..O-5 resolutions (FW-1a/b/c split, frontend parity plan, pairing UX re-amending D-17, device-integration N/A) — FW-1a/b/c |
 
 ## DES — design
 
@@ -157,6 +158,27 @@ outcome; the v5.5.4 bail-out is retired unused). Next: FW-1.)_
       (removed upstream) — the microWakeWord port either vendors that C lib or moves
       features to the shipped signal lib; decide at intake against the wake-pack models'
       feature semantics (`fw_execution_layer.md` E-2 outcome note). UNGATED — next task.)*
+      *(Requirements review done 2026-07-20 (owner, 3 rounds, artifact `d398d488`) —
+      **intake baseline = `docs/design/fw1_requirements.md`** (R-01..R-33 + O-1..O-5 all
+      agreed; reconciles + supersedes this entry's imported text where they differ). The
+      frontend question above is O-2: BOTH paths behind one interface, parity harness
+      decides. Per **O-5 this task executes as three slices** (below); this umbrella
+      entry stays as the scope anchor and closes when FW-1c does.)*
+      - [ ] **FW-1a** [dev:waveshare-lcd146] — **core loop to first light**: audio
+            pipeline (R-09/10/11) + wake stack with the O-2 parity harness (R-12..15) +
+            both WS channels against the pin (R-16..18) + state machine (R-25) +
+            dual-core split (R-28) + NVS-seed provisioning; the TUNABLES slice of the
+            REST API ships here **with the API's born stamp** (R-21/27/31). Done =
+            a real utterance answered end-to-end on the bench; unblocks the DES-9
+            acoustic bench. C++ per R-29; E-6 audit consumed from the dossier.
+      - [ ] **FW-1b** [dev:waveshare-lcd146] — **provisioning + lifecycle**: Stage-1
+            SoftAP portal with WiFi form (R-20, O-3) + full REST surface (R-31) + CSR
+            pairing flow against Plane B (R-22; file the workbench pairing-page
+            cross-repo item at start) + OTA (R-23) + model push (R-24).
+      - [ ] **FW-1c** [dev:waveshare-lcd146] — **display build**: compile-flag display
+            app variant, three listening animations + NVS selection (R-03), display on
+            core 0 below network (R-28); backlog features (tap-clock, timer countdown —
+            the latter gated on voice ARCH-59) stay OUT until separately filed.
 
 ## DOC — documentation
 

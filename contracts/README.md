@@ -29,7 +29,12 @@ bump.
 _Pending pin (not yet a folder): **device-integration** — the bridge's convention (tag
 `device-integration-v1`) is pinned by **DES-4** together with the per-device descriptors
 it governs; the descriptors themselves are per-instance config validated against that
-pin, not contracts (`process/contracts.md` §1)._
+pin, not contracts (`process/contracts.md` §1). **Explicitly N/A for the voice satellite
+(`waveshare-lcd146`)** — owner ruling 2026-07-20, FW-1 requirements review O-4
+(`docs/design/fw1_requirements.md`): the satellite is a voice-plane device WB7 reaches
+over the pinned WS protocol; the bridge never actuates it, so it publishes no
+descriptor. The guard's "never pinned" warning stays until DES-4's bridge-actuated
+devices arrive — explained, not silenced._
 
 Guards: layer 1 is the vendored `scripts/contract_guard.py` (commons
 `packages/contract-guard/`, vendored at tag **`contract-guard-v3`** — never edit the

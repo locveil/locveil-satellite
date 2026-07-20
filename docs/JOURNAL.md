@@ -15,6 +15,28 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-20 — FW-1 requirements review CONVERGED (owner, 3 rounds, council-style
+  artifact `d398d488`): intake baseline `docs/design/fw1_requirements.md` AGREED.**
+  33 requirements distilled from the normative corpus (D-x/E-x/C-x/pins/dossier),
+  reviewed card-by-card with approve/comment verdicts; all approved, all 5 open
+  decisions closed by owner ruling. Substance beyond restatement: the stream-end
+  handshake question answered from the pin (the `response` frame IS the ack); the
+  wake-word-tail cut ruled feasible via the trigger-offset dial (R-09); dual-core
+  split proposed and agreed with display on core 0 below network (R-28); C++ chosen
+  (R-29); plain-HTTP device API rationale recorded against the workbench's `:80`
+  panel (R-31); trace posture = owes nothing, tolerate optional frames (R-30).
+  Owner rulings: O-2 both-frontends parity harness; O-3 Stage-1 form day 1; O-4
+  device-integration N/A for the satellite (noted in `contracts/README.md`); O-5
+  FW-1 → FW-1a/b/c (ledger split executed); D-17 re-amended — CSR approval moves to
+  a pairing-style flow in the workbench device page (recorded in
+  `esp32_satellite.md`). Cross-repo: **voice `ARCH-59` FILED repo-to-repo**
+  (timer-intent verification — completion ack path + initiation timestamp; from the
+  owner's R-33 timer-cue concept; voice repo commit `2d2c782`); the workbench
+  pairing-page filing waits for FW-1b start. docs: none — design corpus + ledgers
+  only, no user-facing surface. contracts: none — no surface moved; the REST API
+  stamp is born-stamped AT FW-1a per R-21, device-integration N/A recorded (pin
+  still pending for DES-4).
+
 - **2026-07-20 — DES-8 delta 8: retention DECIDED (C-10, owner: "option A" off the
   concept sheet) + four pre-existing fit defects from the widened boolean.** The
   owner asked how front and back hold together ("3 screws?") and what the antenna
