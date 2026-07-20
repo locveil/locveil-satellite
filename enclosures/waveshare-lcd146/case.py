@@ -40,6 +40,9 @@ class P:
     sw_z: float = -8.10
     bosses = ((12.00, -14.95), (-11.54, -15.45), (0.00, 17.75))  # SMTSO-M2-3.5
     boss_top_z: float = -10.90       # standoff outer end (3.2 proud of back face)
+    pillar_seat_z: float = -11.00    # pillar tops 0.1 SHY of the boss ends — the
+    # (−11.54, −15.45) boss carries a collar 0.1 deeper than the surveyed −10.90
+    # (full-STEP boolean, delta 8); the M2 preload closes the ≤0.2 gap at all three
 
     # case parameters
     clr: float = 0.45                # board-to-cavity clearance per side
@@ -55,6 +58,18 @@ class P:
     usb_slot_w: float = 11.0         # variant B open bottom for a straight plug
     usb_slot_d: float = 6.0
     pin_hole_d: float = 1.6          # switch service pinholes
+
+    # retention (C-10): shell skirt to the wall + 2 M2 from below into plate feet
+    # + 2 plastic teeth hooking plate-top rebates. Metal stays in the low band;
+    # the teeth flank the top SMTSO screw head (x ±2.1) — a centred tooth would
+    # land ON that head, and the antenna band gets plastic only.
+    foot_x: float = 8.6              # screw axes at ±foot_x — clear of USB (±5.5) and slots (13.4+)
+    foot_w: float = 4.6              # foot boss width (x) — pilot Ø1.7 keeps ≥1.1 wall
+    screw_z: float = -11.4           # screw axis depth: foot spans z ±2.0 around it
+    screw_clear_d: float = 2.3
+    screw_pilot_d: float = 1.7
+    tooth_x: float = 8.0             # tooth centres at ±tooth_x
+    tooth_w: float = 4.0             # rebate is +0.3/side; tooth z 0.95 in a 1.25 rebate
 
     @property
     def cav_w(self): return self.board_w + 2 * self.clr
@@ -80,17 +95,19 @@ def squircle(w, h, r):
 
 
 # ---------------------------------------------------------------- front shell
-# Bezel + side walls; open at the back where the plate closes it.
+# Bezel + side walls; the skirt (C-10) runs past the plate to the wall plane, so
+# the silhouette closes and the plate rim is captured with the 0.15 pocket gap.
 with BuildPart() as front:
-    with BuildSketch(Plane.XY.offset(p.back_in_z)) as sk:
+    with BuildSketch(Plane.XY.offset(p.back_z)) as sk:
         with Locations((0, p.cav_cy)):
             squircle(p.out_w, p.out_h, p.corner_r)
-    extrude(amount=p.front_z - p.back_in_z)
-    # cavity (leaves the front bezel wall)
-    with BuildSketch(Plane.XY.offset(p.back_in_z)) as sk:
+    extrude(amount=p.front_z - p.back_z)
+    # cavity + plate pocket (leaves the front bezel wall); the plate outline is
+    # cav −0.3, so the same prism gives the skirt its 0.15/side rim clearance
+    with BuildSketch(Plane.XY.offset(p.back_z)) as sk:
         with Locations((0, p.cav_cy)):
             squircle(p.cav_w, p.cav_h, p.corner_r - p.wall)
-    extrude(amount=(p.face_z - p.back_in_z), mode=Mode.SUBTRACT)
+    extrude(amount=(p.face_z - p.back_z), mode=Mode.SUBTRACT)
     # display opening through the bezel
     with BuildSketch(Plane.XY.offset(p.face_z)) as sk:
         with Locations((0, p.disp_cy)):
@@ -100,6 +117,12 @@ with BuildPart() as front:
     with BuildPart(mode=Mode.SUBTRACT):
         with Locations(Location((p.usb[0], p.cav_cy - p.out_h / 2, (p.face_z + p.back_in_z) / 2))):
             Box(p.usb_slot_w, 2 * p.wall + 2, p.usb_slot_d)
+    # display FPC tail relief (delta 8): the touch/display film wraps the board's
+    # bottom edge at x ≈ −6.7 and reaches y −23.12 — 0.1 past the cavity's corner
+    # arc (−23.05 there). Local 0.4 pocket in the wall face; 2.0 wall remains.
+    with BuildPart(mode=Mode.SUBTRACT):
+        with Locations(Location((-6.7, -23.15, -3.3))):
+            Box(3.0, 0.6, 3.2)
     # switch service pinholes, right wall (actuators at +X)
     with BuildPart(mode=Mode.SUBTRACT):
         for y in p.sw_y:
@@ -118,6 +141,24 @@ with BuildPart() as front:
         for dx in (-3.0, 0.0, 3.0):
             with Locations(Location((p.spk[0] + dx, -22.5, p.back_in_z + 1.2))):
                 Box(1.6, 10.0, 2.6)
+    # retention teeth (C-10): added AFTER the cuts so the pocket prism can't eat
+    # them. Each tooth lives in the wall-side sliver z −15.65…−14.7 and laps the
+    # plate-top edge arc (engagement 0.7…2.0 across its width); the box runs into
+    # the skirt wall to bond and stays inside the outer wall (21.83 at x 10). The
+    # tooth underside is a ~1–2 mm FDM micro-bridge on the face-down print.
+    with BuildPart():
+        for sx in (p.tooth_x, -p.tooth_x):
+            with Locations(Location((sx, 19.05, -15.175))):
+                Box(p.tooth_w, 2.9, 0.95)
+    # retention screws: clearance bores up through the corner-arc band + spot-faces
+    # flattening the under-curve for the pan heads. Bore top −22.0 stops shy of the
+    # plate-foot face (the foot's pilot is the plate's own cut).
+    with BuildPart(mode=Mode.SUBTRACT):
+        for sx in (p.foot_x, -p.foot_x):
+            with Locations(Location((sx, -24.0, p.screw_z), (90, 0, 0))):
+                Cylinder(radius=p.screw_clear_d / 2, height=4.0)
+            with Locations(Location((sx, -26.0, p.screw_z), (90, 0, 0))):
+                Cylinder(radius=2.2, height=2.9)   # seat plane y −24.55, Ø4.4
 
 # ---------------------------------------------------------------- back plate
 # Closes the shell; carries keyholes, M2 screw holes into the board standoffs,
@@ -139,8 +180,8 @@ with BuildPart() as back:
     # flange Ø3.5 it seats.
     with BuildPart():
         for (x, y) in p.bosses:
-            with Locations(Location((x, y, (p.back_in_z + p.boss_top_z) / 2))):
-                Cylinder(radius=2.3, height=p.back_in_z * -1 + p.boss_top_z)
+            with Locations(Location((x, y, (p.back_in_z + p.pillar_seat_z) / 2))):
+                Cylinder(radius=2.3, height=p.back_in_z * -1 + p.pillar_seat_z)
     # mic gasket ring: seals against the MIC CAN'S ported face (NOT the board — the can
     # sits 0.9 proud, Z -8.60; a board-plane ring would crash into it). Ring lands fully
     # on the 4.7 x 5.0 can (outer Ø4.4), stops 0.5 shy for the gasket washer's crush
@@ -158,7 +199,10 @@ with BuildPart() as back:
         # isolation — one defined path instead of coupling the mic to the case cavity;
         # the 2 mm bridge span is trivial FDM). Clipped at the rim by the outline
         # prism; the rim hand-off pocket to the shell inlet stays a DES-9 gasket item.
-        with Locations(Location((p.mic[0], p.mic[1] - duct_l / 2, -11.1))):
+        # Top −11.05, sunk 0.25 into the rail tops (delta 8): the (−11.54, −15.45)
+        # SMTSO body reaches −10.90 over the duct's east rail line — the delta-7
+        # slab (top −10.8) clipped it 0.1; 0.15 clearance now, tunnel still closed.
+        with Locations(Location((p.mic[0], p.mic[1] - duct_l / 2, -11.35))):
             Box(4.4, duct_l, 0.6)
     # the acoustic L inside the ring (owner-caught: the v0 bore dead-ended DOWN into
     # the plate slab while the duct channel hit the ring's solid side — no through
@@ -194,6 +238,35 @@ with BuildPart() as back:
     with BuildPart(mode=Mode.SUBTRACT):
         with Locations(Location((7.5, p.spk[1] - p.spk[3] / 2 - 2.0 - 0.6, p.back_in_z + 1.4))):
             Box(5.0, 3.0, 2.4)
+    # rib clearance notches (delta 8): the full-STEP boolean found back-side parts
+    # CROSSING the rib lines — the 0.5 gasket gap assumed a bare board back. Ribs
+    # are notched around them (+0.4 clearance); sealing over the notches is a DES-9
+    # gasket item (thicker foam strips at the notch floors).
+    with BuildPart(mode=Mode.SUBTRACT):
+        # battery connector (x 0.7…5.7, proud to −9.2) + tinies — left rib
+        with Locations(Location((3.45, 0.8, -8.8))):
+            Box(6.3, 7.0, 1.6)
+        # small parts to −8.4/−8.5 — bottom-rib west run
+        with Locations(Location((3.4, -7.0, -8.4))):
+            Box(6.4, 3.4, 0.8)
+        # part to −8.42 — top-rib west end
+        with Locations(Location((1.45, 7.35, -8.4))):
+            Box(2.5, 2.7, 0.8)
+        # switch bodies (proud to −9.2) — top/bottom rib east corners
+        with Locations(Location((14.85, 7.85, -8.8))):
+            Box(2.5, 1.7, 1.6)
+        with Locations(Location((14.85, -8.0, -8.8))):
+            Box(2.5, 1.4, 1.6)
+    # retention feet (C-10): bosses the two from-below screws thread into. Boxes run
+    # deliberately past the bottom edge (−22.6) so the global outline intersect trims
+    # their underside to the plate's corner arc — which lands them 0.24…0.28 above
+    # the skirt band's cavity face. z −13.4…−9.4 stays 1.7 behind the PCB back; plan
+    # position clears USB (x ±4.47), the mic duct rails (−16.4…−12.0) and the
+    # lower-right SMTSO pillar (x 9.7…14.3 at y ≥ −17.25) — STEP-verified.
+    with BuildPart():
+        for sx in (p.foot_x, -p.foot_x):
+            with Locations(Location((sx, -20.25, p.screw_z))):
+                Box(p.foot_w, 4.7, 4.0)
     # assembly-fit rule: clip EVERYTHING (ribs, rails, pillars) to the plate outline —
     # the squircle corner arcs narrow the cavity; features placed by rectangle math
     # (spk box corner, mic duct rails) are trimmed here instead of per-feature.
@@ -208,6 +281,19 @@ with BuildPart() as back:
                 Cylinder(radius=3.6, height=p.plate_t + 2)
             with Locations(Location((x, y + 5.0, p.back_z + p.plate_t / 2))):
                 Box(3.7, 10.0, p.plate_t + 2)
+    # retention rebates + pilots (C-10). Rebates: the top-edge BACK corner is
+    # relieved (z −15.8…−14.55) so the shell teeth sit between wall and the
+    # remaining front-layer ledge — shell creep (+Z) presses tooth on ledge.
+    # Flanks the top SMTSO countersink head (x ±2.1) — never cut near it.
+    # Pilots: Ø1.7 up into the feet, floor 0.4 under the foot top (M2 forms
+    # ~3.8 mm of thread from the arc face).
+    with BuildPart(mode=Mode.SUBTRACT):
+        for sx in (p.tooth_x, -p.tooth_x):
+            with Locations(Location((sx, 18.9, -15.175))):
+                Box(p.tooth_w + 0.6, 3.2, 1.25)
+        for sx in (p.foot_x, -p.foot_x):
+            with Locations(Location((sx, -20.5, p.screw_z), (90, 0, 0))):
+                Cylinder(radius=p.screw_pilot_d / 2, height=4.4)
 
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)

@@ -103,11 +103,13 @@ before **DES-3** is done.
       acoustic bench** (filed 2026-07-18 from the DES-8 design,
       `docs/design/satellite_enclosure.md` §5). Print v0 (`enclosures/waveshare-lcd146/`,
       matte white PETG, face-down shell / inner-face-up plate); fit-check on a unit;
-      **speaker radiating-face check before sealing rib heights**; gasket material pick;
-      front-shell retention feature (snap lip vs 2 self-tappers, v0 is friction);
-      acoustic bench — mic SNR through the 90° duct vs open, speaker bottom-slot tuning
-      (count/width are `case.py` parameters); CAD amendments land back in the design doc
-      + `case.py`. HW-GATED: needs the printer and a unit on the bench.
+      **speaker radiating-face check before sealing rib heights**; gasket material pick
+      (incl. foam strips over the delta-8 rib notches); front-shell retention
+      **validation** (C-10 DECIDED delta 8: 2× M2×6 from below + 2 top teeth — check
+      tooth/tilt engagement kinematics + screw-boss fit; the snap-vs-tappers question is
+      closed); acoustic bench — mic SNR through the 90° duct vs open, speaker bottom-slot
+      tuning (count/width are `case.py` parameters); CAD amendments land back in the
+      design doc + `case.py`. HW-GATED: needs the printer and a unit on the bench.
 
 ## PCB — board projects
 

@@ -15,6 +15,31 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   mechanical unknown. Print/fabrication + bench fit-check follow-ups file from the
   design; only the fit-check is HW-GATED.
 
+- **2026-07-20 — DES-8 delta 8: retention DECIDED (C-10, owner: "option A" off the
+  concept sheet) + four pre-existing fit defects from the widened boolean.** The
+  owner asked how front and back hold together ("3 screws?") and what the antenna
+  is (ceramic chip antenna, top edge, IPEX1 via resistor move — Waveshare docs);
+  three options went onto a concept sheet (artifact `aa4adf56`): A) 2 screws below
+  + plastic teeth up top, B) countersunk screws from the wall side, C) snap lip.
+  Owner picked **A** — the 3-point pattern with the top point in PLASTIC, which is
+  what the antenna band wants; note the tooth had to split into TWO at x ±8 because
+  the vendor's own top SMTSO screw head (0, +17.75) sits where a centred tooth
+  would land. Geometry: skirt to the wall plane (silhouette closed, 0.15 rim gap),
+  plate feet at x ±8.6 trimmed by the outline intersect to ride the corner arc,
+  M2×6 thread-forming from below with spot-faced seats, teeth-behind-ledge rebates
+  in the plate's top-back edge. Verification WIDENED to the full 420-solid STEP
+  (previous deltas ran a subset) and caught four pre-existing defects, all fixed:
+  (1) speaker rib box crossing the battery connector (~1 mm), (2) both switch
+  bodies clipped by the rib east corners, (3) the delta-7 mic-tunnel roof 0.1 into
+  the (−11.54, −15.45) SMTSO collar (roof sunk to top −11.05, tunnel still closed),
+  (4) display FPC tail 0.1 proud of the cavity arc at x ≈ −6.7 (local 0.4 relief).
+  Rib notches make the notch-floor seal a DES-9 gasket item (thicker foam strips).
+  Full re-verify: shell∩plate 0, shell∩board 0, plate∩board 0, mic 30/30 +
+  speaker 38/38 open, 27/27 aperture probes, 12/12 retention probes, skirt closed
+  at the wall plane. Exports + renders re-synced (new R7 retention section). Screw
+  purchase recorded (§5). docs: none — enclosure design corpus only, no user-facing
+  surface. contracts: none — local mechanical design, no cross-repo surface.
+
 - **2026-07-19 — DES-8 delta 7: mic duct roofed — closed tunnel (owner question:
   open channel vs roof).** Ruling: roof — not for propagation but for ISOLATION (an
   open channel couples the mic to the case cavity: room sound arriving through two

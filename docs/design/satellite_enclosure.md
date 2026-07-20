@@ -19,6 +19,7 @@ MEASURED from the STEP (build123d survey), not transcribed.
 | C-7 | Bezel lip opening Ø38.2 — stays outside the Ø37.36 viewing circle, protects the glass-less panel edge |
 | C-8 | Two parts: **front shell** (bezel + walls) + **back plate** (keyholes, M2 screws into the board's SMTSO standoffs, acoustic ribs); board screws to the plate, plate hangs on the wall |
 | C-9 | Switch access = **service pinholes** (Ø1.6, right wall at the measured switch positions) — BOOT/PWR are bench acts, not user controls |
+| C-10 | Retention (2026-07-20, from the retention concept sheet — "option A") = **2 screws low + 2 plastic teeth high**: shell skirt extended to the wall plane (captures the plate rim, 0.15/side); two **M2×6 thread-forming from below** at x ±8.6 through the corner-arc band into plate feet (spot-faced seats); two **teeth at x ±8** hooking rebates in the plate's top-edge back corner — plastic-only in the antenna band, and FLANKING the top SMTSO screw head (a centred tooth would land on that metal). Assembly: hook teeth first, tilt down, drive the screws. |
 
 ## 2. Measured inputs (STEP survey 2026-07-18; frame = board centre, X right, Y up, Z out of face)
 
@@ -31,7 +32,8 @@ MEASURED from the STEP (build123d survey), not transcribed.
 | Switches | TS24CA ×2, actuators at the +X edge, y = +9.91 / −10.20, z −8.10 |
 | M2 standoffs | SMTSO-M2-3.5 at **(12.00, −14.95), (−11.54, −15.45), (0.00, +17.75)**, outer ends Z −10.90 |
 | Viewing circle | Ø37.36 (active Ø36.96) — nothing covers inside it |
-| Antenna | top band (~y > +17) — plastic only near it; keyholes placed at y = −6 |
+| Antenna | top band (~y > +17) — **ceramic chip antenna** (Waveshare docs; IPEX1 selectable via 0 Ω resistor move); plastic only near it; keyholes placed at y = −6. The vendor's own top SMTSO screw at (0, +17.75) is pre-existing metal in the band — the keep-out governs what the case ADDS |
+| Back-side proud parts (full-STEP boolean, 2026-07-20) | battery connector x 0.7…5.7 / y −1.2…2.8 to z −9.2; switch bodies to −9.2; smalls near the west rib runs to −8.5; the (−11.54, −15.45) SMTSO carries a collar to −10.80; display FPC tail wraps the board bottom edge at x ≈ −6.7 to y −23.12 |
 
 ## 3. Acoustic architecture (the §2.4 "dominant quality lever", wall-posture resolved)
 
@@ -62,29 +64,50 @@ nothing and instead forms two sealed paths that turn 90° to the bottom edge:
   can; align the bore (and the gasket washer's bore) to the real hole before print 2.
 - The mic duct is a **closed tunnel** since 2026-07-19 (owner question — isolation:
   one defined path instead of coupling the mic to the case cavity; the 2 mm roof
-  bridge is trivial FDM). Remaining DES-9 seam: the rim hand-off pocket where the
+  bridge is trivial FDM). Roof top sits at **−11.05** (sunk 2026-07-20: the
+  (−11.54, −15.45) SMTSO body reaches −10.90 over the duct's east rail — the first
+  roof clipped it 0.1). Remaining DES-9 seam: the rim hand-off pocket where the
   tunnel meets the shell's inlet (plus the 0.15 rim clearance) — gasket detail.
+- The speaker rib box is **notched** around the back-side parts that cross its rib
+  lines (battery connector, both switch bodies, smalls on the west runs — found by
+  the full-STEP boolean 2026-07-20; the 0.5 gasket gap assumed a bare board back).
+  Sealing over the notch floors (−8.8 / −9.6 vs the −8.18 rib tops) is a DES-9
+  gasket item: thicker foam strips at the notches.
 
 ## 4. Parts & assembly
 
 1. Back plate screws to the board's three SMTSO-M2 standoffs (M2×6, countersunk from
-   the wall side; screw budget respects the 3.5 mm max engagement).
-2. Front shell caps over board + plate (side-wall capture; retention feature — snap
-   lip vs 2 self-tappers from below — is a DES-9 print-fit decision, v0 is friction).
-3. Plate hangs on two wall screws through the keyholes; USB cable exits the open
+   the wall side; screw budget respects the 3.5 mm max engagement; pillar seats sit
+   0.1 shy of the boss ends — one boss carries a deeper collar — and the preload
+   closes the gap).
+2. Plate hangs on two wall screws through the keyholes; USB cable exits the open
    bottom aperture (11 × 6 mm) with a straight plug.
+3. Front shell retention (**C-10**): hook the two top teeth into the plate's
+   top-edge rebates, tilt the bottom down over the plate, drive **two M2×6
+   thread-forming pan-heads from below** (x ±8.6, spot-faced seats on the
+   corner-arc band) into the plate feet. Service on the wall: two screws out,
+   tilt, off. The skirt closes the silhouette to the wall plane with a 0.15/side
+   rim gap.
 
 ## 5. Follow-ups
 
 - **DES-9** (HW-GATED): print v0, fit-check on a unit, radiating-face check, gasket
-  material pick, retention feature, acoustic bench (mic SNR through the duct vs open;
-  speaker slot tuning), then CAD amendments here. Print orientation: face-down front
-  shell, inner-face-up plate; no supports expected except the USB aperture bridge.
+  material pick (now incl. foam strips over the rib notches), **retention validation
+  (C-10 decided — tooth/tilt engagement kinematics, screw-boss fit, FPC-tail relief
+  clearance)**, acoustic bench (mic SNR through the duct vs open; speaker slot
+  tuning), then CAD amendments here. Print orientation: face-down front shell,
+  inner-face-up plate; no supports expected except the USB aperture bridge (the
+  tooth undersides are ~1–2 mm micro-bridges).
 - Cable purchase (recorded): straight **USB-A → USB-C data-capable** cables + plain
   **5 V/2 A USB-A** wall adapters, three of each.
+- Screw purchase (recorded 2026-07-20): per unit 3× **M2×6 countersunk** (board →
+  plate standoffs) + 2× **M2×6 thread-forming pan-head** (shell retention); ×3
+  units plus spares.
 
 ## 6. Session evidence
 
 Concept sheet (non-normative visualization, incl. the two cable-exit variants the
-owner decided between): claude.ai artifact `50bfdc56` (session 2026-07-18). The
-normative record is this document + `case.py`.
+owner decided between): claude.ai artifact `50bfdc56` (session 2026-07-18).
+Retention concept sheet (the three C-10 candidates, constraints map, sections):
+claude.ai artifact `aa4adf56` (session 2026-07-20). The normative record is this
+document + `case.py`.
