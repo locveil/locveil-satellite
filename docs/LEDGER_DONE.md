@@ -610,3 +610,17 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       `docs/manifest.json` node touched. contracts: none — consumed tool tag re-vendored
       (`scope-v7.3.1`, bytes unchanged; not first consumption); no owned surface or pin
       moved.
+- [x] **OPS-24** — **DONE 2026-10-05** (filed + executed same session; the discovered
+      staleness recorded in OPS-14 at the OPS-18 close). **`consumer-pins` invariant
+      re-truthed in CLAUDE.md — owner-approved edit to repo-local law** (owner,
+      2026-10-05, on the coordinator's direct question: "I want these updates as a part
+      of this run"). Two factual changes, nothing else in the invariant touched: the
+      count and list gain the fourth pin — **commons `docs-manifest-schema`**, the
+      vocabulary `docs/manifest.json` is validated against, pinned at
+      `contracts/pins/docs-manifest-schema/` (OPS-18); and the device-integration bullet
+      now says what the registry and DES-4 already say — not pinned yet, DES-4 takes the
+      first pin at bridge's `device-integration-v1.2.0` (the lead sentence read as if
+      all listed artifacts were pinned). The "left for the owner" note in OPS-14 is
+      removed. docs: none — CLAUDE.md is agent-facing law, not a `docs/manifest.json`
+      node. contracts: none — prose catching up with pins that already moved (OPS-18)
+      or have not moved yet (DES-4).

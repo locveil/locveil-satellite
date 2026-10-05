@@ -31,7 +31,7 @@ corpus migrated from `../locveil-voice` (see `docs/JOURNAL.md`).
   single-image design is RETIRED (HK-4 round 3 — the GPIO14 double-booking); never
   reintroduce a multi-device image. Rooms are provisioning-time NVS, the voice registry is
   authoritative (an optional build-time NVS default seed is allowed).
-- **`consumer-pins`** — this repo CONSUMES three versioned sibling artifacts, pinned one-way
+- **`consumer-pins`** — this repo CONSUMES four versioned sibling artifacts, pinned one-way
   inward under `contracts/` (never hand-edit a pin; re-pin on a vN bump — see
   `contracts/README.md`):
   - **voice WS wire protocol** — `../locveil-voice/docs/guides/websocket-api.md` is the
@@ -44,7 +44,10 @@ corpus migrated from `../locveil-voice` (see `docs/JOURNAL.md`).
     owns the versioned convention; this repo owns the conforming **per-device descriptors**
     (required timing/availability fields; `confirm_latency_ms` is STATIC). Fully DESIGN-TIME
     — vocabulary reconciliation happens at the DES gate, no runtime negotiation; the one
-    retained firmware-version topic is the stale-pin tripwire.
+    retained firmware-version topic is the stale-pin tripwire. Not pinned yet: DES-4 takes
+    the first pin, at bridge's `device-integration-v1.2.0`.
+  - **commons docs-manifest-schema** — the vocabulary `docs/manifest.json` is validated
+    against, pinned at `contracts/pins/docs-manifest-schema/`.
 - **`no-execution-toolchain-at-bootstrap`** — no PlatformIO install and no skidl-skills
   install until DES-3 / DES-2 decide them (HK-4 round 4, owner amendment). Day-one toolchain
   is knowledge-side only: pcbparts MCP + Serena-over-cloned-SKiDL (PCB), Espressif docs +

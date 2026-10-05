@@ -3,6 +3,14 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-24 DONE: the `consumer-pins` invariant counts four.** The repo's
+  own law still listed three consumed artifacts after OPS-18 pinned a fourth
+  (`docs-manifest-schema`, commons), and its device-integration bullet sat under a
+  sentence saying everything listed is pinned — it is not, until DES-4 takes it at
+  `device-integration-v1.2.0`. Both corrected, by the owner's direct approval; a
+  delegated agent session had flagged the staleness and declined to edit local law on
+  relayed permission. docs: none. contracts: none.
+
 - **2026-10-05 — OPS-23 DONE: scope-v7.3.1 — the two pinned blocks stop disagreeing.**
   The sweep report had flagged that the re-worded contract-triad block said "both
   guards run … on EVERY push, no path gate" while the shared-invariants block two

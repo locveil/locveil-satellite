@@ -296,10 +296,8 @@ _(none open)_
       *(2026-10-05, sweep GO: the coordinator session wrote lead ID OPS-14 back into
       PROD-28. Sweep executed the same day — OPS-15, 16, 17, 18, 19, 21 and 22 are in
       DONE. Remaining before this lead closes: **OPS-20**, which waits for voice's
-      `ws-protocol-v1.1.0`. One discovered staleness left for the owner, not edited
-      from a delegation: the repo-local `consumer-pins` invariant in CLAUDE.md still
-      enumerates three consumed artifacts; `docs-manifest-schema` (commons) is now a
-      fourth pin. Follow-up OPS-23 (scope-v7.3.1 block re-pin) is in DONE.)*
+      `ws-protocol-v1.1.0`. Follow-ups OPS-23 (scope-v7.3.1 block re-pin) and OPS-24
+      (`consumer-pins` invariant re-truthed) are in DONE.)*
 - [ ] **OPS-20** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.1.0` — the
       machine core arrives** (voice's hand-written golden frames + JSONL transcripts +
       schema, subordinate to the document; minor — the pinned set gains files, flat
