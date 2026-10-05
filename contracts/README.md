@@ -40,7 +40,8 @@ devices arrive — explained, not silenced._
 Guards: layer 1 is the vendored `scripts/contract_guard.py` (commons
 `packages/contract-guard/`, vendored at tag **`contract-guard-v3`** — never edit the
 vendored file, re-pin to move; runs in `hooks/pre-commit` (`--relax-tags` mid-bump
-tolerance) and the path-gated `contract-guard` CI job, `--check` only); layer 2 is the
+tolerance) and the `contract-guard` CI job — every push and PR, no path gate
+(HK-13) — `--check` only); layer 2 is the
 per-contract guards and conformance tests listed above. *(This line said `contract-guard-v1` while the vendored
 script was already v2 — the HK-12 round-2 live drift find, corrected by the OPS-12
 re-vendor to v3.)*

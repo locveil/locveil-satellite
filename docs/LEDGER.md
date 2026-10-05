@@ -292,14 +292,6 @@ _(none open)_
       the `- [x] **OPS-12** …` header lines, so OPS-12's body now reads as a second
       paragraph of OPS-11 and the guard counts one OPS completion short. Verbatim
       restoration from `b078c90` rides OPS-17 as a ledger-integrity rider.
-- [ ] **OPS-16** [fleet] [release] — **Wave-0 CI: un-gate `contract-guard.yml`** (PROD-28
-      wave 0 / `contracts.md` §4 as amended by HK-13: layer 1 runs on every push with no
-      path gate — the owned artifact lives outside `contracts/`, and a hand-kept path
-      list is one more copy of the edge). Both 13-entry `paths:` lists go; the workflow
-      runs on every branch push and every PR. The job's steps (layer 1, the advisory
-      repin stage, both layer-2 owner guards) are unchanged. `ledger-guard.yml` keeps
-      its path gate (the shared-invariants block still prescribes it; not in this
-      delegation).
 - [ ] **OPS-17** [fleet] [release] — **The HK-13 tool sweep (ONE sweep, after the commons
       tag set):** re-vendor byte-identical `scripts/scope_guard.py` (newest `scope-v*`,
       with the re-worded contract-triad block re-pinned in CLAUDE.md + its sha256 in

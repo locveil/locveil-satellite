@@ -3,6 +3,17 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-16 DONE: the contract-guard CI job lost its path gate (HK-13
+  wave 0).** Two 13-entry path lists — one more hand-written copy of "which files are
+  contract-relevant", already carrying three vendored-script names and a template path
+  that had to be remembered on every change — replaced by nothing: every branch push
+  and every PR runs layer 1 strict, the advisory staleness stage and both owner
+  guards (~12 s). Tag refs excluded on purpose so a cut's commit+tag push stays one
+  run. ledger-guard keeps its gate — the shared block still prescribes it and HK-13
+  did not touch it. With OPS-15 this closes the satellite's owner-side share of
+  PROD-28 that needs no new tooling; OPS-17..21 wait for the commons tag set and
+  voice's cuts. docs: none. contracts: none — wiring only.
+
 - **2026-10-05 — OPS-15 DONE: `esp32-site-v1.1.0` cut — the STAMP now says what the
   contract is.** The first three-part tag in this repo and its first enumerated
   owned surface: `artifacts` lists the Plane-B nginx template and nothing else, so

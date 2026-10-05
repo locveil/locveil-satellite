@@ -435,3 +435,24 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       docs: esp32-site-reference — the canonical-reference page re-truthed (version
       authority, consumer line, bump rule, changelog). contracts: `esp32-site-v1.1.0`
       cut (minor — `artifacts` declared; header-comment bytes); re-pin owed: voice.
+- [x] **OPS-16** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 wave 0, under
+      lead OPS-14). **`contract-guard.yml` un-gated — every push and PR, no path gate.**
+      Both 13-entry `paths:` lists removed (`contracts.md` §4 as amended: the owned
+      artifact lives outside `contracts/`, so a gated job was one hand-kept copy of the
+      edge away from never running for the edit the drift rule exists to catch); push
+      trigger widened from `main` to every branch (`branches: ["**"]` — branch refs
+      only, so a contract tag push does not start a second run); `pull_request`
+      unfiltered. Steps unchanged: layer 1 strict, the advisory `repin --check` stage,
+      both layer-2 owner guards — so layer 2 now also runs on every push. Reconciled at
+      intake: PROD-28 lists the un-gate inside the satellite sweep AND as wave 0
+      ("independent of everything else") — executed as wave 0. `ledger-guard.yml` keeps
+      its path gate (prescribed by the shared-invariants block; outside this
+      delegation). The registry's Guards paragraph said "path-gated" — re-truthed in
+      the same change (its vendored-tool tag mention stays for OPS-17). Verification:
+      trigger block parsed (`push.branches ["**"]`, bare `pull_request`); this commit's
+      own pushed run is watched to completion and its verdict goes into the lead's
+      write-back, not pre-asserted here (the OPS-8 lesson) — and since this commit
+      touches formerly-listed paths, the first run the old gate would have SKIPPED is
+      the next push that touches none of them. docs: none — CI workflow + registry prose, no
+      `docs/manifest.json` node touched. contracts: none — enforcement wiring only, no
+      versioned surface moved.

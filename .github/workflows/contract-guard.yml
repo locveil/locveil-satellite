@@ -5,20 +5,13 @@
 # check_docs_manifest.py (docs-manifest coherence, process/user-docs.md §4).
 name: contract-guard
 
+# HK-13 (contracts.md §4): NO path gate — every branch push and every PR. The owned
+# artifact lives outside contracts/, and a hand-kept path list is one more copy of the
+# edge that can rot (OPS-16). `branches: ["**"]` = all branches, not tag refs.
 on:
   push:
-    branches: [main]
-    paths: ["contracts/**", ".contract-guard.toml", ".repin.toml", "scripts/contract_guard.py", "scripts/repin.py", "scripts/check_esp32_site.py",
-            "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
-            "README.md", "CONTRIBUTING.md", "provisioning/README.md",
-            "provisioning/ansible/templates/esp32-site.conf.j2",
-            ".github/workflows/contract-guard.yml"]
+    branches: ["**"]
   pull_request:
-    paths: ["contracts/**", ".contract-guard.toml", ".repin.toml", "scripts/contract_guard.py", "scripts/repin.py", "scripts/check_esp32_site.py",
-            "scripts/check_docs_manifest.py", "docs/manifest.json", "docs/guides/**",
-            "README.md", "CONTRIBUTING.md", "provisioning/README.md",
-            "provisioning/ansible/templates/esp32-site.conf.j2",
-            ".github/workflows/contract-guard.yml"]
 
 jobs:
   contract-guard:
