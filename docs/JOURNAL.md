@@ -3,6 +3,31 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — PROD-28 delegation pulled (council HK-13): OPS-14 (lead) + OPS-15..21
+  filed `[release]`; DES-4 and FW-1a amended.** HK-13 single-sources the contract
+  graph — the owner's STAMP says what a contract is (`artifacts`, now mandatory), the
+  consumer's `.repin.toml` says who consumes it and which test proves it, everything
+  else is derived or checked; versions go three-level with three-part tags. The
+  satellite share: **OPS-15** the standalone `esp32-site-v1.1.0` cut and **OPS-16** the
+  wave-0 CI un-gate start now (owner-side, no new tooling); **OPS-17** (re-vendor
+  scope-guard / contract-guard v4 / repin v2 + `.repin.toml` migration + registry and
+  pin-README trims), **OPS-18** (`docs-manifest-schema` pin, internal STAMP retired),
+  **OPS-19/20** (ws-protocol at `v1.0.1`, then the machine core at `v1.1.0`) and
+  **OPS-21** (wake-pack) wait for the commons tag set and voice's cuts. `[release]`
+  enters this ledger for the first time (owner ruling q8) — defined in the ledger
+  preamble as "before FW first light"; the keeper dissent on DES-4's pin stays where it
+  was recorded. Reconciled against repo reality at intake: the vendored tools trail on
+  two (scope-v7.1 vs v7.2, contract-guard-v3 vs v3.1) with no task filed — true; the
+  CI un-gate is wave 0, not sweep work, so it was pulled forward; voice re-pinned
+  esp32-site at v1 long ago, so both the README consumer line and the STAMP note are
+  stale; bridge already cut `device-integration-v1.1` (VWB-42) but its STAMP enumerates
+  the owner README — unpinnable under the reserved-names rule, so DES-4 waits for
+  `v1.2.0` and reads its pin set from that STAMP; the registry's pending-pin paragraph
+  lost its version string in the same change. FW-1a now owns the ws-protocol
+  conformance test by name and consumes the pinned machine-core fixtures whenever they
+  arrive — gated on nothing. Side find: the OPS-12 DONE header was eaten by `4c56057`
+  (its body reads as part of OPS-11) — restoration rides OPS-17.
+
 - **2026-07-18 — DES-8 filed: voice-satellite enclosure design (owner).** The DES-7
   mechanical inputs (findings §2: vendor STEP verified with hashes, not committed;
   §2.6: no vendor case, community finds unusable → design from the STEP) get their

@@ -26,10 +26,11 @@ bump.
 |---|---|---|
 | [`docs-manifest`](docs-manifest/README.md) | artifact stays `docs/manifest.json` (the user-facing docs inventory, `process/user-docs.md` §4); `docs-manifest/` holds the STAMP + pointer README | `docs-manifest/STAMP.json` (`docs-manifest-v1`, INTERNAL — no git tag; bumped only on a schema reshape; guard: `scripts/check_docs_manifest.py`) |
 
-_Pending pin (not yet a folder): **device-integration** — the bridge's convention (tag
-`device-integration-v1`) is pinned by **DES-4** together with the per-device descriptors
-it governs; the descriptors themselves are per-instance config validated against that
-pin, not contracts (`process/contracts.md` §1). **Explicitly N/A for the voice satellite
+_Pending pin (not yet a folder): **device-integration** — the bridge's convention is
+pinned by **DES-4** together with the per-device descriptors it governs, at the bridge's
+README-split cut (HK-13; the version lives in the DES-4 ledger entry — no version string
+here until a PIN exists); the descriptors themselves are per-instance config validated
+against that pin, not contracts (`process/contracts.md` §1). **Explicitly N/A for the voice satellite
 (`waveshare-lcd146`)** — owner ruling 2026-07-20, FW-1 requirements review O-4
 (`docs/design/fw1_requirements.md`): the satellite is a voice-plane device WB7 reaches
 over the pinned WS protocol; the bridge never actuates it, so it publishes no

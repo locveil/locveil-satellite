@@ -9,6 +9,11 @@ board lists these as seed only and never asserts their status — this ledger ow
 Phase order is LAW: **DES → PCB → FW** (`phase-gates` invariant); no FW task starts
 before **DES-3** is done.
 
+**`[release]`** (first used 2026-10-05, owner ruling HK-13 q8 via board PROD-28): the task
+is on this repo's release path. Pre-first-release that reads **"done before FW first
+light"** (FW-1a's done-line); the first release gate re-reads the tag. Untagged tasks keep
+their phase-gate ordering only.
+
 ## Design & review index
 
 | Document | Backs |
@@ -30,7 +35,7 @@ before **DES-3** is done.
       HK-4 round 4). Deliberately NOT installed at bootstrap
       (`no-execution-toolchain-at-bootstrap`); this task decides whether/how it enters the
       PCB toolchain alongside Serena-over-cloned-SKiDL.
-- [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] —
+- [ ] **DES-4** [dev:revox-a77][dev:revox-b215][dev:pioneer-cld925][dev:panasonic-fs90] [release] —
       **Adopt the bridge's device-descriptor format for the deck devices.** Consumes the
       bridge's device-integration-convention design (PROD-15 bridge delegation item 2;
       "convention down, descriptors up") — author the conforming per-device descriptors
@@ -62,6 +67,24 @@ before **DES-3** is done.
       repo-to-repo request for a `device-integration-v1.1` minor tag when authoring
       (preferred), or pin at v1 and carry contract-guard's legacy warning until the next
       bump.)*
+      *(HK-13 / PROD-28 amendment 2026-10-05, filed with OPS-14 — SUPERSEDES both pin
+      notes above (the `device-integration-v1` ref and the v1.1 request; bridge did cut
+      `device-integration-v1.1` on 2026-07-18, VWB-42 — do NOT pin it: its STAMP
+      enumerates the owner's `README.md`, a reserved name in a pin folder since HK-13,
+      `process/contracts.md` §2). **The pin set is read from the owner's STAMP, never
+      listed here:** this task pins at bridge's **`device-integration-v1.2.0`** (the
+      README-split cut — normative prose moves to the enumerated
+      `contracts/device-integration/convention.md`), taking exactly that STAMP's
+      `artifacts` + the STAMP itself via the vendored repin (v2 derives the set; no
+      consumer-side `files` list). **This task WAITS for that cut** — confirmed at
+      intake: nothing in this repo consumes the pin yet (no descriptor, no test; the
+      voice satellite is N/A per O-4). The PIN `conformance` pointer must be a real file
+      path — the descriptor conformance check this task wires — in the same change as
+      the pin. The ahead-of-pin `[[family]]` declaration in `.repin.toml` (prose
+      pointer, pre-enumeration `files`) cannot survive guard v4 / repin v2 as written;
+      its fate at the sweep is settled in OPS-17. **Tag:** `[release]` by owner ruling
+      (HK-13 q8); the keeper dissent — this pin belongs to the later deck devices, not
+      to FW first light — is recorded in HK-13 and not reopened here.)*
 
 - [ ] **DES-5** [fleet] — **Device certificate lifecycle — revocation and renewal** (imported
       2026-07-12 from voice **ARCH-44**, export-closed there; travels with `provisioning/`).
@@ -171,6 +194,19 @@ outcome; the v5.5.4 bail-out is retired unused). Next: FW-1.)_
             REST API ships here **with the API's born stamp** (R-21/27/31). Done =
             a real utterance answered end-to-end on the bench; unblocks the DES-9
             acoustic bench. C++ per R-29; E-6 audit consumed from the dossier.
+            *(HK-13 / PROD-28 amendment 2026-10-05, filed with OPS-14: **this slice
+            owns the ws-protocol conformance test** — every "FW-1" conformance pointer
+            (registry rows, pin READMEs, `.repin.toml`, the PIN.json `conformance`
+            fields) means FW-1a; the pointers themselves are rewritten by the sweep
+            (OPS-17 / the re-pins), never by hand in a pin. The test **consumes voice's
+            pinned WS machine-core fixtures from the day they exist in the pin**
+            (golden frames, JSONL transcripts, schema — `ws-protocol-v1.1.0`, OPS-20)
+            and is **never gated on them**: until they arrive it binds to the pinned
+            `websocket-api.md` alone, and nothing here waits for voice (nor voice for
+            this slice). Same for the wake-pack flash-time hash verification (R-15) —
+            an FW-1a deliverable. From this slice's start **touch-the-family is a hard
+            CI failure** for this repo's pins (satellite's own offer, `contracts.md`
+            §5; wired by OPS-17).)*
       - [ ] **FW-1b** [dev:waveshare-lcd146] — **provisioning + lifecycle**: Stage-1
             SoftAP portal with WiFi form (R-20, O-3) + full REST surface (R-31) + CSR
             pairing flow against Plane B (R-22; file the workbench pairing-page
@@ -219,3 +255,117 @@ _(none open)_
       the DES-5 verb surface needs on the controller (e.g. CRL regeneration + nginx reload
       if DES-5 chooses `ssl_crl`). Blocked on DES-5 by definition — the design decides what
       gets deployed. Ref: `../locveil-commons/docs/design/workbench.md` §6.
+- [ ] **OPS-14** [fleet] [release] — **PROD-28 / HK-13 delegation LEAD: single-sourced
+      contract graph — intake, amendments, write-back** (decision of record: HK-13 in
+      `../locveil-commons/board/BOARD_DONE.md`, 2026-10-05; normative text
+      `../locveil-commons/process/contracts.md` §1–§5 as amended; delegation text: the
+      "satellite —" clause of PROD-28). Sub-tasks, each its own commit: **OPS-15**
+      (esp32-site cut), **OPS-16** (wave-0 CI un-gate) — owner-side, no new tooling,
+      start on intake; **OPS-17** (tool sweep), **OPS-18** (docs-manifest-schema pin),
+      **OPS-19** / **OPS-20** (ws-protocol re-pins), **OPS-21** (wake-pack re-pin) — wait
+      for the commons tag set / voice cuts; **DES-4** and **FW-1a** amended in place.
+      This lead closes when every sub-task is done and the IDs are written back into
+      PROD-28 (the board is commons' file — the write-back is handed to the coordinator
+      session, never edited from here).
+      **Intake reconciliation (2026-10-05, vs repo reality):** (a) confirmed — the
+      esp32-site STAMP carries the singular `artifact` pointer and no `artifacts`; the
+      template header nit is live (line 2 says `nginx/ansible/templates/…`); the README
+      consumer line AND the STAMP `note` are stale — voice re-pinned at `esp32-site-v1`
+      long ago (its PIN.json carries version/tag, owner commit `fcc6989`). (b) "trails on
+      two, unfiled" confirmed — vendored `scope-v7.1` vs commons `scope-v7.2`,
+      `contract-guard-v3` vs `contract-guard-v3.1`, `repin-v1` current; no task existed.
+      The CI un-gate is NOT sweep work: PROD-28's own wave-0 paragraph makes it
+      independent of the tag set, so it is pulled forward as OPS-16. "Fix the registry's
+      no-git-tag line" confirmed — the tag `docs-manifest-v1` exists in this repo while
+      the registry and the internal STAMP note both say "no git tag"; the line dies with
+      the internal STAMP (OPS-18), it is not separately re-truthed. The internal STAMP's
+      `schema` pointer is a cross-repo path that resolves nowhere in CI. (c) voice has
+      cut neither `ws-protocol-v1.0.1` nor `v1.1.0` yet (only `ws-protocol-v1`,
+      `wake-pack-v1`); every `.repin.toml` `conformance` value is prose, none a path.
+      (d) bridge HAS cut `device-integration-v1.1` (VWB-42 fulfilled) — superseded
+      unpinned by `v1.2.0`, see the DES-4 amendment. **Narrowings:** the delegation's
+      "re-vendor the three tools" also re-pins the contract-triad block (it ships with
+      the next scope tag); wake-pack's re-pin is filed separately because voice's
+      wake-pack cut may ride its ASSET-6 rather than the tag set.
+      **Intake find outside the delegation (recorded, not fixed here):** the OPS-12 DONE
+      header is missing from `LEDGER_DONE.md` — commit `4c56057` (OPS-11 DONE) deleted
+      the `- [x] **OPS-12** …` header lines, so OPS-12's body now reads as a second
+      paragraph of OPS-11 and the guard counts one OPS completion short. Verbatim
+      restoration from `b078c90` rides OPS-17 as a ledger-integrity rider.
+- [ ] **OPS-15** [fleet] [release] — **`esp32-site-v1.1.0` — standalone cut, STAMP
+      declares `artifacts`** (PROD-28 satellite (a); NOT riding DES-5 — DES-5's
+      read-surface bump takes the next version). STAMP gains
+      `artifacts: ["provisioning/ansible/templates/esp32-site.conf.j2"]` — the template
+      only; the pointer README is never enumerated (reserved name) and `STAMP.json`
+      travels implicitly. Folded in: the template header-comment path nit
+      (`nginx/ansible/…` → `provisioning/ansible/…`, recorded-not-fixed since v1) and
+      the stale consumer line in `contracts/esp32-site/README.md` + the STAMP `note`.
+      Level: **minor** per the delegation — the STAMP gains its declaration (the set
+      voice already pins is unchanged: template + STAMP); the comment fix alone would be
+      a patch. Version string three-part (`1.1.0`); the registry row carries exactly the
+      current tag, no historical version strings. `scripts/check_esp32_site.py` must
+      stay green (9 markers). Bump flow: artifact + STAMP one commit → tag → push both
+      together. `re-pin owed: voice`.
+- [ ] **OPS-16** [fleet] [release] — **Wave-0 CI: un-gate `contract-guard.yml`** (PROD-28
+      wave 0 / `contracts.md` §4 as amended by HK-13: layer 1 runs on every push with no
+      path gate — the owned artifact lives outside `contracts/`, and a hand-kept path
+      list is one more copy of the edge). Both 13-entry `paths:` lists go; the workflow
+      runs on every branch push and every PR. The job's steps (layer 1, the advisory
+      repin stage, both layer-2 owner guards) are unchanged. `ledger-guard.yml` keeps
+      its path gate (the shared-invariants block still prescribes it; not in this
+      delegation).
+- [ ] **OPS-17** [fleet] [release] — **The HK-13 tool sweep (ONE sweep, after the commons
+      tag set):** re-vendor byte-identical `scripts/scope_guard.py` (newest `scope-v*`,
+      with the re-worded contract-triad block re-pinned in CLAUDE.md + its sha256 in
+      `.scope-guard.toml`), `scripts/contract_guard.py` @ `contract-guard-v4.0.0`,
+      `scripts/repin.py` @ `repin-v2.0.0`; migrate `.repin.toml` — drop every `files`
+      list (repin v2 derives the set from the owner STAMP at the tag), `conformance`
+      becomes a real file path per family, `[[tool]]` entries gain path + sha256;
+      registry `contracts/README.md` — vendored-tool tag mentions and both pin rows
+      re-truthed (every `<family>-vX` string equals the STAMP/PIN tag; "FW-1" conformance
+      pointers → FW-1a), the Guards paragraph's historical aside trimmed; **both pin
+      READMEs trimmed** (manual re-pin recipes out, stale FW-1/phase-gate lines out —
+      the README stays as the consumer's why-note); `check_esp32_site.py` docstring's
+      `esp32-site-v1` literal reworded; CI: the `repin --check` stage gains
+      touch-the-family from a diff base as a **hard failure** (satellite's offer — hard
+      from FW-1a start; wired at this sweep if FW-1a has not started, which is earlier
+      and stricter), staleness otherwise stays advisory under the §5 carve-out. Decide
+      at intake: the pending `device-integration` `[[family]]` declaration — keep it with
+      a resolving pointer or remove it until DES-4 re-adds it with the pin (keeper
+      recommendation: remove; the registry's pending paragraph + DES-4 keep it visible);
+      the ws-protocol `conformance` path before FW-1a's test exists (guard v4 wants a
+      file — settle against the commons pointer vocabulary). Rider: restore the OPS-12
+      DONE header (see OPS-14). WAITS: commons `contract-guard-v4.0.0` + `repin-v2.0.0`
+      + the scope tag carrying the block.
+- [ ] **OPS-18** [fleet] [release] — **Pin `docs-manifest-schema`; retire the internal
+      `contracts/docs-manifest/` STAMP** (HK-13 decision 6, reversing HK-6's per-repo
+      internal contract: `docs/manifest.json` is instance data, the contract is the
+      commons-owned schema). First pin `contracts/pins/docs-manifest-schema/` at
+      `docs-manifest-schema-v1.0.0` via repin v2 (`[[family]]` in `.repin.toml`,
+      conformance = `scripts/check_docs_manifest.py`, re-pointed from its mirrored
+      vocabulary constants to the pinned schema where stdlib allows); delete
+      `contracts/docs-manifest/` (STAMP + README; the `docs-manifest-v1` tag stays as
+      frozen history); registry "Internal" section goes — and with it the false "no git
+      tag" line; the guard's stamp-coherence block and the manifest's own references to
+      the internal STAMP follow. WAITS: commons `docs-manifest-schema-v1.0.0` + OPS-17
+      (needs repin v2). `contracts:` at close = first consumption.
+- [ ] **OPS-19** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.0.1`**
+      (voice's bytes-only cut absorbing its two post-tag drifts; STAMP enumerates
+      `docs/guides/websocket-api.md` whole; served `protocol_version` stays "1"). Via the
+      vendored repin, never by hand. This is the pin that reported "current" while the
+      owner's doc and STAMP had both moved — the live find HK-13 opened on. WAITS:
+      voice's `ws-protocol-v1.0.1` tag (+ OPS-17 if repin v2 is already required to read
+      the enumerated set). If `v1.1.0` exists when this starts, pin straight to it and
+      close OPS-20 as absorbed.
+- [ ] **OPS-20** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.1.0` — the
+      machine core arrives** (voice's hand-written golden frames + JSONL transcripts +
+      schema, subordinate to the document; minor — the pinned set gains files, flat
+      names). Satellite reviews voice's machine-core design doc when asked (one frames
+      file vs one per frame type; unique flat file names — repo-to-repo, no ID needed).
+      After this pin FW-1a's conformance test reads the fixtures; FW-1a is never gated
+      on this task and this task never on FW-1a. WAITS: voice's `ws-protocol-v1.1.0`.
+- [ ] **OPS-21** [fleet] [release] — **Re-pin `wake-pack` at voice's declared cut** (its
+      sidecar STAMP gains `artifacts: []` + a resolving guard pointer; may ride voice
+      ASSET-6 / the BUILD-44 multi-model re-stamp rather than the HK-13 tag set). The pin
+      stays the STAMP alone; `conformance` = `scripts/publish_model_pack.py` (real path,
+      set in OPS-17). WAITS: voice's next `wake-pack-v*` tag.
