@@ -2,29 +2,24 @@
 
 A **pinned, one-way-inward copy** of the voice-owned WS wire protocol
 (`consumer-pins` invariant; voice `ws-protocol-doc-canonical`). Voice is the source of
-truth: artifact `docs/guides/websocket-api.md`, stamped under voice
-`contracts/ws-protocol/` (tag `ws-protocol-v1`). **The doc wins, firmware adapts.**
-Never hand-edit any file here — re-pin on a vN bump.
+truth: the guide `docs/guides/websocket-api.md`, stamped under voice
+`contracts/ws-protocol/`. **The doc wins, firmware adapts.**
 
-| File | Origin | What it is |
-|---|---|---|
-| `websocket-api.md` | voice (byte-identical @ `ws-protocol-v1`) | The wire protocol: register → PCM → end; reply channel `speak_begin`/PCM/`speak_end`; `protocol_version` in every `registered` ack |
-| `STAMP.json` | voice (byte-identical) | The owner's version stamp (code constant: voice `irene/core/ws_protocol.py::WS_PROTOCOL_VERSION`) |
-| `PIN.json` | **satellite-stamped** | The pin record: tag/commit, file hashes, conformance pointer |
+Everything in this folder except this README and `PIN.json` is the owner's bytes — the
+set voice's STAMP enumerates at the tag `PIN.json` records, plus that STAMP. Never
+hand-edit; the pin moves only by a re-pin ledger task running
+`python3 scripts/repin.py ws-protocol`.
 
-Conformance (layer 2): pending FW-1 — no firmware exists yet (`phase-gates`: FW opens
-after DES-3). Until then the pinned doc is the build contract; the FW-1 conformance
-test binds the firmware's register/stream/reply handling to this pin when it lands.
-Staleness (never a push gate): the satellite `register` message reports
-`protocol_version`; voice compares (voice ARCH-48).
+**Why it is pinned:** the firmware is built against this document — register → PCM →
+end, the reply channel `speak_begin`/PCM/`speak_end`, `protocol_version` in every
+`registered` ack. When voice's machine core lands in the pinned set (golden frames,
+transcripts, schema — subordinate to the document), the firmware's conformance test
+reads those fixtures from here.
 
-Re-pin:
+**Conformance (layer 2):** not written yet — it is FW-1a's deliverable. Until then
+`PIN.json` carries no `conformance` pointer and contract-guard warns
+`PIN-NO-CONFORMANCE`; FW-1a adds the test and its path in `.repin.toml` together.
 
-```bash
-git -C ../locveil-voice show ws-protocol-vN:docs/guides/websocket-api.md \
-  > contracts/pins/ws-protocol/websocket-api.md
-git -C ../locveil-voice show ws-protocol-vN:contracts/ws-protocol/STAMP.json \
-  > contracts/pins/ws-protocol/STAMP.json
-# update PIN.json (version, tag, owner_commit, files sha256s, pin_date), then:
-python3 scripts/contract_guard.py --check
-```
+**Staleness:** `scripts/repin.py --check` (hook: warn; CI: touching this folder while
+the pin trails fails). At runtime the satellite's `register` message reports
+`protocol_version` — the protocol's major — and voice compares (voice ARCH-48).

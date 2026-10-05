@@ -495,6 +495,31 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       touched. contracts: none — consumed tools re-vendored at newer tags
       (`scope-v7.3.0`, `contract-guard-v4.0.0`, `repin-v2.0.0`; not first consumption);
       no owned surface moved, no pin moved.
+- [x] **OPS-19** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
+      delegation (c), under lead OPS-14). **`ws-protocol` re-pinned `ws-protocol-v1` →
+      `ws-protocol-v1.0.1`** via `scripts/repin.py ws-protocol` (repin v2; voice
+      `12d9a05`). The pin set came from the OWNER's STAMP at the tag — `artifacts:
+      ["docs/guides/websocket-api.md"]` + the STAMP — not from a list in this repo; the
+      fresh PIN.json is strict under guard v4 and carries `conformance: null` (no test
+      until FW-1a; guard warns `PIN-NO-CONFORMANCE`, nothing fails, no placeholder).
+      What the patch moved in the pinned bytes: the guide's header now names the
+      three-part tag and states that the served `protocol_version` is the MAJOR only;
+      the Python sample's port 6000 → 8080; the STAMP gains `artifacts` and the
+      post-layout-move `code_constant` path. **No wire change** — FW-1a's build
+      contract is what it was. This is the pin that read "current" for months while
+      both owner files had moved under an unmoved tag — the live find HK-13 opened on;
+      whole-file enumeration plus STAMP-DRIFT on voice's side now make that state
+      impossible to reach silently. Same commit (moved in from OPS-17): the pin README
+      trimmed to the consumer's why-note — manual `git show >` re-pin recipe out, the
+      stale "FW opens after DES-3" lines out, no version string left in it (PIN.json is
+      the record), conformance named as FW-1a's; registry row at `ws-protocol-v1.0.1`
+      with the FW-1 → FW-1a pointer. `ws-protocol-v1.1.0` (machine core) did not exist
+      at execution, so OPS-20 stays open. Verified: contract-guard v4 green (the pin's
+      two legacy warnings gone, replaced by the expected `PIN-NO-CONFORMANCE`);
+      `repin --check` reports ws-protocol current; `--touched` over this change raises
+      nothing (the pin is at the owner's newest). docs: none — pin + its consumer note +
+      registry row; no `docs/manifest.json` node touched. contracts: `ws-protocol` pin
+      moved `v1` → `v1.0.1` (patch, bytes only; consumed, not first consumption).
 - [x] **OPS-22** — **DONE 2026-10-05** (filed + executed same session; intake find of
       OPS-14, coordinator ruling: own task and commit). **OPS-12 DONE header restored.**
       Commit `4c56057` (OPS-11 DONE) had deleted the header line

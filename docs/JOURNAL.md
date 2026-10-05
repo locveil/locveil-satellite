@@ -3,6 +3,20 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-19 DONE: ws-protocol re-pinned at `ws-protocol-v1.0.1` — the pin
+  that lied by standing still.** First re-pin through repin v2, and the first one in
+  this repo where the file list was not ours: the tool read voice's STAMP at the tag,
+  took the one guide it enumerates plus the STAMP, and wrote a strict PIN. The diff is
+  exactly the drift HK-13 started from — a sample port and a STAMP path that had moved
+  under `ws-protocol-v1` while `--check` kept answering "current" — plus the new header
+  paragraph saying the served `protocol_version` is the major and patches never touch
+  it. No wire change, so nothing in the FW-1a baseline moves. The PIN carries no
+  conformance pointer and the guard says so on every run (`PIN-NO-CONFORMANCE`) until
+  FW-1a writes the test; that warning is the ledger's claim made visible, not a defect.
+  The pin README lost its hand-run recipe and its July phase-gate story. OPS-20 (the
+  machine core at `v1.1.0`) still waits on voice.
+  docs: none. contracts: ws-protocol pin `v1` → `v1.0.1` (patch).
+
 - **2026-10-05 — OPS-17 DONE: the tool sweep — repin v2, contract-guard v4, scope-v7.3.0,
   and a `.repin.toml` that no longer lists anyone else's files.** repin now re-vendors
   the tools itself and records tag + sha256 per tool, so "which version is this script"

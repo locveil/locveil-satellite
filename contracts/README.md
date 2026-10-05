@@ -17,7 +17,7 @@ bump.
 
 | Pin | Owner | Notes |
 |---|---|---|
-| [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1`) | the WS wire protocol — **the doc wins, firmware adapts**; conformance: FW-1 (opens after DES-3, `phase-gates`); staleness: `register` reports `protocol_version` |
+| [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1.0.1`) | the WS wire protocol — **the doc wins, firmware adapts**; conformance: FW-1a's test (not written yet — the PIN names none); staleness: `register` reports `protocol_version` (the major) |
 | [`wake-pack`](pins/wake-pack/README.md) | locveil-voice (tag `wake-pack-v1`) | sidecar stamp over the UNMODIFIED third-party HF pack — binaries never enter this tree; conformance: hash-at-publish (OPS-1) + hash-at-flash (FW-1) |
 
 ## Internal

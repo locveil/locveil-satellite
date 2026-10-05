@@ -308,18 +308,6 @@ _(none open)_
       tag" line; the guard's stamp-coherence block and the manifest's own references to
       the internal STAMP follow. WAITS: commons `docs-manifest-schema-v1.0.0` + OPS-17
       (needs repin v2). `contracts:` at close = first consumption.
-- [ ] **OPS-19** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.0.1`**
-      (voice's bytes-only cut absorbing its two post-tag drifts; STAMP enumerates
-      `docs/guides/websocket-api.md` whole; served `protocol_version` stays "1"). Via the
-      vendored repin, never by hand. This is the pin that reported "current" while the
-      owner's doc and STAMP had both moved — the live find HK-13 opened on. WAITS:
-      voice's `ws-protocol-v1.0.1` tag (+ OPS-17 if repin v2 is already required to read
-      the enumerated set). If `v1.1.0` exists when this starts, pin straight to it and
-      close OPS-20 as absorbed.
-      *(Moved here from OPS-17 at its close, 2026-10-05: this pin's README trim (manual
-      re-pin recipe + stale FW-1/phase-gate lines out) and its registry row (tag, "FW-1"
-      → FW-1a) land in THIS commit — touching a pin folder while the pin trails its
-      owner is exactly what touch-the-family fails, so they cannot precede the re-pin.)*
 - [ ] **OPS-20** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.1.0` — the
       machine core arrives** (voice's hand-written golden frames + JSONL transcripts +
       schema, subordinate to the document; minor — the pinned set gains files, flat

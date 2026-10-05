@@ -1,8 +1,11 @@
 # WebSocket API
 
-**Protocol version: 1** (`ws-protocol-v1`) — the server confirms it as `protocol_version` in
+**Protocol version: 1** (`ws-protocol-v1.0.1`) — the server confirms it as `protocol_version` in
 every `registered` ack, so a client can check what it was built against instead of trusting
-prose. The version only moves on a breaking wire change.
+prose. That served number is the protocol's **major** version: it moves only on a breaking wire
+change. The contract tag carries the full three-part version — an additive change to the wire is
+a minor release, an edit to this document that leaves the wire untouched is a patch — and neither
+of those changes the number the server sends.
 
 Irene exposes four WebSocket channels. Two of them are the **voice wire protocol** — how a
 satellite (an ESP32 in a room, or any client with a microphone) streams speech in and gets the
@@ -188,7 +191,7 @@ A minimal batch-mode exchange, start to finish:
 import asyncio, json, wave, websockets
 
 async def say(wav_path: str):
-    async with websockets.connect("ws://localhost:6000/ws/audio") as ws:
+    async with websockets.connect("ws://localhost:8080/ws/audio") as ws:
         await ws.send(json.dumps({"type": "register", "client_id": "probe",
                                   "room_name": "Тест", "sample_rate": 16000}))
         print(json.loads(await ws.recv()))          # {"type": "registered", ...}
