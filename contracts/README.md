@@ -17,7 +17,7 @@ bump.
 
 | Pin | Owner | Notes |
 |---|---|---|
-| [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1.0.1`) | the WS wire protocol — **the doc wins, firmware adapts**; conformance: FW-1a's test (not written yet — the PIN names none); staleness: `register` reports `protocol_version` (the major) |
+| [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1.1.0`) | the WS wire protocol — the guide plus its machine core (golden frames, transcripts, schema); **the doc wins, firmware adapts**; conformance: FW-1a's data-driven test over the pinned fixtures (not written yet — the PIN names none); staleness: `register` reports `protocol_version` (the major) |
 | [`wake-pack`](pins/wake-pack/README.md) | locveil-voice (tag `wake-pack-v1.0.1`) | sidecar stamp over the UNMODIFIED third-party HF pack — the STAMP is the whole pinned set, binaries never enter this tree; conformance: hash-at-publish (`scripts/publish_model_pack.py`) + hash-at-flash (FW-1a) |
 | [`docs-manifest-schema`](pins/docs-manifest-schema/README.md) | locveil-commons (tag `docs-manifest-schema-v1.0.0`) | the org docs-manifest vocabulary (`process/user-docs.md` §4) — `docs/manifest.json` is instance data validated against it, not a contract; conformance: `scripts/check_docs_manifest.py`, which reads its key sets and enums from the pinned schema |
 

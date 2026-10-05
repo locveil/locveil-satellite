@@ -554,6 +554,37 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       nothing (the pin is at the owner's newest). docs: none — pin + its consumer note +
       registry row; no `docs/manifest.json` node touched. contracts: `ws-protocol` pin
       moved `v1` → `v1.0.1` (patch, bytes only; consumed, not first consumption).
+- [x] **OPS-20** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
+      delegation (c), decision 9; under lead OPS-14). **`ws-protocol` re-pinned
+      `ws-protocol-v1.0.1` → `ws-protocol-v1.1.0` — the machine core is in the pin.**
+      Via `scripts/repin.py ws-protocol` (voice `221c175`); the set came from the owner's
+      STAMP — 12 enumerated artifacts + the STAMP, copied flat: the guide,
+      `frames.golden.json`, nine `transcript.*.jsonl`, `ws-protocol.schema.json`. Strict
+      PIN, `conformance: null` (FW-1a's test does not exist yet; `PIN-NO-CONFORMANCE`
+      stays the honest warning). **Fixture check from the firmware's seat, before
+      commit — nothing unusable:** `frames.golden.json` parses (20 frames, 110 cases:
+      59 valid / 51 invalid, + 6 unknown-type + 4 malformed); every file name, frame
+      name and case id fits `[a-z0-9._/-]`, ids are unique and stay unique after
+      identifier mangling; every case id sits under its frame; every valid case carries
+      its frame's required keys with the declared JSON types; every frame has its
+      `…/unknown-field` case; every invalid client-frame case carries `expect`; all nine
+      transcripts parse, open with a matching `meta` line, name only frames the golden
+      file defines with the right channel/direction; the four FW-1a needs
+      (`audio-batch`, `reply-burst`, `satellite-pair`, `reconnect`) exist; `seq` pairs
+      and restarts at 1 on the reconnect; no BOM; UTF-8 with non-ASCII text as the guide
+      warns. **One substantive read of the guide diff, recorded on FW-1a:** beyond the
+      new section the guide now states what the server does — errors are terminal,
+      unknown keys/types must be ignored (binding from this version), and reply audio
+      is converted DOWN but never up, where the previous text promised audio "already
+      converted to the rate you registered"; the FW-1 baseline's R-10 leaned on the old
+      sentence. Filed as intake notes on FW-1a (R-30, R-25, R-10 + the test shape); the
+      owner-agreed `fw1_requirements.md` is not edited by a pin task. Same commit: pin
+      README rewritten around what the pin now holds and how FW-1a consumes it;
+      registry row at `ws-protocol-v1.1.0`. Verified: contract-guard v4 strict green
+      (the one expected warning); `repin --check --fail-on any` exits 0. docs: none —
+      pin + its consumer note + registry row + ledger notes; no `docs/manifest.json`
+      node touched. contracts: `ws-protocol` pin moved `v1.0.1` → `v1.1.0` (minor — the
+      pinned set gains the machine core, 11 files; consumed, not first consumption).
 - [x] **OPS-21** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
       sweep, under lead OPS-14). **`wake-pack` re-pinned `wake-pack-v1` →
       `wake-pack-v1.0.1`** via `scripts/repin.py wake-pack` (repin v2; voice `ba3745a`).

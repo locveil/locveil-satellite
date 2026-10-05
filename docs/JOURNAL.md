@@ -3,6 +3,22 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-20 DONE: ws-protocol at `ws-protocol-v1.1.0` — the protocol now
+  arrives as data too.** Voice's hand-written machine core is in the pin: golden frames
+  with must-accept / may-reject / must-ignore / must-survive verdicts, nine recorded
+  transcripts, a schema. Thirteen files, and not one of their names typed in this repo
+  — the owner's STAMP listed them. Checked from the firmware's seat before committing:
+  everything parses, every name is identifier-safe and unique, the four scenarios
+  FW-1a will replay are there; nothing unusable. The fixtures are what FW-1a's
+  conformance test becomes — a table, not a reading of prose. The guide's own diff
+  mattered more than the files: three things the reference server always did are now
+  written down, and one of them cuts against the FW-1 baseline — reply audio is
+  converted down but never UP, so a burst can arrive below the declared 22050 Hz and
+  `speak_begin.rate` is the truth (R-10 had the opposite sentence to lean on). That,
+  the terminal `error` frame (R-25) and ignore-unknown-keys (R-30) are filed as intake
+  notes on FW-1a rather than edits to the owner-agreed baseline. All PROD-28 sub-tasks
+  are now in DONE. docs: none. contracts: ws-protocol pin `v1.0.1` → `v1.1.0` (minor).
+
 - **2026-10-05 — OPS-24 DONE: the `consumer-pins` invariant counts four.** The repo's
   own law still listed three consumed artifacts after OPS-18 pinned a fourth
   (`docs-manifest-schema`, commons), and its device-integration bullet sat under a
