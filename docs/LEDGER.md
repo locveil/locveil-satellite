@@ -355,11 +355,3 @@ _(none open)_
       ASSET-6 / the BUILD-44 multi-model re-stamp rather than the HK-13 tag set). The pin
       stays the STAMP alone; `conformance` = `scripts/publish_model_pack.py` (real path,
       set in OPS-17). WAITS: voice's next `wake-pack-v*` tag.
-- [ ] **OPS-22** — **Restore the OPS-12 DONE header in `LEDGER_DONE.md`** (intake find of
-      OPS-14, filed per `review-then-remediate`; coordinator ruling 2026-10-05: own task
-      and commit). Commit `4c56057` (OPS-11 DONE) deleted the two header lines of the
-      OPS-12 completion entry, so its body reads as a second paragraph of OPS-11 and
-      scope-guard counts one OPS completion short. Fix: re-insert the header lines
-      verbatim from `b078c90` (the OPS-12 DONE commit) — DONE is frozen history, so
-      nothing is reworded; verify the entry is byte-identical to `b078c90`'s and the
-      guard's OPS done-count rises by one.

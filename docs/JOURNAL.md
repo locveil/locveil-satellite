@@ -3,6 +3,14 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-22 DONE: the OPS-12 completion has its header back.** One line
+  lost in July when the OPS-11 close was inserted above it (`4c56057`) — since then the
+  DONE ledger showed OPS-12's guard-sweep text as a second paragraph of OPS-11 and the
+  ID existed only in the journal and in git. Restored verbatim from the OPS-12 DONE
+  commit `b078c90`, compared byte-identical. Found while counting IDs at the PROD-28
+  intake — next-free-ID arithmetic reads the ledgers, so a missing declaration is
+  exactly the kind of gap that hands out a used number. docs: none. contracts: none.
+
 - **2026-10-05 — PROD-28 sweep GO: OPS-17/18/19/21 unblocked, OPS-22 filed, OPS-20
   still waits.** The owners' tags are out — commons `contract-guard-v4.0.0`,
   `repin-v2.0.0`, `scope-v7.3.0` (block-only) and the new family

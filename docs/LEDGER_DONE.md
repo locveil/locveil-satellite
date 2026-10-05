@@ -374,6 +374,7 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       touched. contracts: none — the filings REQUEST owner-side bumps (wake-pack v1.x,
       device-integration v1.1); the pins move by their own re-pin/first-pin tasks (the
       wake-pack re-pin at voice's cut; DES-4).
+- [x] **OPS-12** [fleet] — **DONE 2026-07-18** (PROD-26/HK-12 delegation, rides OPS-11).
       **Guard + block sweep, one commit.** `scripts/scope_guard.py` re-vendored
       byte-identical @ **`scope-v7.1`** (1.3.0 → 1.4.0: CONTRACTS-VERDICT +
       UNKNOWN-PREFIX; `contracts_verdict_since = 2026-07-18` set — no DONE entry predating
@@ -456,3 +457,13 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       the next push that touches none of them. docs: none — CI workflow + registry prose, no
       `docs/manifest.json` node touched. contracts: none — enforcement wiring only, no
       versioned surface moved.
+- [x] **OPS-22** — **DONE 2026-10-05** (filed + executed same session; intake find of
+      OPS-14, coordinator ruling: own task and commit). **OPS-12 DONE header restored.**
+      Commit `4c56057` (OPS-11 DONE) had deleted the header line
+      `- [x] **OPS-12** [fleet] — **DONE 2026-07-18** (PROD-26/HK-12 delegation, rides
+      OPS-11).` — one line, not the two the filing guessed — leaving OPS-12's body as a
+      trailing paragraph of OPS-11. Re-inserted verbatim from `b078c90`; the restored
+      entry compares byte-identical to that commit's, OPS-11 again ends at its own
+      `contracts:` verdict, and scope-guard now counts OPS-12 as a completion. Nothing
+      else in DONE touched. docs: none — ledger repair, no `docs/manifest.json` node
+      touched. contracts: none — no surface involved.
