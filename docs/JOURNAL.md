@@ -3,6 +3,19 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-14 DONE: the PROD-28 lead closes — the satellite's HK-13 share is
+  discharged in one day.** Ten commits under the lead: one owned cut
+  (`esp32-site-v1.1.0`), the CI un-gate, the three-tool sweep, a new pin
+  (`docs-manifest-schema`) with an internal contract retired, three re-pins (ws-protocol
+  twice — patch, then the machine core — and wake-pack), and three small follow-ups
+  (a lost DONE header, the v7.3.1 block wording, the `consumer-pins` count). What
+  changed in kind, not just in version numbers: nothing in this repo lists another
+  repo's files any more, the tools know their own tag and hash, the registry can only
+  say the current version, and a commit that touches a trailing pin fails. Left open
+  on purpose: DES-4 (the device-integration pin arrives with its descriptors and
+  test) and FW-1a (writes the conformance test the ws-protocol PIN is honestly
+  missing). docs: none. contracts: none at the lead — recorded per sub-task.
+
 - **2026-10-05 — OPS-20 DONE: ws-protocol at `ws-protocol-v1.1.0` — the protocol now
   arrives as data too.** Voice's hand-written machine core is in the pin: golden frames
   with must-accept / may-reject / must-ignore / must-survive verdicts, nine recorded

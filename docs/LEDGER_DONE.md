@@ -412,6 +412,40 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       docs: none — consumer tooling/config, no `docs/manifest.json` node touched.
       contracts: **repin FIRST CONSUMED** (commons surface, vendored @ `repin-v1` with
       its `[[tool]]` self-watch); no owned surface moved.
+- [x] **OPS-14** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 delegation
+      LEAD; decision of record: HK-13 in `../locveil-commons/board/BOARD_DONE.md`;
+      normative text `../locveil-commons/process/contracts.md` §1–§5). **Single-sourced
+      contract graph — the satellite share is discharged.** Sub-tasks, each its own
+      commit, all in DONE: **OPS-15** (`esp32-site-v1.1.0`, STAMP declares `artifacts`;
+      re-pin owed: voice), **OPS-16** (contract-guard CI un-gated), **OPS-17** (tool
+      sweep: repin v2, contract-guard v4, scope-v7.3.0; `.repin.toml` migrated;
+      touch-the-family hard in CI), **OPS-18** (`docs-manifest-schema` first pin;
+      internal `docs-manifest` STAMP retired), **OPS-19** + **OPS-20** (ws-protocol at
+      `v1.0.1`, then the machine core at `v1.1.0`), **OPS-21** (wake-pack at `v1.0.1`),
+      plus the follow-ups **OPS-22** (OPS-12 DONE header restored), **OPS-23**
+      (scope-v7.3.1 block re-pin) and **OPS-24** (`consumer-pins` invariant re-truthed,
+      owner-approved). **Amended in place and still open by design:** DES-4 (first
+      `device-integration` pin at bridge's `v1.2.0`, set read from that STAMP, family
+      re-declared with pin + test in one change; `[release]`, keeper dissent recorded in
+      HK-13) and FW-1a (owns the ws-protocol conformance test over the pinned fixtures,
+      gated on nothing; carries the v1.1.0 intake notes R-30 / R-25 / R-10).
+      **Write-back:** lead ID OPS-14 recorded in PROD-28 by the coordinator session
+      (verified in `../locveil-commons/board/BOARD.md`; the board is never edited from
+      here). **Intake reconciliation of record (2026-10-05):** the esp32-site STAMP had
+      no `artifacts`, a live header-path nit and two stale "voice pinned pre-tag"
+      claims; the vendored tools trailed on two with no task filed; the CI un-gate was
+      wave 0, not sweep work; the "no git tag" registry line was false
+      (`docs-manifest-v1` exists); every `.repin.toml` conformance value was prose;
+      bridge's `device-integration-v1.1` was unpinnable under the reserved-names rule.
+      **End state:** every owned STAMP declares its artifacts and is three-part; every
+      pin's file set is the owner's enumeration; no `files` list, no prose pointer and
+      no historical version string left in config or registry; guard v4 strict green
+      with one warning (`PIN-NO-CONFORMANCE`, ws-protocol — clears when FW-1a adds its
+      test); `repin --check --fail-on any` clean. docs: none at the lead — the
+      sub-tasks carry their own verdicts (esp32-site-reference at OPS-15, contributing
+      at OPS-18). contracts: none at the lead — every move is recorded on its sub-task
+      (owned: `esp32-site-v1.1.0`, re-pin owed: voice; consumed: ws-protocol `v1.1.0`,
+      wake-pack `v1.0.1`, docs-manifest-schema `v1.0.0` first consumed).
 - [x] **OPS-15** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
       delegation (a), under lead OPS-14). **`esp32-site-v1.1.0` — standalone cut, STAMP
       declares `artifacts`.** Not riding DES-5 (its read-surface bump takes the next
