@@ -292,20 +292,6 @@ _(none open)_
       the `- [x] **OPS-12** …` header lines, so OPS-12's body now reads as a second
       paragraph of OPS-11 and the guard counts one OPS completion short. Verbatim
       restoration from `b078c90` rides OPS-17 as a ledger-integrity rider.
-- [ ] **OPS-15** [fleet] [release] — **`esp32-site-v1.1.0` — standalone cut, STAMP
-      declares `artifacts`** (PROD-28 satellite (a); NOT riding DES-5 — DES-5's
-      read-surface bump takes the next version). STAMP gains
-      `artifacts: ["provisioning/ansible/templates/esp32-site.conf.j2"]` — the template
-      only; the pointer README is never enumerated (reserved name) and `STAMP.json`
-      travels implicitly. Folded in: the template header-comment path nit
-      (`nginx/ansible/…` → `provisioning/ansible/…`, recorded-not-fixed since v1) and
-      the stale consumer line in `contracts/esp32-site/README.md` + the STAMP `note`.
-      Level: **minor** per the delegation — the STAMP gains its declaration (the set
-      voice already pins is unchanged: template + STAMP); the comment fix alone would be
-      a patch. Version string three-part (`1.1.0`); the registry row carries exactly the
-      current tag, no historical version strings. `scripts/check_esp32_site.py` must
-      stay green (9 markers). Bump flow: artifact + STAMP one commit → tag → push both
-      together. `re-pin owed: voice`.
 - [ ] **OPS-16** [fleet] [release] — **Wave-0 CI: un-gate `contract-guard.yml`** (PROD-28
       wave 0 / `contracts.md` §4 as amended by HK-13: layer 1 runs on every push with no
       path gate — the owned artifact lives outside `contracts/`, and a hand-kept path
@@ -325,8 +311,7 @@ _(none open)_
       re-truthed (every `<family>-vX` string equals the STAMP/PIN tag; "FW-1" conformance
       pointers → FW-1a), the Guards paragraph's historical aside trimmed; **both pin
       READMEs trimmed** (manual re-pin recipes out, stale FW-1/phase-gate lines out —
-      the README stays as the consumer's why-note); `check_esp32_site.py` docstring's
-      `esp32-site-v1` literal reworded; CI: the `repin --check` stage gains
+      the README stays as the consumer's why-note); CI: the `repin --check` stage gains
       touch-the-family from a diff base as a **hard failure** (satellite's offer — hard
       from FW-1a start; wired at this sweep if FW-1a has not started, which is earlier
       and stricter), staleness otherwise stays advisory under the §5 carve-out. Decide

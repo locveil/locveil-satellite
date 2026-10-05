@@ -2,9 +2,9 @@
 """esp32-site owner-side guard (layer 2, process/contracts.md §4 — OPS-3/PROD-16).
 
 Asserts the owned Plane-B nginx site template still carries every surface marker the
-`esp32-site-v1` contract guarantees (contracts/esp32-site/README.md "What v1
-guarantees"). A dropped marker means a consumer-visible break — bump the STAMP version
-and tag instead of silently editing. Stdlib-only, --check only, exit 1 on any miss.
+`esp32-site` contract guarantees across major 1 (contracts/esp32-site/README.md "What
+v1 guarantees"). A dropped marker means a consumer-visible break — a MAJOR cut (STAMP
+version + tag), never a silent edit. Stdlib-only, --check only, exit 1 on any miss.
 """
 
 from __future__ import annotations

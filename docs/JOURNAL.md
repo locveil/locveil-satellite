@@ -3,6 +3,20 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-15 DONE: `esp32-site-v1.1.0` cut — the STAMP now says what the
+  contract is.** The first three-part tag in this repo and its first enumerated
+  owned surface: `artifacts` lists the Plane-B nginx template and nothing else, so
+  repin v2 will derive voice's pin set from this STAMP and contract-guard's
+  CONTENT-DRIFT byte-locks the template from this tag on (any future edit is a cut —
+  the README now says so, with the three levels). Standalone by ruling, not riding
+  DES-5. Two pieces of long-recorded staleness went out with it: the header comment
+  that pointed at a path this repo never had (`nginx/ansible/…`, held back since v1
+  because a comment fix alone would have been a bump), and the "voice pinned pre-tag"
+  consumer story in both the README and the STAMP note — voice has pinned the v1 tag
+  since July. The surface itself did not move: all nine guard markers intact, voice's
+  rendered-instance e2e test sees a changed comment line and nothing else.
+  docs: esp32-site-reference. contracts: `esp32-site-v1.1.0` cut; re-pin owed: voice.
+
 - **2026-10-05 — PROD-28 delegation pulled (council HK-13): OPS-14 (lead) + OPS-15..21
   filed `[release]`; DES-4 and FW-1a amended.** HK-13 single-sources the contract
   graph — the owner's STAMP says what a contract is (`artifacts`, now mandatory), the

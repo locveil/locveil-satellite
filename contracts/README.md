@@ -11,7 +11,7 @@ bump.
 
 | Contract | Where | Version authority |
 |---|---|---|
-| [`esp32-site`](esp32-site/README.md) | artifact stays `provisioning/ansible/templates/esp32-site.conf.j2` (Plane-B nginx site); `esp32-site/` holds the STAMP + pointer README | `esp32-site/STAMP.json` + tag `esp32-site-v1` (owner guard: `scripts/check_esp32_site.py`; consumer: voice `contracts/pins/esp32-site/`) |
+| [`esp32-site`](esp32-site/README.md) | artifact stays `provisioning/ansible/templates/esp32-site.conf.j2` (Plane-B nginx site); `esp32-site/` holds the STAMP + pointer README | `esp32-site/STAMP.json` + tag `esp32-site-v1.1.0` (owner guard: `scripts/check_esp32_site.py`; consumer: voice `contracts/pins/esp32-site/`) |
 
 ## Consumed (pins)
 

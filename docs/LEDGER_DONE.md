@@ -411,3 +411,27 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       docs: none — consumer tooling/config, no `docs/manifest.json` node touched.
       contracts: **repin FIRST CONSUMED** (commons surface, vendored @ `repin-v1` with
       its `[[tool]]` self-watch); no owned surface moved.
+- [x] **OPS-15** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
+      delegation (a), under lead OPS-14). **`esp32-site-v1.1.0` — standalone cut, STAMP
+      declares `artifacts`.** Not riding DES-5 (its read-surface bump takes the next
+      version). `contracts/esp32-site/STAMP.json`: `version` `1.1.0`, tag
+      `esp32-site-v1.1.0` (three-part from this cut; `esp32-site-v1` stays frozen),
+      `artifacts: ["provisioning/ansible/templates/esp32-site.conf.j2"]` — the template
+      only, repo-root path; the pointer README is never enumerated and the STAMP travels
+      implicitly. The singular `artifact` pointer is kept (it resolves; the org shape
+      for an owned-surface-elsewhere). Folded in: the template header comment now names
+      its real path (`provisioning/ansible/templates/…` — the nit recorded-not-fixed
+      since v1; no directive changed), and the two stale claims that voice "pinned
+      pre-tag, fills version/tag at its next re-pin" (README consumer line + STAMP
+      `note`) — voice's pin has carried `esp32-site-v1` since its BUILD-24 re-pin.
+      README also gains the three-level bump rule and a changelog; the registry row
+      carries exactly the current tag; the owner guard's docstring names the major-1
+      surface instead of a historical tag. Level: minor per the delegation (the STAMP
+      gains its declaration; the set voice pins — template + STAMP — is unchanged; the
+      comment fix alone would have been a patch). Verified: `check_esp32_site.py` green
+      (9 markers); contract-guard green strict once tagged (CONTENT-DRIFT now live for
+      the template — tag bytes == HEAD). Bump flow per HK-12: artifact + STAMP in this
+      one commit → annotated tag on it → commit and tag pushed together.
+      docs: esp32-site-reference — the canonical-reference page re-truthed (version
+      authority, consumer line, bump rule, changelog). contracts: `esp32-site-v1.1.0`
+      cut (minor — `artifacts` declared; header-comment bytes); re-pin owed: voice.
