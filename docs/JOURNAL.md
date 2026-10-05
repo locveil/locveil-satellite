@@ -10,7 +10,7 @@ Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days in
   to fix the server, not the firmware: voice now converts in both directions, the old
   sentence is back in the guide, and the fixture that encoded the weaker behaviour is
   retired in place — still in the file, stating nothing, to be skipped. So the R-10
-  note filed three hours ago is withdrawn and the baseline stands as agreed; no
+  note filed earlier today is withdrawn and the baseline stands as agreed; no
   per-burst I2S re-clock, no resampler. The same cut adds T-9 (reply bursts never
   overlap — one less thing for the playback path to defend against) and makes the
   server type-check opening frames. Fixture check re-run from the firmware's seat with
