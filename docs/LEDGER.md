@@ -299,7 +299,7 @@ _(none open)_
       `ws-protocol-v1.1.0`. One discovered staleness left for the owner, not edited
       from a delegation: the repo-local `consumer-pins` invariant in CLAUDE.md still
       enumerates three consumed artifacts; `docs-manifest-schema` (commons) is now a
-      fourth pin.)*
+      fourth pin. Follow-up OPS-23 (scope-v7.3.1 block re-pin) is in DONE.)*
 - [ ] **OPS-20** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.1.0` — the
       machine core arrives** (voice's hand-written golden frames + JSONL transcripts +
       schema, subordinate to the document; minor — the pinned set gains files, flat

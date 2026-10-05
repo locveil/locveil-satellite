@@ -3,6 +3,16 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-23 DONE: scope-v7.3.1 — the two pinned blocks stop disagreeing.**
+  The sweep report had flagged that the re-worded contract-triad block said "both
+  guards run … on EVERY push, no path gate" while the shared-invariants block two
+  screens up still prescribes a path-gated ledger-guard job. Commons answered with a
+  block-only tag the same day: the line now names contract-guard and repin and says
+  the ledger guard keeps its own gate. Re-vendored (script bytes unchanged), block
+  re-pinned verbatim, hash matched against the commons pin; `ledger-guard.yml` stays
+  as it is, now by the letter of both blocks. All tools current again.
+  docs: none. contracts: none — tool tag only.
+
 - **2026-10-05 — OPS-18 DONE: the docs manifest stopped being a contract; its schema
   became a pin.** HK-6 had every repo stamp its own `docs/manifest.json` as an internal
   contract whose STAMP pointed across the repo boundary at a commons file CI could

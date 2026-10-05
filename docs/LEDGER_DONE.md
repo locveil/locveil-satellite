@@ -587,3 +587,26 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       `contracts:` verdict, and scope-guard now counts OPS-12 as a completion. Nothing
       else in DONE touched. docs: none — ledger repair, no `docs/manifest.json` node
       touched. contracts: none — no surface involved.
+- [x] **OPS-23** [fleet] [release] — **DONE 2026-10-05** (filed + executed same session;
+      PROD-28 / HK-13 follow-up under lead OPS-14 — commons cut `scope-v7.3.1` in answer
+      to the block disagreement this repo reported at the OPS-17 sweep). **scope-guard
+      re-vendored `scope-v7.3.0` → `scope-v7.3.1`; contract-triad block re-pinned.**
+      Block-only release: `scripts/scope_guard.py` bytes unchanged (same sha256
+      `294cf411…`, byte-identical to the tag; `repin.py tool scope-guard` moved only the
+      recorded `pinned_tag`). The block's enforcement line now reads "contract-guard and
+      repin run in the hook and on EVERY push, no path gate (the ledger guard keeps its
+      own)" where it said "both guards" — so it no longer contradicts the
+      shared-invariants block's path-gated `ledger-guard` job, and this repo's
+      `ledger-guard.yml` gate stands as wired. Verified before pinning: the tag is on
+      commons' origin and its diff against `v7.3.0` in `process/claude-blocks/` is that
+      one line. Copied verbatim between the markers (label `scope-v7.3.1`); sha256
+      `eb3a35f5…` in `.scope-guard.toml`, equal to the commons pin. Registry: no edit —
+      the Guards paragraph names no `scope-v*` string (only the contract-guard tag), so
+      there was nothing to re-truth. NOT done here: the `consumer-pins` invariant edit
+      (fourth pin) — repo-local law, left for the owner's own session (see OPS-14).
+      Verified: scope-guard green; contract-guard v4 strict green, one warning
+      (`PIN-NO-CONFORMANCE`, ws-protocol, by design); `repin --check --fail-on any`
+      exits 0. docs: none — vendored tool record + pinned process block, no
+      `docs/manifest.json` node touched. contracts: none — consumed tool tag re-vendored
+      (`scope-v7.3.1`, bytes unchanged; not first consumption); no owned surface or pin
+      moved.
