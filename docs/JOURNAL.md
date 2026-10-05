@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — PROD-28 sweep GO: OPS-17/18/19/21 unblocked, OPS-22 filed, OPS-20
+  still waits.** The owners' tags are out — commons `contract-guard-v4.0.0`,
+  `repin-v2.0.0`, `scope-v7.3.0` (block-only) and the new family
+  `docs-manifest-schema-v1.0.0`; voice `ws-protocol-v1.0.1` and `wake-pack-v1.0.1`;
+  bridge `device-integration-v1.2.0`. The coordinator settled OPS-17's two open intake
+  questions: the ahead-of-pin `device-integration` declaration leaves `.repin.toml`
+  until DES-4 brings family, pin and test together, and ws-protocol's pin carries NO
+  conformance pointer until FW-1a writes the test (guard v4 warns, nothing is
+  invented). The OPS-12 header restoration became its own task, **OPS-22**, instead of
+  a rider. Lead ID OPS-14 is written back on the board. Only the machine-core re-pin
+  (OPS-20) is left waiting, on voice's `ws-protocol-v1.1.0`.
+
 - **2026-10-05 — OPS-16 DONE: the contract-guard CI job lost its path gate (HK-13
   wave 0).** Two 13-entry path lists — one more hand-written copy of "which files are
   contract-relevant", already carrying three vendored-script names and a template path

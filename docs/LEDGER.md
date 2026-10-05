@@ -291,7 +291,11 @@ _(none open)_
       header is missing from `LEDGER_DONE.md` — commit `4c56057` (OPS-11 DONE) deleted
       the `- [x] **OPS-12** …` header lines, so OPS-12's body now reads as a second
       paragraph of OPS-11 and the guard counts one OPS completion short. Verbatim
-      restoration from `b078c90` rides OPS-17 as a ledger-integrity rider.
+      restoration from `b078c90` is its own task, **OPS-22** (coordinator ruling at
+      sweep GO — a filed task and commit, not a rider).
+      *(2026-10-05, sweep GO: the coordinator session wrote lead ID OPS-14 back into
+      PROD-28. Remaining before this lead closes: OPS-20, which waits for voice's
+      `ws-protocol-v1.1.0`.)*
 - [ ] **OPS-17** [fleet] [release] — **The HK-13 tool sweep (ONE sweep, after the commons
       tag set):** re-vendor byte-identical `scripts/scope_guard.py` (newest `scope-v*`,
       with the re-worded contract-triad block re-pinned in CLAUDE.md + its sha256 in
@@ -306,14 +310,19 @@ _(none open)_
       the README stays as the consumer's why-note); CI: the `repin --check` stage gains
       touch-the-family from a diff base as a **hard failure** (satellite's offer — hard
       from FW-1a start; wired at this sweep if FW-1a has not started, which is earlier
-      and stricter), staleness otherwise stays advisory under the §5 carve-out. Decide
-      at intake: the pending `device-integration` `[[family]]` declaration — keep it with
-      a resolving pointer or remove it until DES-4 re-adds it with the pin (keeper
-      recommendation: remove; the registry's pending paragraph + DES-4 keep it visible);
-      the ws-protocol `conformance` path before FW-1a's test exists (guard v4 wants a
-      file — settle against the commons pointer vocabulary). Rider: restore the OPS-12
-      DONE header (see OPS-14). WAITS: commons `contract-guard-v4.0.0` + `repin-v2.0.0`
-      + the scope tag carrying the block.
+      and stricter), staleness otherwise stays advisory under the §5 carve-out.
+      *(Intake 2026-10-05, sweep GO — tag set on commons' origin: `contract-guard-v4.0.0`,
+      `repin-v2.0.0`, `scope-v7.3.0` (block-only: script bytes identical to v7.2, the
+      contract-triad text changed). Both open intake questions settled by the
+      coordinator, consistent with HK-13: **(1)** the pending `device-integration`
+      `[[family]]` declaration is REMOVED until DES-4 re-adds family + pin + a real
+      conformance test in one change; the registry's pending paragraph stays and names
+      the target cut. **(2)** ws-protocol's `conformance` is OMITTED — no test exists
+      until FW-1a writes it; guard v4 then warns `PIN-NO-CONFORMANCE` on the fresh pin,
+      the honest state, and no placeholder file is invented. wake-pack:
+      `conformance = "scripts/publish_model_pack.py"`. The OPS-12 header rider moved out
+      to OPS-22. Re-vendoring goes through `repin.py tool <name>` (v2 writes the file and
+      records `pinned_tag` + `sha256`), bootstrapped once from the commons copy.)*
 - [ ] **OPS-18** [fleet] [release] — **Pin `docs-manifest-schema`; retire the internal
       `contracts/docs-manifest/` STAMP** (HK-13 decision 6, reversing HK-6's per-repo
       internal contract: `docs/manifest.json` is instance data, the contract is the
@@ -346,3 +355,11 @@ _(none open)_
       ASSET-6 / the BUILD-44 multi-model re-stamp rather than the HK-13 tag set). The pin
       stays the STAMP alone; `conformance` = `scripts/publish_model_pack.py` (real path,
       set in OPS-17). WAITS: voice's next `wake-pack-v*` tag.
+- [ ] **OPS-22** — **Restore the OPS-12 DONE header in `LEDGER_DONE.md`** (intake find of
+      OPS-14, filed per `review-then-remediate`; coordinator ruling 2026-10-05: own task
+      and commit). Commit `4c56057` (OPS-11 DONE) deleted the two header lines of the
+      OPS-12 completion entry, so its body reads as a second paragraph of OPS-11 and
+      scope-guard counts one OPS completion short. Fix: re-insert the header lines
+      verbatim from `b078c90` (the OPS-12 DONE commit) — DONE is frozen history, so
+      nothing is reworded; verify the entry is byte-identical to `b078c90`'s and the
+      guard's OPS done-count rises by one.
