@@ -1,8 +1,10 @@
-# Convention: process/contracts.md §4 — job name `contract-guard`, --check only.
-# Layer 1 (coherence): vendored contract_guard.py @ contract-guard-v3 (OPS-12; CI runs
-# strict — no --relax-tags — the pushed tag must exist, unlike the mid-bump local hook).
+# Convention: process/contracts.md §4–§5 (HK-5, HK-12, HK-13) — job name
+# `contract-guard`, --check only. Vendored tools: tag + sha256 in .repin.toml.
+# Layer 1 (coherence): contract_guard.py, strict — no --relax-tags: the pushed tag must
+#   exist, unlike the mid-bump local hook — then repin --check with touch-the-family
+#   against the push base.
 # Layer 2 (owned-surface guards): check_esp32_site.py (esp32-site markers) +
-# check_docs_manifest.py (docs-manifest coherence, process/user-docs.md §4).
+#   check_docs_manifest.py (docs-manifest coherence, process/user-docs.md §4).
 name: contract-guard
 
 # HK-13 (contracts.md §4): NO path gate — every branch push and every PR. The owned
@@ -18,19 +20,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # PROD-25: TAG-MISSING resolves owned STAMP tags via `git tag -l`. The convention's
-      # `fetch-tags: true` one-liner is a no-op here (actions/checkout#1467: on the default
-      # shallow single-commit fetch it only drops --no-tags, and tag auto-following can't
-      # see tags on unfetched commits — run 29414821199 was the live proof). Fetch the tag
-      # refs explicitly; shallow stays fine, the rule only needs the refs.
-      - run: git fetch --tags --depth=1 origin
+        with:
+          # full history: TAG-MISSING / ORPHAN-TAG / CONTENT-DRIFT / STAMP-DRIFT read
+          # tags and tag trees, and --touched diffs against the push base.
+          fetch-depth: 0
+      # PROD-25: never rely on fetch-tags (actions/checkout#1467) — fetch the tag refs
+      # explicitly (run 29414821199 was the live proof on this repo).
+      - name: Fetch tags
+        run: git fetch --tags --force origin
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python3 scripts/contract_guard.py --check
-      # HK-12 §5 staleness stage — ADVISORY (config default_fail_on = "none"): the
-      # recorded satellite carve-out holds until FW first light; the first release gate
-      # raises it (release flows then run --fail-on any).
-      - run: python3 scripts/repin.py --check
-      - run: python3 scripts/check_esp32_site.py
-      - run: python3 scripts/check_docs_manifest.py
+      - name: "contract-guard --check (layer 1, strict)"
+        run: python3 scripts/contract_guard.py --check
+      # HK-12 §5 staleness: ADVISORY under the config's default_fail_on = "none" (the
+      # recorded satellite carve-out until FW first light; the first release gate
+      # raises it). HK-13 touch-the-family is NOT under the carve-out: --touched fails
+      # a change that touches a pin folder or its conformance test while the pin trails
+      # its owner (satellite's own offer; OPS-17). A first push of a new branch has no
+      # base (all-zero sha) — repin then warns and skips the touch check.
+      - name: "repin --check (staleness advisory, touch-the-family hard)"
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
+        run: python3 scripts/repin.py --check --touched "$BASE"
+      - name: "esp32-site owner guard (layer 2)"
+        run: python3 scripts/check_esp32_site.py
+      - name: "docs-manifest coherence guard (layer 2)"
+        run: python3 scripts/check_docs_manifest.py

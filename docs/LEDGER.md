@@ -296,33 +296,6 @@ _(none open)_
       *(2026-10-05, sweep GO: the coordinator session wrote lead ID OPS-14 back into
       PROD-28. Remaining before this lead closes: OPS-20, which waits for voice's
       `ws-protocol-v1.1.0`.)*
-- [ ] **OPS-17** [fleet] [release] — **The HK-13 tool sweep (ONE sweep, after the commons
-      tag set):** re-vendor byte-identical `scripts/scope_guard.py` (newest `scope-v*`,
-      with the re-worded contract-triad block re-pinned in CLAUDE.md + its sha256 in
-      `.scope-guard.toml`), `scripts/contract_guard.py` @ `contract-guard-v4.0.0`,
-      `scripts/repin.py` @ `repin-v2.0.0`; migrate `.repin.toml` — drop every `files`
-      list (repin v2 derives the set from the owner STAMP at the tag), `conformance`
-      becomes a real file path per family, `[[tool]]` entries gain path + sha256;
-      registry `contracts/README.md` — vendored-tool tag mentions and both pin rows
-      re-truthed (every `<family>-vX` string equals the STAMP/PIN tag; "FW-1" conformance
-      pointers → FW-1a), the Guards paragraph's historical aside trimmed; **both pin
-      READMEs trimmed** (manual re-pin recipes out, stale FW-1/phase-gate lines out —
-      the README stays as the consumer's why-note); CI: the `repin --check` stage gains
-      touch-the-family from a diff base as a **hard failure** (satellite's offer — hard
-      from FW-1a start; wired at this sweep if FW-1a has not started, which is earlier
-      and stricter), staleness otherwise stays advisory under the §5 carve-out.
-      *(Intake 2026-10-05, sweep GO — tag set on commons' origin: `contract-guard-v4.0.0`,
-      `repin-v2.0.0`, `scope-v7.3.0` (block-only: script bytes identical to v7.2, the
-      contract-triad text changed). Both open intake questions settled by the
-      coordinator, consistent with HK-13: **(1)** the pending `device-integration`
-      `[[family]]` declaration is REMOVED until DES-4 re-adds family + pin + a real
-      conformance test in one change; the registry's pending paragraph stays and names
-      the target cut. **(2)** ws-protocol's `conformance` is OMITTED — no test exists
-      until FW-1a writes it; guard v4 then warns `PIN-NO-CONFORMANCE` on the fresh pin,
-      the honest state, and no placeholder file is invented. wake-pack:
-      `conformance = "scripts/publish_model_pack.py"`. The OPS-12 header rider moved out
-      to OPS-22. Re-vendoring goes through `repin.py tool <name>` (v2 writes the file and
-      records `pinned_tag` + `sha256`), bootstrapped once from the commons copy.)*
 - [ ] **OPS-18** [fleet] [release] — **Pin `docs-manifest-schema`; retire the internal
       `contracts/docs-manifest/` STAMP** (HK-13 decision 6, reversing HK-6's per-repo
       internal contract: `docs/manifest.json` is instance data, the contract is the
@@ -343,6 +316,10 @@ _(none open)_
       voice's `ws-protocol-v1.0.1` tag (+ OPS-17 if repin v2 is already required to read
       the enumerated set). If `v1.1.0` exists when this starts, pin straight to it and
       close OPS-20 as absorbed.
+      *(Moved here from OPS-17 at its close, 2026-10-05: this pin's README trim (manual
+      re-pin recipe + stale FW-1/phase-gate lines out) and its registry row (tag, "FW-1"
+      → FW-1a) land in THIS commit — touching a pin folder while the pin trails its
+      owner is exactly what touch-the-family fails, so they cannot precede the re-pin.)*
 - [ ] **OPS-20** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.1.0` — the
       machine core arrives** (voice's hand-written golden frames + JSONL transcripts +
       schema, subordinate to the document; minor — the pinned set gains files, flat
@@ -355,3 +332,5 @@ _(none open)_
       ASSET-6 / the BUILD-44 multi-model re-stamp rather than the HK-13 tag set). The pin
       stays the STAMP alone; `conformance` = `scripts/publish_model_pack.py` (real path,
       set in OPS-17). WAITS: voice's next `wake-pack-v*` tag.
+      *(Moved here from OPS-17 at its close, 2026-10-05: this pin's README trim and its
+      registry row land in THIS commit, for the same touch-the-family reason as OPS-19.)*

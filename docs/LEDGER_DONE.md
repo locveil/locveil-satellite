@@ -457,6 +457,44 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       the next push that touches none of them. docs: none — CI workflow + registry prose, no
       `docs/manifest.json` node touched. contracts: none — enforcement wiring only, no
       versioned surface moved.
+- [x] **OPS-17** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
+      delegation (b), under lead OPS-14). **The HK-13 tool sweep — one commit.**
+      **Re-vendored through repin v2** (`repin.py tool <name>`, bootstrapped once from
+      the commons copy; each compared byte-identical to its commons tag):
+      `scripts/repin.py` @ **`repin-v2.0.0`** (1.0.0 → 2.0.0: pin set derived from the
+      owner STAMP, three severity levels, `--touched`, tool re-vendor + hash),
+      `scripts/contract_guard.py` @ **`contract-guard-v4.0.0`** (3.0.0 → 4.0.0: the
+      HK-13 rule set; skips v3.1), `scripts/scope_guard.py` @ **`scope-v7.3.0`** (1.4.0 →
+      1.4.1 — the v7.2 rotation fix; v7.3.0 itself is block-only). **Block:** the
+      re-worded `contract-triad` block pinned verbatim into CLAUDE.md (marker
+      `scope-v7.3.0`), sha256 `527e6888…` in `.scope-guard.toml`, equal to the commons
+      pin; the other two blocks compared identical to their commons sources, untouched.
+      **`.repin.toml` migrated:** every `files` list dropped; each `[[tool]]` carries
+      `path` + `pinned_tag` + `sha256`; wake-pack `conformance =
+      "scripts/publish_model_pack.py"` (a real path; its internal freshness gate still
+      calls the same CLI — checked against v2's flags); ws-protocol carries NO
+      `conformance` until FW-1a writes the test; the ahead-of-pin `device-integration`
+      family removed until DES-4 (both per the intake rulings). **Registry:** Guards
+      paragraph at the current tool tag, its historical "said v1 while running v2" aside
+      removed (REGISTRY-VERSION failed on both strings on the first v4 run — the rule
+      working as designed); pending-pin paragraph names `device-integration-v1.2.0` and
+      says why the family is undeclared. **CI:** `fetch-depth: 0` + explicit tag fetch;
+      `repin --check --touched "$BASE"` (push: `github.event.before`; PR: the base
+      branch) — staleness stays advisory under `default_fail_on = "none"`, **touch-the-
+      family is a hard failure from this commit** (FW-1a has not started, so this is
+      earlier than the offer); steps named, names with ": " quoted. **Narrowed at
+      execution:** the two pin-README trims and the two registry pin rows moved to
+      their re-pin tasks (OPS-19, OPS-21) — editing a pin folder while its pin trails
+      is precisely what the new CI step fails; the `check_esp32_site.py` docstring was
+      already done in OPS-15. Verified: scope-guard green; contract-guard v4 green with
+      5 warnings, all legacy-by-design and each owned by an open task (docs-manifest
+      STAMP without `artifacts` → OPS-18; both pins' pre-HK-13 STAMPs and prose
+      `conformance` → OPS-19 / OPS-21); `repin --check` reports both voice pins one
+      patch behind and all three tools current with matching hashes. docs: none —
+      vendored tooling, config, CI and registry prose; no `docs/manifest.json` node
+      touched. contracts: none — consumed tools re-vendored at newer tags
+      (`scope-v7.3.0`, `contract-guard-v4.0.0`, `repin-v2.0.0`; not first consumption);
+      no owned surface moved, no pin moved.
 - [x] **OPS-22** — **DONE 2026-10-05** (filed + executed same session; intake find of
       OPS-14, coordinator ruling: own task and commit). **OPS-12 DONE header restored.**
       Commit `4c56057` (OPS-11 DONE) had deleted the header line

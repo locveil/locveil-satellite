@@ -3,6 +3,22 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-17 DONE: the tool sweep — repin v2, contract-guard v4, scope-v7.3.0,
+  and a `.repin.toml` that no longer lists anyone else's files.** repin now re-vendors
+  the tools itself and records tag + sha256 per tool, so "which version is this script"
+  stopped being prose in three places. The config lost every `files` list (the owner's
+  STAMP is the list), the `device-integration` placeholder family (back with DES-4,
+  pin and test together), and all three prose conformance strings — wake-pack points at
+  the real publish script, ws-protocol points at nothing until FW-1a writes its test.
+  Guard v4 bit exactly once on first run: the registry's Guards paragraph still told
+  the story of the day it said v1 while running v2 — two historical version strings,
+  both now gone. CI gained full history and `repin --check --touched`, so touching a
+  pin that trails its owner fails from today while ordinary staleness stays advisory.
+  That rule immediately reshaped this sweep: the pin-README trims could not ride this
+  commit (both pins trail by a patch), so they moved into the re-pins. Remaining v4
+  warnings are five legacy notices, each already owned by OPS-18/19/21.
+  docs: none. contracts: none — tools re-vendored, nothing owned or pinned moved.
+
 - **2026-10-05 — OPS-22 DONE: the OPS-12 completion has its header back.** One line
   lost in July when the OPS-11 close was inserted above it (`4c56057`) — since then the
   DONE ledger showed OPS-12's guard-sweep text as a second paragraph of OPS-11 and the

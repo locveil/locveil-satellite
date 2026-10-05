@@ -28,20 +28,22 @@ bump.
 
 _Pending pin (not yet a folder): **device-integration** — the bridge's convention is
 pinned by **DES-4** together with the per-device descriptors it governs, at the bridge's
-README-split cut (HK-13; the version lives in the DES-4 ledger entry — no version string
-here until a PIN exists); the descriptors themselves are per-instance config validated
+README-split cut `device-integration-v1.2.0` (HK-13 — the first cut whose enumerated set
+is pinnable; DES-4 adds the `.repin.toml` family, the pin and its conformance test in one
+change); the descriptors themselves are per-instance config validated
 against that pin, not contracts (`process/contracts.md` §1). **Explicitly N/A for the voice satellite
 (`waveshare-lcd146`)** — owner ruling 2026-07-20, FW-1 requirements review O-4
 (`docs/design/fw1_requirements.md`): the satellite is a voice-plane device WB7 reaches
 over the pinned WS protocol; the bridge never actuates it, so it publishes no
-descriptor. The guard's "never pinned" warning stays until DES-4's bridge-actuated
-devices arrive — explained, not silenced._
+descriptor. Until DES-4 the family is deliberately not declared in `.repin.toml`
+(a declaration needs a conformance test that resolves; none can exist before a
+descriptor does) — this paragraph and the DES-4 ledger entry are the visible record._
 
 Guards: layer 1 is the vendored `scripts/contract_guard.py` (commons
-`packages/contract-guard/`, vendored at tag **`contract-guard-v3`** — never edit the
-vendored file, re-pin to move; runs in `hooks/pre-commit` (`--relax-tags` mid-bump
-tolerance) and the `contract-guard` CI job — every push and PR, no path gate
-(HK-13) — `--check` only); layer 2 is the
-per-contract guards and conformance tests listed above. *(This line said `contract-guard-v1` while the vendored
-script was already v2 — the HK-12 round-2 live drift find, corrected by the OPS-12
-re-vendor to v3.)*
+`packages/contract-guard/`, vendored at tag **`contract-guard-v4.0.0`** — tag + sha256
+recorded in `.repin.toml`; never edit the vendored file, re-vendor with
+`scripts/repin.py tool contract-guard`); it runs in `hooks/pre-commit` (`--relax-tags`
+mid-bump tolerance) and the `contract-guard` CI job — every push and PR, no path gate
+(HK-13) — `--check` only. The same job runs `scripts/repin.py --check --touched <base>`:
+staleness is advisory here until FW first light, **touching a pin that trails its owner
+fails**. Layer 2 is the per-contract guards and conformance tests listed above.

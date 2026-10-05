@@ -1,12 +1,24 @@
-# locveil-satellite repin config (HK-12/PROD-26, OPS-13; tool vendored @ repin-v1 at
-# scripts/repin.py; severity ladder: ../locveil-commons/process/contracts.md §5).
+# locveil-satellite repin config (HK-12/PROD-26, OPS-13; HK-13/PROD-28 shape, OPS-17).
+# Tool vendored @ the tag recorded in its own [[tool]] block below, at scripts/repin.py;
+# severity ladder: ../locveil-commons/process/contracts.md §5.
 # Families this repo CONSUMES + the [[tool]] vendored-tools manifest.
+#
+# No `files` lists (HK-13): the pin set is whatever the OWNER's STAMP enumerates at the
+# tag (+ the STAMP itself) — this file says only who is consumed and which test proves
+# it. `conformance` is a real file path in this repo, or absent when no test exists yet.
+#
+# Not declared here on purpose: `device-integration` (bridge). Nothing consumes it yet;
+# DES-4 adds the family, the first pin and its conformance test in ONE change
+# (registry note: contracts/README.md).
 
 [repin]
 pinned_by = "locveil-satellite scripts/repin.py (OPS-13)"
 # §5 recorded carve-out (HK-12): pre-first-release repo — even the major-gap severity
 # stays ADVISORY until FW first light. CI and the hook inherit this default; raise to
-# "major" at the first release gate (release flows then pass --fail-on any explicitly).
+# "major" at the first release gate (release flows then pass --fail-on minor).
+# Touch-the-family is NOT covered by the carve-out: CI runs --touched <push base>, and
+# a commit that touches a pin (or its conformance test) while the pin trails fails
+# (satellite's own offer, hard from FW-1a start — wired at OPS-17).
 default_fail_on = "none"
 
 [[family]]
@@ -14,46 +26,31 @@ name = "ws-protocol"
 owner_repo = "locveil-voice"
 owner_dir = "../locveil-voice"
 owner_url = "https://github.com/locveil/locveil-voice.git"
-files = ["docs/guides/websocket-api.md", "contracts/ws-protocol/STAMP.json"]
 [[family.dest]]
 path = "contracts/pins/ws-protocol"
-conformance = "FW-1 firmware WS conformance test (until it exists the pinned doc IS the build contract)"
+# conformance: deliberately ABSENT — the firmware WS conformance test is FW-1a's
+# deliverable; until it exists the pinned doc is the build contract and contract-guard
+# warns PIN-NO-CONFORMANCE (the honest state). FW-1a adds the path with the test.
 
 [[family]]
 name = "wake-pack"
 owner_repo = "locveil-voice"
 owner_dir = "../locveil-voice"
 owner_url = "https://github.com/locveil/locveil-voice.git"
-# Sidecar-STAMP shape: the pinned artifact set is the STAMP alone — the pack binaries
-# never enter this tree (third-party HF artifact). Freshness is TAG-only by design; the
-# HF revision itself is explicitly out of scope here (hash-at-publish / hash-at-flash
-# verify the STAMP's sha256s — scripts/publish_model_pack.py, which also invokes this
-# same freshness check internally).
-files = ["contracts/wake-pack/STAMP.json"]
+# Sidecar-STAMP shape: the owner enumerates `artifacts: []`, so the pinned set is the
+# STAMP alone — the pack binaries never enter this tree (third-party HF artifact).
+# Freshness is TAG-only by design; the HF revision itself is out of scope here
+# (hash-at-publish / hash-at-flash verify the STAMP's sha256s). The conformance file
+# below also invokes this same freshness check internally before publishing; the
+# flash-time half of the conformance arrives with FW-1a.
 [[family.dest]]
 path = "contracts/pins/wake-pack"
-conformance = "scripts/publish_model_pack.py (hash-at-publish) + FW-1 flash-time hash verification"
+conformance = "scripts/publish_model_pack.py"
 
-[[family]]
-name = "device-integration"
-owner_repo = "locveil-bridge"
-owner_dir = "../locveil-bridge"
-owner_url = "https://github.com/locveil/locveil-bridge.git"
-# Declared AHEAD of the first pin: DES-4 takes it, preferably at the v1.1 tag requested
-# repo-to-repo (bridge VWB-42) — until then --check reports never-pinned, the visible
-# nag, advisory under default_fail_on = "none". Files per the DES-4 recorded pin shape
-# (guide + schema + owner STAMP verbatim); DES-4 reconciles this list against the v1.1
-# STAMP's artifacts enumeration at pin time.
-files = ["contracts/device-integration/README.md",
-         "contracts/device-integration/device-descriptor.schema.json",
-         "contracts/device-integration/STAMP.json"]
-[[family.dest]]
-path = "contracts/pins/device-integration"
-conformance = "descriptor CI conformance check (DES-4 wires it)"
-
-# Vendored-tools manifest (the satellite-born rule, promoted org-wide by HK-12): the
-# recorded pinned_tag of each vendored script is checked against the owner's newest
-# family tag — the tag<->vendored-copy relationship stops living in prose.
+# Vendored-tools manifest (the satellite-born rule, promoted org-wide by HK-12): each
+# vendored script's recorded tag is checked against the owner's newest family tag, and
+# its bytes against the recorded sha256 (HK-13) — `repin.py tool <name>` writes the file
+# and both lines; never edit a vendored script.
 
 [[tool]]
 name = "scope-guard"
@@ -61,7 +58,9 @@ family = "scope"
 owner_repo = "locveil-commons"
 owner_dir = "../locveil-commons"
 owner_url = "https://github.com/locveil/locveil-commons.git"
-pinned_tag = "scope-v7.1"
+path = "scripts/scope_guard.py"
+pinned_tag = "scope-v7.3.0"
+sha256 = "294cf4111c7e3e1914b6014c88d99558e3cebaeb736341110208d39bf1e76ba7"
 
 [[tool]]
 name = "contract-guard"
@@ -69,7 +68,9 @@ family = "contract-guard"
 owner_repo = "locveil-commons"
 owner_dir = "../locveil-commons"
 owner_url = "https://github.com/locveil/locveil-commons.git"
-pinned_tag = "contract-guard-v3"
+path = "scripts/contract_guard.py"
+pinned_tag = "contract-guard-v4.0.0"
+sha256 = "51e2a0d1599a2b8e1c3d50538d4f1b4684d8314bc0931b9998d02f36206f74fd"
 
 [[tool]]
 name = "repin"
@@ -77,4 +78,6 @@ family = "repin"
 owner_repo = "locveil-commons"
 owner_dir = "../locveil-commons"
 owner_url = "https://github.com/locveil/locveil-commons.git"
-pinned_tag = "repin-v1"
+path = "scripts/repin.py"
+pinned_tag = "repin-v2.0.0"
+sha256 = "2e55faa86fe17763610ad1d4280df3daf1de8892d1620149dfc0ffcb876d30c4"
