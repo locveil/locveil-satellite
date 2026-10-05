@@ -495,6 +495,40 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       touched. contracts: none — consumed tools re-vendored at newer tags
       (`scope-v7.3.0`, `contract-guard-v4.0.0`, `repin-v2.0.0`; not first consumption);
       no owned surface moved, no pin moved.
+- [x] **OPS-18** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
+      sweep, decision 6; under lead OPS-14). **`docs-manifest-schema` pinned; the
+      internal `docs-manifest` contract retired.** **First pin**
+      `contracts/pins/docs-manifest-schema/` at commons `docs-manifest-schema-v1.0.0`
+      (`99e0d38`) via `scripts/repin.py docs-manifest-schema` — the set is the owner
+      STAMP's: `manifest.schema.json` + the STAMP; strict PIN, `conformance =
+      "scripts/check_docs_manifest.py"`; `[[family]]` added to `.repin.toml` (no `files`),
+      registry row added, consumer why-note README in the pin folder.
+      **`scripts/check_docs_manifest.py` no longer mirrors the vocabulary** — top-level
+      and node key sets, the class / audience / status / phase enums, the id pattern, the
+      surfaces cap and the `canonical` key set are all READ from the pinned schema, so
+      there is no hand copy left to drift (one step past the delegation's floor of
+      "check the mirror against the schema"); a missing or reshaped schema fails loudly.
+      One behaviour change follows from reading the schema instead of the mirror: the
+      optional top-level `$comment` key the schema always allowed is now accepted.
+      Stdlib has no JSON-Schema validator, so the schema's rule KINDS are still applied
+      by hand — recorded in the script and the pin README as the re-pin caveat.
+      Negative-tested: bogus class, invented node field and unknown top-level key each
+      fail; absent schema fails; real manifest green (7 nodes, 5/5 floor classes).
+      **Retired:** `contracts/docs-manifest/` (STAMP + README) deleted — `docs/manifest.json`
+      is instance data (`contracts.md` §1); the git tag `docs-manifest-v1` stays as
+      frozen history; the registry's "Internal" section is gone and with it the false
+      "no git tag" line (the tag existed all along — HK-13's recorded correction); the
+      guard's stamp-coherence block removed. The manifest guard is now hermetic by
+      construction: hook and CI need no commons checkout, and the retired STAMP's
+      `schema` pointer (`../locveil-commons/…`, resolvable nowhere in CI) is gone.
+      CONTRIBUTING.md's schema pointer re-truthed to the pin in the same change (caused
+      staleness). Verified: contract-guard v4 green with exactly one warning
+      (`PIN-NO-CONFORMANCE` on ws-protocol, by design until FW-1a); `repin --check
+      --fail-on any` exits 0. docs: contributing — the schema pointer in the Docs
+      discipline section now names the pin. contracts: `docs-manifest-schema` FIRST
+      CONSUMED (commons surface, pinned @ `docs-manifest-schema-v1.0.0`); owned internal
+      `docs-manifest` STAMP retired (no tag cut; `docs-manifest-v1` frozen) — nothing
+      consumed it, no re-pin owed.
 - [x] **OPS-19** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
       delegation (c), under lead OPS-14). **`ws-protocol` re-pinned `ws-protocol-v1` →
       `ws-protocol-v1.0.1`** via `scripts/repin.py ws-protocol` (repin v2; voice

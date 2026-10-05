@@ -294,20 +294,12 @@ _(none open)_
       restoration from `b078c90` is its own task, **OPS-22** (coordinator ruling at
       sweep GO — a filed task and commit, not a rider).
       *(2026-10-05, sweep GO: the coordinator session wrote lead ID OPS-14 back into
-      PROD-28. Remaining before this lead closes: OPS-20, which waits for voice's
-      `ws-protocol-v1.1.0`.)*
-- [ ] **OPS-18** [fleet] [release] — **Pin `docs-manifest-schema`; retire the internal
-      `contracts/docs-manifest/` STAMP** (HK-13 decision 6, reversing HK-6's per-repo
-      internal contract: `docs/manifest.json` is instance data, the contract is the
-      commons-owned schema). First pin `contracts/pins/docs-manifest-schema/` at
-      `docs-manifest-schema-v1.0.0` via repin v2 (`[[family]]` in `.repin.toml`,
-      conformance = `scripts/check_docs_manifest.py`, re-pointed from its mirrored
-      vocabulary constants to the pinned schema where stdlib allows); delete
-      `contracts/docs-manifest/` (STAMP + README; the `docs-manifest-v1` tag stays as
-      frozen history); registry "Internal" section goes — and with it the false "no git
-      tag" line; the guard's stamp-coherence block and the manifest's own references to
-      the internal STAMP follow. WAITS: commons `docs-manifest-schema-v1.0.0` + OPS-17
-      (needs repin v2). `contracts:` at close = first consumption.
+      PROD-28. Sweep executed the same day — OPS-15, 16, 17, 18, 19, 21 and 22 are in
+      DONE. Remaining before this lead closes: **OPS-20**, which waits for voice's
+      `ws-protocol-v1.1.0`. One discovered staleness left for the owner, not edited
+      from a delegation: the repo-local `consumer-pins` invariant in CLAUDE.md still
+      enumerates three consumed artifacts; `docs-manifest-schema` (commons) is now a
+      fourth pin.)*
 - [ ] **OPS-20** [fleet] [release] — **Re-pin `ws-protocol` at `ws-protocol-v1.1.0` — the
       machine core arrives** (voice's hand-written golden frames + JSONL transcripts +
       schema, subordinate to the document; minor — the pinned set gains files, flat

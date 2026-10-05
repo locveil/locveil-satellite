@@ -52,8 +52,8 @@ a derived doc disagree, the dossier wins; fix the derivation.
 
 ## Docs discipline
 
-User-facing docs are inventoried in `docs/manifest.json` (schema:
-`../locveil-commons/process/user-docs/manifest.schema.json`; convention:
+User-facing docs are inventoried in `docs/manifest.json` (schema: commons-owned, pinned
+here at `contracts/pins/docs-manifest-schema/manifest.schema.json`; convention:
 `../locveil-commons/process/user-docs.md`). Every task completion records a docs
 verdict against the manifest's node ids; a new user-facing doc is registered in the
 manifest **in the same change** (the coherence guard `scripts/check_docs_manifest.py`

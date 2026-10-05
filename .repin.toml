@@ -47,6 +47,18 @@ owner_url = "https://github.com/locveil/locveil-voice.git"
 path = "contracts/pins/wake-pack"
 conformance = "scripts/publish_model_pack.py"
 
+[[family]]
+name = "docs-manifest-schema"
+owner_repo = "locveil-commons"
+owner_dir = "../locveil-commons"
+owner_url = "https://github.com/locveil/locveil-commons.git"
+# The org docs-manifest vocabulary (HK-13: the SCHEMA is the contract, docs/manifest.json
+# is instance data). The conformance file reads its key sets / enums straight from the
+# pinned schema — no hand mirror.
+[[family.dest]]
+path = "contracts/pins/docs-manifest-schema"
+conformance = "scripts/check_docs_manifest.py"
+
 # Vendored-tools manifest (the satellite-born rule, promoted org-wide by HK-12): each
 # vendored script's recorded tag is checked against the owner's newest family tag, and
 # its bytes against the recorded sha256 (HK-13) — `repin.py tool <name>` writes the file

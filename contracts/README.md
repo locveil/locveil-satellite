@@ -19,12 +19,7 @@ bump.
 |---|---|---|
 | [`ws-protocol`](pins/ws-protocol/README.md) | locveil-voice (tag `ws-protocol-v1.0.1`) | the WS wire protocol — **the doc wins, firmware adapts**; conformance: FW-1a's test (not written yet — the PIN names none); staleness: `register` reports `protocol_version` (the major) |
 | [`wake-pack`](pins/wake-pack/README.md) | locveil-voice (tag `wake-pack-v1.0.1`) | sidecar stamp over the UNMODIFIED third-party HF pack — the STAMP is the whole pinned set, binaries never enter this tree; conformance: hash-at-publish (`scripts/publish_model_pack.py`) + hash-at-flash (FW-1a) |
-
-## Internal
-
-| Contract | Where | Version authority |
-|---|---|---|
-| [`docs-manifest`](docs-manifest/README.md) | artifact stays `docs/manifest.json` (the user-facing docs inventory, `process/user-docs.md` §4); `docs-manifest/` holds the STAMP + pointer README | `docs-manifest/STAMP.json` (`docs-manifest-v1`, INTERNAL — no git tag; bumped only on a schema reshape; guard: `scripts/check_docs_manifest.py`) |
+| [`docs-manifest-schema`](pins/docs-manifest-schema/README.md) | locveil-commons (tag `docs-manifest-schema-v1.0.0`) | the org docs-manifest vocabulary (`process/user-docs.md` §4) — `docs/manifest.json` is instance data validated against it, not a contract; conformance: `scripts/check_docs_manifest.py`, which reads its key sets and enums from the pinned schema |
 
 _Pending pin (not yet a folder): **device-integration** — the bridge's convention is
 pinned by **DES-4** together with the per-device descriptors it governs, at the bridge's

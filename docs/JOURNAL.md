@@ -3,6 +3,22 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-18 DONE: the docs manifest stopped being a contract; its schema
+  became a pin.** HK-6 had every repo stamp its own `docs/manifest.json` as an internal
+  contract whose STAMP pointed across the repo boundary at a commons file CI could
+  never see — and whose guard carried the schema's enums retyped by hand. HK-13 turned
+  that around: the manifest is instance data, the vocabulary is the commons-owned
+  contract. Here that meant a first pin of `docs-manifest-schema-v1.0.0`, the internal
+  STAMP folder deleted, and `check_docs_manifest.py` rewritten to READ its key sets and
+  enums from the pinned file instead of restating them — the mirror is gone rather
+  than checked. The registry lost its "Internal" section and the line claiming
+  `docs-manifest-v1` had no git tag (it does; it stays, frozen). Guard v4 is down to a
+  single warning, the ws-protocol pin honestly naming no conformance test, and
+  `repin --check --fail-on any` is clean. That closes the satellite sweep; of PROD-28
+  only OPS-20 (the WS machine core at `ws-protocol-v1.1.0`) and the lead remain.
+  docs: contributing. contracts: `docs-manifest-schema` first consumed; internal
+  `docs-manifest` STAMP retired.
+
 - **2026-10-05 — OPS-21 DONE: wake-pack re-pinned at `wake-pack-v1.0.1`.** A
   declaration-only patch on voice's side — the sidecar STAMP now says out loud that it
   enumerates nothing (`artifacts: []` + a guard pointer), which is what makes "the
