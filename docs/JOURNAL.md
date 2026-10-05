@@ -3,6 +3,18 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-21 DONE: wake-pack re-pinned at `wake-pack-v1.0.1`.** A
+  declaration-only patch on voice's side — the sidecar STAMP now says out loud that it
+  enumerates nothing (`artifacts: []` + a guard pointer), which is what makes "the
+  STAMP is the whole pin" a checked statement instead of a comment in our config. The
+  hashes did not move: the `pack` object compares identical to the v1 pin. The PIN's
+  conformance pointer is now a file that exists (`scripts/publish_model_pack.py`)
+  rather than a sentence. With this, `repin --check --fail-on any` is clean for the
+  first time since the tool was adopted. Still standing from July: mutable HF URLs in
+  the STAMP and the drifted upstream `irina.json` — voice's ASSET-6 (deferred there),
+  untouched by a patch that by definition moves no pack bytes.
+  docs: none. contracts: wake-pack pin `v1` → `v1.0.1` (patch).
+
 - **2026-10-05 — OPS-19 DONE: ws-protocol re-pinned at `ws-protocol-v1.0.1` — the pin
   that lied by standing still.** First re-pin through repin v2, and the first one in
   this repo where the file list was not ours: the tool read voice's STAMP at the tag,

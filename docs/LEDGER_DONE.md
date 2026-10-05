@@ -520,6 +520,29 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       nothing (the pin is at the owner's newest). docs: none — pin + its consumer note +
       registry row; no `docs/manifest.json` node touched. contracts: `ws-protocol` pin
       moved `v1` → `v1.0.1` (patch, bytes only; consumed, not first consumption).
+- [x] **OPS-21** [fleet] [release] — **DONE 2026-10-05** (PROD-28 / HK-13 satellite
+      sweep, under lead OPS-14). **`wake-pack` re-pinned `wake-pack-v1` →
+      `wake-pack-v1.0.1`** via `scripts/repin.py wake-pack` (repin v2; voice `ba3745a`).
+      Voice cut it with the HK-13 tag set after all (not riding ASSET-6): a
+      declaration-only patch — the sidecar STAMP declares `artifacts: []` with a
+      resolving `guard` pointer, so the derived pin set is the STAMP alone, as before.
+      Compared at re-pin: the `pack` object (word, HF repo + revision, per-file URLs and
+      sha256s) is identical to the v1 pin — no hash moved, so nothing published or
+      flashed against v1 stops verifying. The fresh PIN.json is strict under guard v4
+      and its `conformance` is the real path `scripts/publish_model_pack.py` (the
+      flash-time half stays FW-1a's). Same commit (moved in from OPS-17): pin README
+      trimmed — manual re-pin recipe out, no version string left in it, "FW-1" → FW-1a,
+      the publish script named where "OPS-1" stood (the model-pack half became OPS-7);
+      registry row at `wake-pack-v1.0.1`. **Not fixed by this cut, still open on voice's
+      side (voice ASSET-6, `[deferred]` there — the BUILD-44 answer + drift addendum):**
+      the STAMP's URLs remain mutable `/resolve/main/` refs, and the July OPS-13 find
+      (upstream `irina.json` no longer matching the pinned sha256) is untouched by a
+      patch that moves no pack bytes — not re-probed over the network today. Verified:
+      contract-guard v4 green, the pin's two legacy warnings gone; `repin --check
+      --fail-on any` exits 0 — every pin and vendored tool at its owner's newest.
+      docs: none — pin + its consumer note + registry row; no `docs/manifest.json` node
+      touched. contracts: `wake-pack` pin moved `v1` → `v1.0.1` (patch, declaration
+      only; consumed, not first consumption).
 - [x] **OPS-22** — **DONE 2026-10-05** (filed + executed same session; intake find of
       OPS-14, coordinator ruling: own task and commit). **OPS-12 DONE header restored.**
       Commit `4c56057` (OPS-11 DONE) had deleted the header line

@@ -315,10 +315,3 @@ _(none open)_
       file vs one per frame type; unique flat file names — repo-to-repo, no ID needed).
       After this pin FW-1a's conformance test reads the fixtures; FW-1a is never gated
       on this task and this task never on FW-1a. WAITS: voice's `ws-protocol-v1.1.0`.
-- [ ] **OPS-21** [fleet] [release] — **Re-pin `wake-pack` at voice's declared cut** (its
-      sidecar STAMP gains `artifacts: []` + a resolving guard pointer; may ride voice
-      ASSET-6 / the BUILD-44 multi-model re-stamp rather than the HK-13 tag set). The pin
-      stays the STAMP alone; `conformance` = `scripts/publish_model_pack.py` (real path,
-      set in OPS-17). WAITS: voice's next `wake-pack-v*` tag.
-      *(Moved here from OPS-17 at its close, 2026-10-05: this pin's README trim and its
-      registry row land in THIS commit, for the same touch-the-family reason as OPS-19.)*
