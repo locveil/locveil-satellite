@@ -1,14 +1,14 @@
 {
   "contract": "ws-protocol",
-  "version": "1.1.0",
-  "tag": "ws-protocol-v1.1.0",
+  "version": "1.2.0",
+  "tag": "ws-protocol-v1.2.0",
   "owner_repo": "locveil-voice",
-  "owner_commit": "221c1755ab7ae0ff6145006d5a798d1df5d343e9",
+  "owner_commit": "645100a199d1f4b924e1a6bd388401f48c182c00",
   "pinned_by": "locveil-satellite scripts/repin.py (OPS-13)",
   "pin_date": "2026-10-05",
   "files": {
-    "websocket-api.md": "91b23614a5aebe9b5896264df4668eedb2379a14048773a04cadc94f6ee75a51",
-    "frames.golden.json": "1ad983ded2eca29e95def7916bca8be82cee03cd26ba3c96b12ed2f9990b3bec",
+    "websocket-api.md": "b78f8b13805a07c02df9b32971aab78ddc0788c7d988e177a3873584c6866c0d",
+    "frames.golden.json": "56399f5eec3236528aa8b5bb8286b2a656452c8229fa4c0bb3bfa31c27a51a5a",
     "transcript.audio-batch.jsonl": "c883a07a987457b05a30931ba4615869804d68b89bbeedfb5f367bde94554fb2",
     "transcript.audio-streaming.jsonl": "6a0b2ca4a3b7b7838027fd9cbfeb3f28a8a79c04b62cf3eb61d57a21914fd67b",
     "transcript.audio-trace.jsonl": "b40ec4901c062bc23de6e5d7d58b628fbe6c282c402e5f586be627715d67034a",
@@ -19,7 +19,7 @@
     "transcript.output-push.jsonl": "66d0497ccd922d6ae239c6e166f90a21a005d00bfd5c82ce286b883ab50f00bf",
     "transcript.observe-tap.jsonl": "d1e64ef20dd3f60dbc5b882c4d06336c4283cac2411504624c50a389b7ed71a1",
     "ws-protocol.schema.json": "dbc7bb4a30e1c71110ec5203e1157681ee41a8dffbcebbdcd5b908a310e5cc8a",
-    "STAMP.json": "d4feff364b1b1058c464dc5530ad51927ee0b4be8437a4b779b775a9ff9f634f"
+    "STAMP.json": "0bf864f2af3fc146a5853564190880db58745f98ebee7bc53b5555f41829eb5c"
   },
   "conformance": null
 }

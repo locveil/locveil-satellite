@@ -31,15 +31,18 @@ FW-1a builds its conformance test as a **data-driven table** over this folder:
   server frame is accepted (including each `<frame>/unknown-field` case), every
   `unknown` type is ignored with the connection kept, every `malformed` text is
   survived, no `invalid` case faults; the frames the firmware SENDS match the `valid`
-  client-frame shapes;
+  client-frame shapes (the server refuses an opening frame whose keys have the wrong
+  JSON type); a case marked `"retired": true` is SKIPPED — it states nothing any more,
+  whatever its `verdict` says;
 - four transcripts replayed against the session state machine: `audio-batch`,
-  `reply-burst`, `satellite-pair`, `reconnect`, with the guide's rules T-1..T-8 applied.
+  `reply-burst`, `satellite-pair`, `reconnect`, with the guide's transcript rules (T-1
+  onward — the list grows by minor releases) applied.
 
 The other five transcripts and the `output` / `observe` frames describe channels and
 modes the satellite does not use; they are pinned because a pin is always the owner's
 complete set. Names here (files, frames, case ids, transcripts) are stable for the
 whole of major 1 and safe to turn into generated identifiers; retired cases are marked,
-never removed.
+never removed — which is why the harness must read the mark.
 
 **Conformance (layer 2):** not written yet — it is FW-1a's deliverable. Until then
 `PIN.json` carries no `conformance` pointer and contract-guard warns

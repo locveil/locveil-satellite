@@ -689,3 +689,40 @@ Completed entries, MOVED here on close. Frozen history — never re-edited. Rota
       removed. docs: none — CLAUDE.md is agent-facing law, not a `docs/manifest.json`
       node. contracts: none — prose catching up with pins that already moved (OPS-18)
       or have not moved yet (DES-4).
+- [x] **OPS-25** [fleet] [release] — **DONE 2026-10-05** (filed + executed same session;
+      coordinator-relayed re-pin after voice's cut answering this repo's OPS-20 finding).
+      **`ws-protocol` re-pinned `ws-protocol-v1.1.0` → `ws-protocol-v1.2.0`** via
+      `scripts/repin.py ws-protocol` (voice `645100a`). Same twelve enumerated artifacts
+      + STAMP; bytes moved in the guide and `frames.golden.json` only (the nine
+      transcripts and the schema are unchanged); strict PIN, `conformance: null` as
+      before. **What the minor carries, read from the pinned guide:** (1) the reply-audio
+      guarantee withdrawn in v1.1.0 is RESTORED — the server converts to exactly the
+      registered rate and channel count, up as well as down; "play it as it comes" is
+      back, `speak_begin.rate`/`channels` always equal the registration, an
+      unconvertible reply is not sent; (2) the case
+      `reply.speak_begin/lower-rate-than-registered` is RETIRED, not removed — a retired
+      case states nothing and a harness skips it; (3) new rule **T-9**: reply bursts
+      never overlap; (4) the server type-checks opening frames — wrong JSON type =
+      `error` + close on the two voice channels (18 new client-side `wrong-json-type`
+      cases with `expect`, 16 of them on `audio.register` / `reply.register-reply`).
+      Served `protocol_version` still "1". **FW-1a notes corrected in the same commit:**
+      the R-10 note from OPS-20 is WITHDRAWN (baseline R-10 stands as the owner agreed
+      it — no per-burst re-clock, no resampling); added: skip retired cases, T-9 may be
+      relied on, send-side JSON types; R-30 and R-25 notes stand. **Fixture check from
+      the firmware's seat, re-run before commit — nothing unusable:** golden file parses
+      (20 frames; 129 frame cases + 6 unknown + 4 malformed = 139; live: 59 valid / 69
+      invalid; 1 retired, carrying its retirement note); all names within
+      `[a-z0-9._/-]`, unique, unique after identifier mangling; every non-retired valid
+      case carries its required keys with the declared JSON types; every frame keeps a
+      live `…/unknown-field` case; every client-side invalid case has `expect`, no
+      server-side case does; all nine transcripts parse and satisfy T-2/T-3/T-4/T-9 and
+      "speak_begin equals the registration" as replayed; the four FW-1a needs exist.
+      One reading note recorded for FW-1a rather than a defect: the valid case
+      `reply.speak_begin/two-channels` (22050 Hz, 2 channels) is a must-ACCEPT at the
+      parser; on a connection registered mono it cannot occur. Same commit: registry row
+      at `ws-protocol-v1.2.0`; pin README gains the skip-retired rule and stops
+      hard-coding the T-rule count. Verified: contract-guard v4 strict green (the one
+      expected warning); `repin --check --fail-on any` exits 0. docs: none — pin + its
+      consumer note + registry row + ledger notes; no `docs/manifest.json` node touched.
+      contracts: `ws-protocol` pin moved `v1.1.0` → `v1.2.0` (minor; consumed, not first
+      consumption).

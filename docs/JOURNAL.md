@@ -3,6 +3,21 @@
 Dated record of work done; rotates per `ledger-discipline.md` §2 (whole days into
 `docs/archive/journal/`, pointer here).
 
+- **2026-10-05 — OPS-25 DONE: ws-protocol at `ws-protocol-v1.2.0` — the finding came
+  back answered.** The OPS-20 fixture check had caught the v1.1.0 guide quietly
+  dropping "reply audio is converted to the rate you registered" in favour of
+  "converted down, never up", against the FW-1 baseline's R-10. The owner's answer was
+  to fix the server, not the firmware: voice now converts in both directions, the old
+  sentence is back in the guide, and the fixture that encoded the weaker behaviour is
+  retired in place — still in the file, stating nothing, to be skipped. So the R-10
+  note filed three hours ago is withdrawn and the baseline stands as agreed; no
+  per-burst I2S re-clock, no resampler. The same cut adds T-9 (reply bursts never
+  overlap — one less thing for the playback path to defend against) and makes the
+  server type-check opening frames. Fixture check re-run from the firmware's seat with
+  retired cases skipped: clean. This is the loop HK-13 was meant to buy — a consumer
+  reads the pinned bytes, objects with a case id, and the owner's next tag carries the
+  answer. docs: none. contracts: ws-protocol pin `v1.1.0` → `v1.2.0` (minor).
+
 - **2026-10-05 — OPS-14 DONE: the PROD-28 lead closes — the satellite's HK-13 share is
   discharged in one day.** Ten commits under the lead: one owned cut
   (`esp32-site-v1.1.0`), the CI un-gate, the three-tool sweep, a new pin

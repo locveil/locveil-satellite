@@ -207,34 +207,44 @@ outcome; the v5.5.4 bail-out is retired unused). Next: FW-1.)_
             an FW-1a deliverable. From this slice's start **touch-the-family is a hard
             CI failure** for this repo's pins (satellite's own offer, `contracts.md`
             §5; wired by OPS-17).)*
-            *(ws-protocol-v1.1.0 intake notes 2026-10-05, filed with OPS-20 — the pin
-            now holds the machine core; `docs/design/fw1_requirements.md` is the
-            owner-AGREED baseline and is NOT edited by a pin task, so these stand
-            here and are applied at this slice's intake. **Test shape:** a
-            data-driven table over `frames.golden.json` (channels `audio` + `reply`:
-            accept every `valid` case incl. `…/unknown-field`, ignore `unknown`,
-            survive `malformed`, never fault on `invalid`) plus four transcripts
-            replayed against the state machine — `audio-batch`, `reply-burst`,
-            `satellite-pair`, `reconnect` — under rules T-1..T-8; the guide's section
-            "The machine-readable core" is the only description of those files the
-            firmware may rely on. **Baseline amendments owed (read the R-items
-            through these):** **R-30 widens** — tolerate-and-ignore covers unknown
-            JSON KEYS in known frames as well as unknown frame types, in every
-            connection state including before the `registered` ack (the guide's
-            "Growing without breaking", binding on clients from v1.1.0). **R-25** —
-            a server `error` frame is TERMINAL: it is the last frame on its socket
-            and the server closes; the state machine treats it as connection loss
-            (reconnect + re-register per R-18), never as a recoverable in-session
-            event, and never parses its text. **R-10** (found at the OPS-20 fixture
-            check) — the guide no longer promises reply audio "converted to the rate
-            you registered": the server converts DOWN, never up, so a burst may
-            arrive BELOW the declared 22050 Hz and `speak_begin.rate` states what
-            it carries (valid case `reply.speak_begin/lower-rate-than-registered`);
-            "the satellite never resamples" survives only if playback re-clocks the
-            I2S TX per burst from `speak_begin` — decide re-clock vs resample at
-            intake. Sizing note: the largest pinned satellite-channel text frame is
-            ~1 KB (`audio.trace`, opaque — real ones may be larger); an oversized
-            text frame must be discardable without faulting.)*
+            *(ws-protocol intake notes 2026-10-05 — filed with OPS-20 at `v1.1.0`,
+            CORRECTED with OPS-25 at `v1.2.0`; the pin holds the machine core.
+            `docs/design/fw1_requirements.md` is the owner-AGREED baseline and is NOT
+            edited by a pin task, so these stand here and are applied at this slice's
+            intake. **Test shape:** a data-driven table over `frames.golden.json`
+            (channels `audio` + `reply`: accept every `valid` case incl.
+            `…/unknown-field`, ignore `unknown`, survive `malformed`, never fault on
+            `invalid`; **skip every case marked `"retired": true`** — it states
+            nothing, whatever its verdict) plus four transcripts replayed against the
+            state machine — `audio-batch`, `reply-burst`, `satellite-pair`,
+            `reconnect` — under the guide's transcript rules, **T-9 included and
+            reliable: reply bursts never overlap** (no `speak_begin` before the
+            previous burst's `speak_end`), so the playback path needs no
+            burst-interleave handling. The guide's section "The machine-readable
+            core" is the only description of those files the firmware may rely on.
+            **Baseline amendments owed (read the R-items through these) — both
+            stand:** **R-30 widens** — tolerate-and-ignore covers unknown JSON KEYS in
+            known frames as well as unknown frame types, in every connection state
+            including before the `registered` ack (the guide's "Growing without
+            breaking", binding on clients from v1.1.0). **R-25** — a server `error`
+            frame is TERMINAL: it is the last frame on its socket and the server
+            closes; the state machine treats it as connection loss (reconnect +
+            re-register per R-18), never as a recoverable in-session event, and never
+            parses its text. **R-10 — NOTE WITHDRAWN, the baseline stands as agreed:**
+            the OPS-20 note said a burst could arrive below the registered rate
+            (v1.1.0 documented "converts down, never up"); by owner decision the
+            server now converts reply audio to EXACTLY the registered rate and
+            channel count, up as well as down, and the guide again says "play it as
+            it comes" — `speak_begin.rate`/`channels` always equal what the device
+            registered, "the satellite never resamples" holds with no per-burst
+            re-clock, and a reply that cannot be converted is simply not sent. **Send
+            side:** from v1.2.0 the server type-checks opening frames — `register`
+            and `register-reply` keys must carry the JSON types of the frame
+            reference (e.g. `sample_rate` an integer, not a string) or the
+            connection is refused with `error` + close. Sizing note: the largest
+            pinned satellite-channel text frame is ~1 KB (`audio.trace`, opaque —
+            real ones may be larger); an oversized text frame must be discardable
+            without faulting.)*
       - [ ] **FW-1b** [dev:waveshare-lcd146] — **provisioning + lifecycle**: Stage-1
             SoftAP portal with WiFi form (R-20, O-3) + full REST surface (R-31) + CSR
             pairing flow against Plane B (R-22; file the workbench pairing-page
